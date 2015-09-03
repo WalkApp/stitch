@@ -1,0 +1,22 @@
+centered($ver = true, $hor = true)
+  position: absolute
+
+  if $ver
+    top: 50%
+    transform: translateY(-50%)
+  if $hor
+    left: 50%
+    transform: translateX(-50%)
+  if $ver and $hor
+    transform: translateX(-50%) translateY(-50%)
+
+urlify($path)
+  $path + '?' + $version
+
+selectable()
+  user-select: text
+  cursor: text
+
+not-selectable()
+  user-select: none
+  cursor: default

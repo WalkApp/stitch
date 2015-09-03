@@ -1,0 +1,43 @@
+.m-btn
+  display: inline-block
+  padding: 8px 15px
+  box-sizing: border-box
+  font-size: 14px
+  color: #fff
+  background: #32a4d9
+  border-radius: 3px
+  border: none
+  text-decoration: none
+  text-align: center
+
+  &:hover
+    background: #3388af
+    text-decoration: none
+
+  &:active
+    background: #216a8c
+
+  &.m-btn-sm
+    font-size: 12px
+    padding: 6px 13px
+
+  &.m-btn-block
+    display: block
+    width: 100%
+
+  &.m-btn-link
+    background: none
+    color: $base_link_color
+    border-top: 1px solid
+    border-radius: 0
+
+  &.m-btn-success
+    background: none
+    color: #26cd49
+    border: 1px solid
+
+// Custom overrides
+
+label.m-btn
+  button
+    display: none

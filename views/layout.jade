@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    title!= title
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Open+Sans:400,600|Fredoka+One')
+    link(rel='stylesheet', href='/assets/style.css')
+  body
+    #app-node!= body
+
+    script.
+      window.app = {
+        config: !{JSON.stringify(config)},
+        env: !{JSON.stringify(env)},
+        langs: !{JSON.stringify(langs)}
+      };
+
+    script(type='text/javascript', src='/assets/script.js')

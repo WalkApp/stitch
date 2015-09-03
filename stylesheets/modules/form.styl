@@ -1,0 +1,68 @@
+.m-control-static,
+.m-control
+  display: block
+  padding: 12px 15px
+  border: 1px solid #dedede
+  border-radius: 3px
+  font-size: 14px
+
+  placeholder(color $placeholder_color, font-weight normal)
+
+  &.m-control-sm
+    padding: 6px 15px
+    font-size: 12px
+
+.m-control-static
+  height: 44px
+  resize: none
+  overflow: hidden
+
+.m-control-group
+  display: table
+  margin: 5px 0;
+  width: 100%
+  border: 1px solid #dedede
+  border-radius: 3px
+  background: #fff
+
+  .m-cg-icon
+    color: $placeholder_color
+    display: table-cell
+    padding: 0 5px 0 8px
+    width: 1%
+
+  .m-control
+    display: table-cell
+    border: none
+
+  .m-btn
+    cursor: pointer
+    display: table-cell
+    width: 1%
+    background: none
+    color: $base_link_color
+    font-size: 12px
+
+  .m-cg-icon ~ .m-control
+    padding-left: 0
+
+.m-control-list
+  margin: 5px 0;
+
+  & >
+    .m-control-group,
+    .m-control-static,
+    .m-control
+      margin: 0
+      border-radius: 0
+      border-bottom-width: 0
+
+      &:first-child
+        border-radius: 3px 3px 0 0
+
+      &:last-child
+        border-radius: 0 0 3px 3px
+        border-bottom-width: 1px
+
+      &:only-child
+        border-radius: 3px

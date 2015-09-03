@@ -1,0 +1,36 @@
+.c-dropdown
+  z-index: 10
+  absolute: top 100% right
+  overflow: hidden
+  display: none
+  background: #fff
+  border: 1px solid $base_border_color
+  border-radius: 3px
+  box-shadow: 0 0 4px rgba(0, 0, 0, .05)
+
+  &.show
+    display: block
+
+  .c-d-menu
+    list-style: none
+    padding: 0
+    margin: 0
+    font-size: 14px
+    text-align: left
+
+    li
+      a, span
+        cursor: pointer
+        display: block
+        padding: 7px 14px
+        text-decoration: none
+        color: #000
+
+        &:hover
+          background: #e2f2f9
+
+    .c-d-footer
+      background: #f5fcff
+
+      a, span
+        color: #396c82
