@@ -3,6 +3,7 @@ export default {
     // Common errors:
     unexpected_error: 'Unexpected API error',
     validation_failed: 'Validation failed',
+    undefined_fields: 'Please provide %s',
     required: '%s is required',
     invalid_date: 'Wrong format of date',
     auth_required: 'Authorization required',
@@ -18,11 +19,19 @@ export default {
   },
 
   titles: {
-    welcome: 'Welcome'
+    welcome: 'Welcome',
+    sign_in: 'Sign in'
   },
 
   captions: {
     start: 'Start',
-    about: 'About'
+    about: 'About',
+    sign_in: 'Sign in',
+    sign_up: 'Sign up'
+  },
+
+  fields: {
+    username: 'Username',
+    password: 'Password'
   }
 };
