@@ -1,6 +1,7 @@
 import Backbone from 'backbone';
 import _ from 'lodash';
 import config from 'config';
+import $ from 'jquery';
 
 
 export default class Model extends Backbone.Model {
@@ -22,4 +23,4 @@ export default class Model extends Backbone.Model {
 Model.prototype.apiRoot = config.api_root || config._client.api_root;
 Model.prototype.urlPath = null;
 Model.prototype.idAttribute = '_id';
-Model.prototype.ajax = Backbone.ajax;
+Model.prototype.$ = $.ajax;
