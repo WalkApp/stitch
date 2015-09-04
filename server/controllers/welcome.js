@@ -10,9 +10,14 @@ export default class WelcomeContrller extends ViewController {
     this.renderView(req, res, 'signin');
   }
 
+  signup (req, res) {
+    this.renderView(req, res, 'signup');
+  }
+
   router () {
     this.get('/', this.welcome);
     this.get('/signin', this.signin);
+    this.get('/signup', this.signup);
   }
 }
 

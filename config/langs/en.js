@@ -20,7 +20,8 @@ export default {
 
   titles: {
     welcome: 'Welcome',
-    sign_in: 'Sign in'
+    sign_in: 'Sign in',
+    sign_up: 'Sign up'
   },
 
   captions: {
@@ -32,6 +33,8 @@ export default {
 
   fields: {
     username: 'Username',
-    password: 'Password'
+    password: 'Password',
+    confirm_password: 'Confirm password',
+    full_name: 'Full name'
   }
 };

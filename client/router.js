@@ -4,6 +4,7 @@ import vent from './modules/vent';
 
 import Welcome from './views/welcome';
 import Signin from './views/signin';
+import Signup from './views/signup';
 
 
 class Router extends BaseRouter {
@@ -20,6 +21,10 @@ class Router extends BaseRouter {
 
     this.route('/signin', (ctx, done) => {
       this.renderView(<Signin />, done);
+    });
+
+    this.route('/signup', (ctx, done) => {
+      this.renderView(<Signup />, done);
     });
   }
 }
