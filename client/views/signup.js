@@ -3,6 +3,7 @@ import Form from '../base/form';
 import Footer from './components/footer';
 import lang from '../lang';
 import UserModel from '../models/user';
+import user from '../modules/user';
 
 
 export default class Signin extends Form {
@@ -21,13 +22,13 @@ export default class Signin extends Form {
 
     var
       dfd,
-      user = new UserModel(model);
+      newUser = new UserModel(model);
 
-    dfd = user.save();
-    dfd.fail((xhr) => this.handleAPIError(xhr));
-    dfd.done((resp) => {
-      console.log(resp);
+    dfd = newUser.save().then(() => {
+      return user.signin(newUser.toJSON())
     });
+
+    dfd.fail((xhr) => this.handleAPIError(xhr));
   }
 
   render () {
