@@ -36,7 +36,8 @@ export default {
     following: 'Following',
     profile: 'Profile',
     settings: 'Settings',
-    log_out: 'Log out'
+    log_out: 'Log out',
+    search: 'Search'
   },
 
   fields: {
