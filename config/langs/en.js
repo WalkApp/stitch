@@ -29,7 +29,15 @@ export default {
     start: 'Start',
     about: 'About',
     sign_in: 'Sign in',
-    sign_up: 'Sign up'
+    sign_up: 'Sign up',
+    posts: 'Posts',
+    upcomming: 'Upcomming',
+    followers: 'Followers',
+    following: 'Following',
+    profile: 'Profile',
+    settings: 'Settings',
+    log_out: 'Log out',
+    search: 'Search'
   },
 
   fields: {
