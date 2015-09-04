@@ -2,6 +2,7 @@ import React from 'react';
 import Form from '../base/form';
 import Footer from './components/footer';
 import lang from '../lang';
+import UserModel from '../models/user';
 
 
 export default class Signin extends Form {
@@ -11,6 +12,22 @@ export default class Signin extends Form {
 
   initState () {
     return { model: {} }
+  }
+
+  save (model) {
+    if (model.confirm_password !== model.password) {
+      return this.showError('invalid_confirm_password');
+    }
+
+    var
+      dfd,
+      user = new UserModel(model);
+
+    dfd = user.save();
+    dfd.fail((xhr) => this.handleAPIError(xhr));
+    dfd.done((resp) => {
+      console.log(resp);
+    });
   }
 
   render () {
@@ -29,16 +46,16 @@ export default class Signin extends Form {
             </div>
             <div className="m-control-group">
               <span className="m-cg-icon icon-user"></span>
-              <input valueLink={this.linkState('model.username')} type="text" className="m-control" placeholder={lang.fields.username} />
+              <input valueLink={this.linkState('model.username')} type="text" className="m-control" placeholder={lang.fields.username} required />
             </div>
             <div className="m-control-list">
               <div className="m-control-group">
                 <span className="m-cg-icon icon-lock"></span>
-                <input valueLink={this.linkState('model.password')} type="password" className="m-control" placeholder={lang.fields.password} />
+                <input valueLink={this.linkState('model.password')} type="password" className="m-control" placeholder={lang.fields.password} required />
               </div>
               <div className="m-control-group">
                 <span className="m-cg-icon icon-lock"></span>
-                <input valueLink={this.linkState('model.confirm_password')} type="password" className="m-control" placeholder={lang.fields.confirm_password} />
+                <input valueLink={this.linkState('model.confirm_password')} type="password" className="m-control" placeholder={lang.fields.confirm_password} required />
               </div>
             </div>
             <p className="l-text-center">

@@ -27,15 +27,22 @@ export default class Form extends Component {
       return alert(lang.errors[error]);
     }
 
-    if (error.error === 'undefined_fields') {
-      var message = format(lang.errors[error.error], error.fields.join(','));
-      return alert(message);
+    var messages = [];
+
+    for (let key in error) {
+      let message = _.capitalize(format(lang.errors[error[key]], key));
+      messages.push(message);
     }
+
+    alert(messages.join('\n'));
+  }
+
+  handleAPIError (xhr) {
+    this.showError('unexpected_error');
   }
 
   handleSubmit (event) {
     event.preventDefault();
-
     var model = _.clone(this.state.model);
     this.save(model);
   }

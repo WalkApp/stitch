@@ -7,7 +7,7 @@ import langs from 'config/langs';
 // error - The error as {mixed}.
 // code  - The HTTP status code as {Number}.
 
-export default function (res, error, code = 400)  {
+export default function (res, error, code)  {
   var lang = (res.locals || {}).lang || 'en';
 
   res.status(code).json({
