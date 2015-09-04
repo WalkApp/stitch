@@ -1,3 +1,4 @@
 /public/assets/*
 /public/static/*
 /node_modules
+.DS_Store
