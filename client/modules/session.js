@@ -4,35 +4,27 @@ import vent from './vent';
 
 
 class Session extends Model {
+  defaults () {
+    return {
+      _id: 'static',
+      timestamp: 0
+    };
+  }
+
   initialize () {
     if (!process.browser) {
       return;
     }
 
-    this.loaded = false;
-
-    var dfd = this.fetch();
-    dfd.done(this.handleLoad.bind(this));
     this.on('change', this.updated, this);
-  }
-
-  handleLoad () {
-    this.loaded = true;
-    vent.trigger('session:loaded');
+    this.fetch();
   }
 
   reset () {
-    var
-      that = this,
-      dfd = this.destroy();
-
-    dfd.always(function () {
-      that.clear({ silent: true });
-      that.set(that.defaults, { silent: true });
-      that.save();
-    });
-
-    return dfd;
+    this.destroy();
+    this.clear({ silent: true });
+    this.set(this.defaults(), { silent: true });
+    this.save();
   }
 
   updated () {
@@ -40,11 +32,6 @@ class Session extends Model {
     this.save();
   }
 }
-
-Session.prototype.defaults = {
-  _id: 'static',
-  timestamp: 0
-};
 
 if (process.browser) {
   Session.prototype.localStorage = new Backbone.LocalStorage('walk:session');
