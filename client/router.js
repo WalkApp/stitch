@@ -1,5 +1,7 @@
 import BaseRouter from './base/router';
 import vent from './modules/vent';
+import auth from './middlewares/auth';
+import user from './modules/user';
 
 
 class Router extends BaseRouter {
@@ -9,11 +11,20 @@ class Router extends BaseRouter {
     vent.on('user:signout', () => this.routeTo('/'));
   }
 
+  middleware () {
+    this.page('/user/:username', auth);
+    this.page('/user', auth);
+  }
+
+  redirect () {
+    this.page('/user', () => this.page.redirect(`/user/${user.username}`));
+  }
+
   router () {
     this.route('/', 'welcome.index');
     this.route('/signin', 'welcome.signin');
     this.route('/signup', 'welcome.signup');
-    this.route('/user', 'user.index');
+    this.route('/user/:username', 'user.index');
   }
 }
 

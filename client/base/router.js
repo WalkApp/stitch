@@ -8,7 +8,7 @@ export default class Router {
     this.page = page;
     this.ctor = null;
 
-    this.use('*', this.createQuery);
+    this.page('*', this.createQuery);
 
     if (this.middleware) {
       this.middleware();
@@ -24,11 +24,11 @@ export default class Router {
 
     this.page.start();
 
-    vent.on('routeTo', (...args) => this.routeTo(...args))
+    vent.on('routeTo', (url) => this.routeTo(url))
   }
 
-  routeTo (...args) {
-    this.page(...args);
+  routeTo (url) {
+    this.page(url);
   }
 
   route (url, action) {
@@ -56,10 +56,6 @@ export default class Router {
         this.afterRoute(ctx);
       }
     });
-  }
-
-  use (...args) {
-    this.page(...args);
   }
 
   beforeRoute (ctx) {
