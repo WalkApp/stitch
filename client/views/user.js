@@ -11,6 +11,8 @@ export default class User extends Component {
   }
 
   render () {
+    var { user } = this.props.data;
+
     return <div className="p-user l-layout">
       <Header />
       <div className="l-wrapper">
@@ -31,8 +33,8 @@ export default class User extends Component {
             <div className="pure-u-6-24">
               <div className="m-profile">
                 <div className="m-p-avatar" style={{ backgroundImage: 'url(/images/default_avatar.jpg)' }}></div>
-                Full name
-                <div className="m-p-username">username</div>
+                { user.full_name ? <div className="m-p-fullname">{user.full_name}</div> : false }
+                <div className="m-p-username">{user.username}</div>
                 <ul className="m-p-statistics">
                   <li><strong>00</strong> <small>{lang.captions.followers}</small></li>
                   <li><strong>00</strong> <small>{lang.captions.following}</small></li>
