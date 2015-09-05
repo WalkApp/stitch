@@ -1,7 +1,7 @@
 import ViewController from '../base/view_controller';
 
 
-export default class WelcomeContrller extends ViewController {
+export default class WelcomeController extends ViewController {
   welcome (req, res) {
     this.renderView(req, res, 'welcome');
   }
@@ -21,4 +21,4 @@ export default class WelcomeContrller extends ViewController {
   }
 }
 
-WelcomeContrller.prototype.logPrefix = 'main-controller';
+WelcomeController.prototype.logPrefix = 'welcome-controller';

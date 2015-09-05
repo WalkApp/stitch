@@ -6,13 +6,13 @@ import UserModel from '../models/user';
 import user from '../modules/user';
 
 
-export default class Signin extends Form {
+export default class Signup extends Form {
   title () {
     return `${lang.brand.name} | ${lang.titles.sign_up}`;
   }
 
   initState () {
-    return { model: {} }
+    return { model: {} };
   }
 
   save (model) {

@@ -11,7 +11,7 @@ export default class Signin extends Form {
   }
 
   initState () {
-    return { model: {} }
+    return { model: {} };
   }
 
   save (model) {
