@@ -5,9 +5,8 @@ import vent from '../modules/vent';
 
 export default class Router {
   constructor () {
-    this.appNode = document.getElementById('app-node');
-    this.titleNode = document.getElementsByTagName('title')[0];
     this.page = page;
+    this.ctor = null;
 
     this.use('*', this.createQuery);
 
@@ -32,14 +31,28 @@ export default class Router {
     this.page(...args);
   }
 
-  route (url, callback) {
+  route (url, action) {
+    var
+      temp = action.split('.'),
+      method = temp[1],
+      Controller = this.controllers[temp[0]];
+
+    if (!Controller) {
+      throw new Error(`undefined controller "${temp[0]}"`);
+    }
+
     this.page(url, (ctx) => {
       this.beforeRoute(ctx);
+      this.ctor = new Controller();
 
-      if (callback.length > 1) {
-        callback(ctx, () => this.afterRoute(ctx));
+      if (!this.ctor[method]) {
+        throw new Error(`undefined method "${method}" of "${temp[0]}" controller`);
+      }
+
+      if (this.ctor[method].length > 1) {
+        this.ctor[method](ctx, () => this.afterRoute(ctx));
       } else {
-        callback(ctx);
+        this.ctor[method](ctx);
         this.afterRoute(ctx);
       }
     });
@@ -50,6 +63,11 @@ export default class Router {
   }
 
   beforeRoute (ctx) {
+    if (this.ctor) {
+      this.ctor.destroy();
+      this.ctor = null;
+    }
+
     vent.trigger('route:before', ctx);
   }
 
@@ -69,10 +87,5 @@ export default class Router {
 
     ctx.query = query;
     next();
-  }
-
-  renderView (View, callback) {
-    var view = React.render(View, this.appNode, callback);
-    this.titleNode.innerText = view.title();
   }
 }

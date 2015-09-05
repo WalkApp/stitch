@@ -1,11 +1,5 @@
-import React from 'react';
 import BaseRouter from './base/router';
 import vent from './modules/vent';
-
-import Welcome from './views/welcome';
-import Signin from './views/signin';
-import Signup from './views/signup';
-import User from './views/user';
 
 
 class Router extends BaseRouter {
@@ -16,22 +10,16 @@ class Router extends BaseRouter {
   }
 
   router () {
-    this.route('/', (ctx, done) => {
-      this.renderView(<Welcome />, done);
-    });
-
-    this.route('/signin', (ctx, done) => {
-      this.renderView(<Signin />, done);
-    });
-
-    this.route('/signup', (ctx, done) => {
-      this.renderView(<Signup />, done);
-    });
-
-    this.route('/user', (ctx, done) => {
-      this.renderView(<User />, done);
-    });
+    this.route('/', 'welcome.index');
+    this.route('/signin', 'welcome.signin');
+    this.route('/signup', 'welcome.signup');
+    this.route('/user', 'user.index');
   }
 }
+
+Router.prototype.controllers = {
+  welcome: require('./controllers/welcome'),
+  user: require('./controllers/user')
+};
 
 export default new Router();
