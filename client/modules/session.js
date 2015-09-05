@@ -16,26 +16,15 @@ class Session extends Model {
       return;
     }
 
-    this.loaded = false;
     this.on('change', this.updated, this);
-
-    var dfd = this.fetch();
-    dfd.done(() => {
-      this.loaded = true;
-      vent.trigger('session:loaded');
-    });
+    this.fetch();
   }
 
   reset () {
-    var dfd = this.destroy();
-
-    dfd.always(() => {
-      this.clear({ silent: true });
-      this.set(this.defaults(), { silent: true });
-      this.save();
-    });
-
-    return dfd;
+    this.destroy();
+    this.clear({ silent: true });
+    this.set(this.defaults(), { silent: true });
+    this.save();
   }
 
   updated () {

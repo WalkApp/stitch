@@ -10,22 +10,13 @@ class User extends Model {
     $.ajaxSetup({ headers });
   }
 
-  _fetch () {
-    var
-      dfd,
-      _id = session.get('user_id');
+  _unsetTokenHeaders () {
+    var headers = { 'X-Access-Token': '' };
+    $.ajaxSetup({ headers });
+  };
 
-    if (!_id) {
-      return;
-    }
-
-    this.set({ _id });
-    dfd = this.fetch();
-    dfd.done(() => {
-      this.loaded = true;
-      this._setTokenHeaders();
-      vent.trigger('user:loaded');
-    });
+  url () {
+    return `${this.apiRoot}/user`;
   }
 
   defaults () {
@@ -36,25 +27,36 @@ class User extends Model {
   }
 
   initialize () {
-    this.loaded = true;
-
-    if (session.loaded) {
-      this._fetch();
-    } else {
-      vent.once('session:loaded', () => this._fetch());
+    if (!process.browser) {
+      return;
     }
+
+    var
+      dfd,
+      _id = session.get('user_id');
+
+    if (!_id) {
+      return;
+    }
+
+    this.set({ _id });
+    this.fetch();
+    this._setTokenHeaders();
+
+    dfd = this.fetch({ ajaxSync: true });
+    dfd.fail(() => this.signout());
+
+    dfd.done((resp) => {
+      this.set({ timestamp: Date.now() }, { silent: true });
+      this.save(resp);
+    });
   }
 
   reset () {
-    var dfd = this.destroy();
-
-    dfd.always(() => {
-      this.clear({ silent: true });
-      this.set(this.defaults(), { silent: true });
-      this.save();
-    });
-
-    return dfd;
+    this.destroy();
+    this.clear({ silent: true });
+    this.set(this.defaults(), { silent: true });
+    this.save();
   }
 
   signin (data) {
@@ -73,6 +75,17 @@ class User extends Model {
     });
 
     return dfd;
+  }
+
+  signout () {
+    this.reset();
+    this._unsetTokenHeaders();
+    session.reset();
+    vent.trigger('user:signout');
+  }
+
+  authorized () {
+    return !!this.id;
   }
 }
 
