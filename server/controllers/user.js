@@ -3,11 +3,11 @@ import ViewController from '../base/view_controller';
 
 export default class UserController extends ViewController {
   user (req, res) {
-    this.renderView(req, res, 'user');
+    this.renderEmptyView(req, res, 'user');
   }
 
   router () {
-    this.get('/user', this.user);
+    this.get('/user/:username', this.user);
   }
 }
 

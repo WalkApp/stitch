@@ -17,7 +17,7 @@ class Router extends BaseRouter {
   }
 
   redirect () {
-    this.page('/user', () => this.page.redirect(`/user/${user.username}`));
+    this.page('/user', () => this.page.redirect(`/user/${user.get('username')}`));
   }
 
   router () {
