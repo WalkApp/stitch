@@ -3,19 +3,15 @@ import user from '../modules/user';
 
 
 export default class UserModel extends Model {
-  url () {
+  urlPath () {
     var
-      username = this.get('username'),
-      url = this.baseUrl();
+      urlPath = '/user',
+      username = this.get('username');
 
     if (username && username !== user.get('username')) {
-      url += `/${username}`;
+      urlPath += `/${username}`;
     }
 
-    return url;
-  }
-
-  urlPath () {
-    return '/user';
+    return urlPath;
   }
 }
