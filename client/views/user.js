@@ -11,6 +11,9 @@ export default class User extends Component {
   }
 
   render () {
+    var user = require('../modules/user');
+    console.log(user.toJSON());
+
     return <div className="p-user l-layout">
       <Header />
       <div className="l-wrapper">
