@@ -47,5 +47,9 @@ export default {
     password: 'Password',
     confirm_password: 'Confirm password',
     full_name: 'Full name'
+  },
+
+  messages: {
+    type_search_text: 'Start typing'
   }
 };
