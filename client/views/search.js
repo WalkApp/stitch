@@ -27,12 +27,12 @@ export default class User extends Component {
             {results.map((user) => {
               return <li className="m-ul-item">
                 <div className="m-ul-i-avatar">
-                  <a href="/user">
+                  <a href={`/user/${user.username}`}>
                     <div style={{ backgroundImage: `url(${user.image_url})` }} className="m-ul-i-a-img"></div>
                   </a>
                 </div>
                 <div className="m-ul-i-info">
-                  <a href="/user" className="m-ul-i-i-login">
+                  <a href={`/user/${user.username}`} className="m-ul-i-i-login">
                     {user.username}
                   </a>
                   {user.full_name ? <div className="m-ul-i-i-fullname">| {user.full_name}</div> : false}
