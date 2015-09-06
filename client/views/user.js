@@ -32,7 +32,7 @@ export default class User extends Component {
           <div className="pure-g">
             <div className="pure-u-6-24">
               <div className="m-profile">
-                <div className="m-p-avatar" style={{ backgroundImage: 'url(/images/default_avatar.jpg)' }}></div>
+                <div className="m-p-avatar" style={{ backgroundImage: `url(${user.image_url})` }}></div>
                 { user.full_name ? <div className="m-p-fullname">{user.full_name}</div> : false }
                 <div className="m-p-username">{user.username}</div>
                 <ul className="m-p-statistics">
