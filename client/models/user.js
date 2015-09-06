@@ -1,7 +1,17 @@
 import Model from '../base/model';
+import user from '../modules/user';
+
 
 export default class UserModel extends Model {
   urlPath () {
-    return '/user';
+    var
+      urlPath = '/user',
+      username = this.get('username');
+
+    if (username && username !== user.get('username')) {
+      urlPath += `/${username}`;
+    }
+
+    return urlPath;
   }
 }
