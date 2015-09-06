@@ -35,6 +35,9 @@ export default class User extends Component {
                 <div className="m-p-avatar" style={{ backgroundImage: `url(${user.image_url})` }}></div>
                 { user.full_name ? <div className="m-p-fullname">{user.full_name}</div> : false }
                 <div className="m-p-username">{user.username}</div>
+                <ul className="m-p-info">
+                  <li><i className="icon-pin"></i> Astana, Kazakhstan</li>
+                </ul>
                 <ul className="m-p-statistics">
                   <li><strong>00</strong> <small>{lang.captions.followers}</small></li>
                   <li><strong>00</strong> <small>{lang.captions.following}</small></li>
