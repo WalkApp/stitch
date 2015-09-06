@@ -14,6 +14,7 @@ class Router extends BaseRouter {
   middleware () {
     this.page('/user/:username', auth);
     this.page('/user', auth);
+    this.page('/search', auth);
   }
 
   redirect () {
@@ -25,12 +26,14 @@ class Router extends BaseRouter {
     this.route('/signin', 'welcome.signin');
     this.route('/signup', 'welcome.signup');
     this.route('/user/:username', 'user.index');
+    this.route('/search', 'search.index');
   }
 }
 
 Router.prototype.controllers = {
   welcome: require('./controllers/welcome'),
-  user: require('./controllers/user')
+  user: require('./controllers/user'),
+  search: require('./controllers/search')
 };
 
 export default new Router();
