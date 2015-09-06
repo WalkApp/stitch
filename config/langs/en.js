@@ -22,7 +22,8 @@ export default {
   titles: {
     welcome: 'Welcome',
     sign_in: 'Sign in',
-    sign_up: 'Sign up'
+    sign_up: 'Sign up',
+    search: 'Search results'
   },
 
   captions: {
@@ -37,7 +38,8 @@ export default {
     profile: 'Profile',
     settings: 'Settings',
     log_out: 'Log out',
-    search: 'Search'
+    search: 'Search',
+    follow: 'Follow'
   },
 
   fields: {
@@ -45,5 +47,9 @@ export default {
     password: 'Password',
     confirm_password: 'Confirm password',
     full_name: 'Full name'
+  },
+
+  messages: {
+    type_search_text: 'Start typing'
   }
 };
