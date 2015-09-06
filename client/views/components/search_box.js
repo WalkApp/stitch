@@ -5,7 +5,6 @@ import Form from '../../base/form';
 import lang from '../../lang';
 
 
-
 export default class SearchBox extends Form {
   initState () {
     return { model: {} };
