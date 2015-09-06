@@ -16,8 +16,10 @@ export function buildUrl (url, params) {
   return url;
 };
 
-export function overrideUrl (url, params) {
-  var query;
+export function overrideUrl (params) {
+  var
+    query,
+    url = window.location.pathname;
 
   params = _.assign(getParams(), params);
 

@@ -14,6 +14,10 @@ export default class BaseCollection extends Collection {
       params.order = this.order
     }
 
+    if (this.filter) {
+      params.filter = this.filter;
+    }
+
     return urlQuery(url, params);
   }
 

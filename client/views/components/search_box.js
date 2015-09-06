@@ -1,11 +1,30 @@
 import React from 'react';
+import { overrideUrl } from 'libs/location';
+import vent from '../../modules/vent';
 import Form from '../../base/form';
 import lang from '../../lang';
+
 
 
 export default class SearchBox extends Form {
   initState () {
     return { model: {} };
+  }
+
+  componentWillMount () {
+    vent.on('route:after', this.setQuery, this);
+  }
+
+  componentWillUnmount () {
+    vent.off('route:after', this.setQuery, this);
+  }
+
+  setQuery (ctx) {
+    this.setState({ model: { text: ctx.query.q } });
+  }
+
+  save (model) {
+    vent.trigger('routeTo', overrideUrl({ q: model.text }));
   }
 
   render () {

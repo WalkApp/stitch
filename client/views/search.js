@@ -24,8 +24,8 @@ export default class User extends Component {
         </div>
         <div className="p-s-container">
           <ul className="m-user-list">
-            {results.map((user) => {
-              return <li className="m-ul-item">
+            {results.map((user, index) => {
+              return <li key={index} className="m-ul-item">
                 <div className="m-ul-i-avatar">
                   <a href={`/user/${user.username}`}>
                     <div style={{ backgroundImage: `url(${user.image_url})` }} className="m-ul-i-a-img"></div>

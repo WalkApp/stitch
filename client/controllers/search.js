@@ -8,7 +8,14 @@ export default class SearchController extends Controller {
   index (ctx, done) {
     var
       dfd,
+      q = ctx.query.q,
       users = new UsersCollection();
+
+    if (q) {
+      users.filter = {
+        username: { contains: q }
+      };
+    }
 
     dfd = this.xhrs.users = users.fetch();
     dfd.done(() => {
