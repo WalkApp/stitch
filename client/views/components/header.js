@@ -3,9 +3,29 @@ import Component from '../../base/component';
 import Dropdown from './dropdown';
 import HeaderSearchBox from './header_search_box';
 import lang from '../../lang';
+import vent from '../../modules/vent';
+import user from '../../modules/user';
 
 
 export default class Header extends Component {
+
+  initState () {
+    return { currentUrl: '' };
+  }
+
+  componentWillMount () {
+    vent.on('route:after', this.setQuery, this);
+  }
+
+  componentWillUnmount () {
+    vent.off('route:after', this.setQuery, this);
+  }
+
+  setQuery (ctx) {
+    this.setState({ currentUrl:ctx.pathname });
+    this.forceUpdate();
+  }
+
   render () {
     return <div className="c-header">
       <div className="l-container">
@@ -17,13 +37,13 @@ export default class Header extends Component {
           </div>
           <div className="pure-u-18-24">
             <ul className="c-h-menu">
-              <li>
+              <li className={this.cx({'active': this.state.currentUrl === `/user/${user.get('username')}` })}>
                 <a href="/user">
                   <span className="icon-home"></span>
                   <span className="c-h-m-underline"></span>
                 </a>
               </li>
-              <li>
+              <li className={this.cx({'active': this.state.currentUrl === '/feed' })}>
                 <a href="/feed">
                   <span className="icon-newspaper"></span>
                   <span className="c-h-m-underline"></span>
