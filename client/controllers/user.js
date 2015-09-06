@@ -9,7 +9,9 @@ export default class UserController extends Controller {
     var
       dfd,
       { username } = ctx.params,
-      user = new UserModel({ username });
+      user = new UserModel();
+
+    user.username = username;
 
     dfd = this.xhrs.user = user.fetch();
     dfd.done(() => {
