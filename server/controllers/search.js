@@ -3,7 +3,7 @@ import ViewController from '../base/view_controller';
 
 export default class SearchController extends ViewController {
   search (req, res) {
-    this.renderView(req, res, 'search');
+    this.renderEmptyView(req, res, 'search');
   }
 
   router () {
