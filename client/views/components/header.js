@@ -25,6 +25,10 @@ export default class Header extends Component {
     this.setState({ currentPath:ctx.pathname });
   }
 
+  signout() {
+    user.signout();
+  }
+
   render () {
     return <div className="c-header">
       <div className="l-container">
@@ -61,7 +65,7 @@ export default class Header extends Component {
                   <li><a href="/profile">{lang.captions.profile}</a></li>
                   <li><a href="/settings">{lang.captions.settings}</a></li>
                   <div className="c-d-footer">
-                    <li><span>{lang.captions.log_out}</span></li>
+                    <li><span onClick={this.signout}>{lang.captions.log_out}</span></li>
                   </div>
                 </ul>
               </Dropdown>
