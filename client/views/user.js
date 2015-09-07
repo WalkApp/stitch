@@ -3,6 +3,7 @@ import Component from '../base/component';
 import Header from './components/header';
 import Footer from './components/footer';
 import lang from '../lang';
+import moment from 'moment';
 
 
 export default class User extends Component {
@@ -36,7 +37,7 @@ export default class User extends Component {
                 { user.full_name ? <div className="m-p-fullname">{user.full_name}</div> : false }
                 <div className="m-p-username">{user.username}</div>
                 <ul className="m-p-info">
-                  <li><i className="icon-pin"></i> Astana, Kazakhstan</li>
+                  <li><i className="icon-clock"></i>{moment(user.created).format('MMM DD, YYYY')}</li>
                 </ul>
                 <ul className="m-p-statistics">
                   <li><strong>00</strong> <small>{lang.captions.followers}</small></li>
