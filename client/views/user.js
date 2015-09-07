@@ -13,8 +13,13 @@ export default class User extends Component {
     return `${lang.brand.name}`;
   }
 
+  //FIXME: fix this shit
   componentWillMount () {
     this.setState({ data: this.props.data });
+  }
+
+  componentWillReceiveProps (props) {
+    this.setState({ data: props.data });
   }
 
   addNewPost (post) {
