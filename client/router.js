@@ -1,6 +1,7 @@
 import BaseRouter from './base/router';
 import vent from './modules/vent';
 import auth from './middlewares/auth';
+import notAuth from './middlewares/not_auth';
 import user from './modules/user';
 
 
@@ -12,6 +13,9 @@ class Router extends BaseRouter {
   }
 
   middleware () {
+    this.page('/welcome', notAuth);
+    this.page('/signin', notAuth);
+    this.page('/signup', notAuth);
     this.page('/user/:username', auth);
     this.page('/user', auth);
     this.page('/search', auth);
