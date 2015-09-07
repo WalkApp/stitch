@@ -13,7 +13,7 @@ class Router extends BaseRouter {
   }
 
   middleware () {
-    this.page('/welcome', notAuth);
+    this.page('/', notAuth);
     this.page('/signin', notAuth);
     this.page('/signup', notAuth);
     this.page('/user/:username', auth);
