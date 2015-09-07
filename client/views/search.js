@@ -4,6 +4,7 @@ import Header from './components/header';
 import Footer from './components/footer';
 import SearchBox from './components/search_box';
 import lang from '../lang';
+import moment from 'moment';
 
 
 export default class User extends Component {
@@ -36,12 +37,12 @@ export default class User extends Component {
                     {user.username}
                   </a>
                   {user.full_name ? <div className="m-ul-i-i-fullname">| {user.full_name}</div> : false}
-                  <div className="m-ul-i-i-location">
-                    <i className="icon-pin"></i> Astana, Kazakhstan
+                  <div className="m-ul-i-i-joined">
+                    <i className="icon-clock"></i>{moment(user.created).format('MMM DD, YYYY')}
                   </div>
                 </div>
                 <div className="m-ul-i-actions">
-                  <button className="m-btn m-btn-success m-btn-block m-btn-small">
+                  <button className="m-btn m-btn-success m-btn-block m-btn-sm">
                     {lang.captions.follow}
                   </button>
                 </div>

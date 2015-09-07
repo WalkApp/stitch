@@ -10,20 +10,19 @@ import user from '../../modules/user';
 export default class Header extends Component {
 
   initState () {
-    return { currentUrl: '' };
+    return { currentPath: '' };
   }
 
   componentWillMount () {
-    vent.on('route:after', this.setQuery, this);
+    vent.on('route:after', this.setActivePath, this);
   }
 
   componentWillUnmount () {
-    vent.off('route:after', this.setQuery, this);
+    vent.off('route:after', this.setActivePath, this);
   }
 
-  setQuery (ctx) {
-    this.setState({ currentUrl:ctx.pathname });
-    this.forceUpdate();
+  setActivePath (ctx) {
+    this.setState({ currentPath:ctx.pathname });
   }
 
   render () {
@@ -37,13 +36,13 @@ export default class Header extends Component {
           </div>
           <div className="pure-u-18-24">
             <ul className="c-h-menu">
-              <li className={this.cx({'active': this.state.currentUrl === `/user/${user.get('username')}` })}>
+              <li className={this.cx({'active': this.state.currentPath === `/user/${user.get('username')}` })}>
                 <a href="/user">
                   <span className="icon-home"></span>
                   <span className="c-h-m-underline"></span>
                 </a>
               </li>
-              <li className={this.cx({'active': this.state.currentUrl === '/feed' })}>
+              <li className={this.cx({'active': this.state.currentPath === '/feed' })}>
                 <a href="/feed">
                   <span className="icon-newspaper"></span>
                   <span className="c-h-m-underline"></span>
