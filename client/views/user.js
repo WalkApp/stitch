@@ -13,8 +13,17 @@ export default class User extends Component {
     return `${lang.brand.name}`;
   }
 
+  componentWillMount () {
+    this.setState({ data: this.props.data });
+  }
+
+  addNewPost (post) {
+    this.state.data.posts.unshift(post);
+    this.setState(this.state);
+  }
+
   render () {
-    var { user, posts, isOwner } = this.props.data;
+    var { user, posts, isOwner } = this.state.data;
 
     return <div className="p-user l-layout">
       <Header />
@@ -49,7 +58,7 @@ export default class User extends Component {
             </div>
             <div className="pure-u-16-24">
               <div className="p-u-content">
-                {isOwner ? <QuickPost /> : false}
+                {isOwner ? <QuickPost onSave={this.addNewPost.bind(this)} /> : false}
                 <div className="m-wall">
                   {posts.map((post, index) => {
                     return <div key={index} className="m-w-row">
