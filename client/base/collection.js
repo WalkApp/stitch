@@ -26,6 +26,5 @@ export default class BaseCollection extends Collection {
   }
 }
 
-BaseCollection.prototype.urlPath = null;
 BaseCollection.prototype.apiRoot = config.api_root || config._client.api_root;
 BaseCollection.prototype.idAttribute = '_id';
