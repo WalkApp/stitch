@@ -4,6 +4,7 @@ import Controller from '../base/controller';
 import UserView from '../views/user';
 import UserModel from '../models/user';
 import PostsCollection from '../models/posts';
+import currentuser from '../modules/user';
 
 
 export default class UserController extends Controller {
@@ -25,7 +26,8 @@ export default class UserController extends Controller {
     dfd.done(() => {
       var data = {
         user: user.toJSON(),
-        posts: posts.toJSON()
+        posts: posts.toJSON(),
+        isOwner: username === currentuser.get('username')
       };
 
       this.renderView(<UserView data={data} />, done);
