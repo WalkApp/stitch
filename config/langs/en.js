@@ -39,17 +39,21 @@ export default {
     settings: 'Settings',
     log_out: 'Log out',
     search: 'Search',
-    follow: 'Follow'
+    follow: 'Follow',
+    add_post: 'Post'
   },
 
   fields: {
     username: 'Username',
     password: 'Password',
     confirm_password: 'Confirm password',
-    full_name: 'Full name'
+    full_name: 'Full name',
+    address: 'Address',
+    image_url: 'Image url'
   },
 
   messages: {
-    type_search_text: 'Start typing'
+    type_search_text: 'Start typing',
+    add_post: 'Tell the world about visited place'
   }
 };

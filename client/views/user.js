@@ -3,6 +3,7 @@ import Component from '../base/component';
 import Header from './components/header';
 import Footer from './components/footer';
 import Post from './components/post';
+import QuickPost from './components/quick_post';
 import lang from '../lang';
 import moment from 'moment';
 
@@ -13,7 +14,7 @@ export default class User extends Component {
   }
 
   render () {
-    var { user, posts } = this.props.data;
+    var { user, posts, isOwner } = this.props.data;
 
     return <div className="p-user l-layout">
       <Header />
@@ -48,6 +49,7 @@ export default class User extends Component {
             </div>
             <div className="pure-u-16-24">
               <div className="p-u-content">
+                {isOwner ? <QuickPost /> : false}
                 <div className="m-wall">
                   {posts.map((post, index) => {
                     return <div key={index} className="m-w-row">
