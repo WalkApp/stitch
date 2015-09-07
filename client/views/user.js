@@ -2,6 +2,7 @@ import React from 'react';
 import Component from '../base/component';
 import Header from './components/header';
 import Footer from './components/footer';
+import Post from './components/post';
 import lang from '../lang';
 import moment from 'moment';
 
@@ -12,7 +13,7 @@ export default class User extends Component {
   }
 
   render () {
-    var { user } = this.props.data;
+    var { user, posts } = this.props.data;
 
     return <div className="p-user l-layout">
       <Header />
@@ -48,7 +49,11 @@ export default class User extends Component {
             <div className="pure-u-16-24">
               <div className="p-u-content">
                 <div className="m-wall">
-
+                  {posts.map((post, index) => {
+                    return <div key={index} className="m-w-row">
+                      <Post data={{ post }} />
+                    </div>
+                  })}
                 </div>
               </div>
             </div>

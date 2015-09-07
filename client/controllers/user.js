@@ -1,7 +1,9 @@
+import $ from 'jquery';
 import React from 'react';
 import Controller from '../base/controller';
 import UserView from '../views/user';
 import UserModel from '../models/user';
+import PostsCollection from '../models/posts';
 
 
 export default class UserController extends Controller {
@@ -9,14 +11,21 @@ export default class UserController extends Controller {
     var
       dfd,
       { username } = ctx.params,
-      user = new UserModel();
+      user = new UserModel(),
+      posts = new PostsCollection();
 
     user.username = username;
+    posts.username = username;
+    posts.order = '-created';
 
-    dfd = this.xhrs.user = user.fetch();
+    this.xhrs.user = user.fetch();
+    this.xhrs.posts = posts.fetch();
+
+    dfd = $.when(this.xhrs.user, this.xhrs.posts);
     dfd.done(() => {
       var data = {
-        user: user.toJSON()
+        user: user.toJSON(),
+        posts: posts.toJSON()
       };
 
       this.renderView(<UserView data={data} />, done);
