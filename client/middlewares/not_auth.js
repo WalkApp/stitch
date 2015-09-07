@@ -6,5 +6,6 @@ export default function (ctx, next) {
   if (user.authorized()) {
     return page.redirect('/user');
   }
-    next();
+
+  next();
 };
