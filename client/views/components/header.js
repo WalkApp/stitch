@@ -27,7 +27,6 @@ export default class Header extends Component {
 
   signout() {
     user.signout();
-    vent.trigger('user:signout');
   }
 
   render () {
