@@ -16,7 +16,7 @@ class User extends Model {
   };
 
   url () {
-    return `${this.apiRoot}/user`;
+    return `${this.apiRoot}/users/profile`;
   }
 
   defaults () {
