@@ -1,5 +1,6 @@
 import React from 'react';
 import Form from '../../base/form';
+import PostModel from '../../models/post';
 import lang from '../../lang';
 
 
@@ -7,18 +8,33 @@ export default class QuickPost extends Form {
   initState () {
     return {
       active: false,
-      model: {}
+      model: { description: '' }
     }
+  }
+
+  save (model) {
+    var
+      dfd,
+      post = new PostModel(model);
+
+    post.username = 'profile';
+
+    dfd = post.save();
+    dfd.fail((xhr) => this.handleAPIError(xhr));
+    dfd.done(() => {
+      this.trigger('save', post.toJSON());
+      this.refreshState();
+    });
   }
 
   render () {
     var { active } = this.state;
 
-    return <form className="c-quick-post">
+    return <form className="c-quick-post" onSubmit={this.handleSubmit}>
       {active
         ? <div>
             <div className="m-control-list">
-              <textarea valueLink={this.linkState('model.description')} placeholder={lang.messages.add_post} className="m-control" />
+              <textarea valueLink={this.linkState('model.description')} placeholder={lang.messages.add_post} className="m-control" required />
               <input valueLink={this.linkState('model.address')} placeholder={lang.fields.address} type="text" className="m-control" />
               <input valueLink={this.linkState('model.image_url')} placeholder={lang.fields.image_url} type="text" className="m-control" />
             </div>
