@@ -8,11 +8,11 @@ import moment from 'moment';
 
 
 export default class User extends Component {
-  title () {
+  title() {
     return `${lang.titles.search}`;
   }
 
-  render () {
+  render() {
     var { results } = this.props.data;
 
     return <div className="p-search l-layout">
@@ -25,29 +25,31 @@ export default class User extends Component {
         </div>
         <div className="p-s-container">
           <ul className="m-user-list">
-            {results.map((user, index) => {
-              return <li key={index} className="m-ul-item">
-                <div className="m-ul-i-avatar">
-                  <a href={`/user/${user.username}`}>
-                    <div style={{ backgroundImage: `url(${user.image_url})` }} className="m-ul-i-a-img"></div>
-                  </a>
-                </div>
-                <div className="m-ul-i-info">
-                  <a href={`/user/${user.username}`} className="m-ul-i-i-login">
-                    {user.username}
-                  </a>
-                  {user.full_name ? <div className="m-ul-i-i-fullname">| {user.full_name}</div> : false}
-                  <div className="m-ul-i-i-joined">
-                    <i className="icon-clock"></i>{moment(user.created).format('MMM DD, YYYY')}
-                  </div>
-                </div>
-                <div className="m-ul-i-actions">
-                  <button className="m-btn m-btn-success m-btn-block m-btn-sm">
-                    {lang.captions.follow}
-                  </button>
-                </div>
-              </li>
-            })}
+            {results.length
+              ? results.map((user, index) => {
+                  return <li key={index} className="m-ul-item">
+                    <div className="m-ul-i-avatar">
+                      <a href={`/user/${user.username}`}>
+                        <div style={{ backgroundImage: `url(${user.image_url})` }} className="m-ul-i-a-img"></div>
+                      </a>
+                    </div>
+                    <div className="m-ul-i-info">
+                      <a href={`/user/${user.username}`} className="m-ul-i-i-login">
+                        {user.username}
+                      </a>
+                      {user.full_name ? <div className="m-ul-i-i-fullname">| {user.full_name}</div> : false}
+                      <div className="m-ul-i-i-joined">
+                        <i className="icon-clock"></i>{moment(user.created).format('MMM DD, YYYY')}
+                      </div>
+                    </div>
+                    <div className="m-ul-i-actions">
+                      <button className="m-btn m-btn-success m-btn-block m-btn-sm">
+                        {lang.captions.follow}
+                      </button>
+                    </div>
+                  </li>
+                })
+              : <h3>{lang.captions.no_records_found}</h3>}
           </ul>
         </div>
       </div>

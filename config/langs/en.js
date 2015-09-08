@@ -40,7 +40,8 @@ export default {
     log_out: 'Log out',
     search: 'Search',
     follow: 'Follow',
-    add_post: 'Post'
+    add_post: 'Post',
+    no_records_found: 'No records found'
   },
 
   fields: {
