@@ -43,14 +43,14 @@ export default class Header extends Component {
               <li className={this.cx({'active': this.state.currentPath === `/user/${user.get('username')}` })}>
                 <a href="/user">
                   <span className="icon-home"></span>
-                  <span className="c-h-m-underline"></span>
                 </a>
+                <span className="c-h-m-underline"></span>
               </li>
               <li className={this.cx({'active': this.state.currentPath === '/feed' })}>
                 <a href="/feed">
                   <span className="icon-newspaper"></span>
-                  <span className="c-h-m-underline"></span>
                 </a>
+                <span className="c-h-m-underline"></span>
               </li>
               <li>
                 <HeaderSearchBox />
