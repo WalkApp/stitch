@@ -8,11 +8,11 @@ import moment from 'moment';
 
 
 export default class User extends Component {
-  title() {
+  title () {
     return `${lang.titles.search}`;
   }
 
-  render() {
+  render () {
     var { results } = this.props.data;
 
     return <div className="p-search l-layout">
@@ -49,7 +49,7 @@ export default class User extends Component {
                     </div>
                   </li>
                 })
-              : <h3>{lang.captions.no_records_found}</h3>}
+              : <h3>{lang.messages.no_records_found}</h3>}
           </ul>
         </div>
       </div>

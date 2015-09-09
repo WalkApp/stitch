@@ -40,8 +40,7 @@ export default {
     log_out: 'Log out',
     search: 'Search',
     follow: 'Follow',
-    add_post: 'Post',
-    no_records_found: 'No records found'
+    add_post: 'Post'
   },
 
   fields: {
@@ -55,6 +54,7 @@ export default {
 
   messages: {
     type_search_text: 'Start typing',
-    add_post: 'Tell the world about visited place'
+    add_post: 'Tell the world about visited place',
+    no_records_found: 'No records found'
   }
 };
