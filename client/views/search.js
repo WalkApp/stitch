@@ -3,6 +3,7 @@ import Component from '../base/component';
 import Header from './components/header';
 import Footer from './components/footer';
 import SearchBox from './components/search_box';
+import FollowToggle from './components/follow_toggle.js';
 import lang from '../lang';
 import moment from 'moment';
 
@@ -43,9 +44,7 @@ export default class User extends Component {
                       </div>
                     </div>
                     <div className="m-ul-i-actions">
-                      <button className="m-btn m-btn-success m-btn-block m-btn-sm">
-                        {lang.captions.follow}
-                      </button>
+                      <FollowToggle user={user}/>
                     </div>
                   </li>
                 })
