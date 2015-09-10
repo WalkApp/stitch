@@ -1,6 +1,8 @@
 import React from 'react';
 import Component from '../../base/component';
 import lang from '../../lang';
+
+
 export default class FollowToggle extends Component
 {
   initState () {
@@ -17,7 +19,7 @@ export default class FollowToggle extends Component
 
   render () {
     return <button className={this.cx('m-btn m-btn-block m-btn-sm m-btn-success', {'m-btn-active': this.state.isFollow})} onClick={this.handleToggle.bind(this)}>
-      {lang.captions.follow}
+      {this.state.isFollow ? lang.captions.unfollow : lang.captions.follow}
     </button>
   }
 

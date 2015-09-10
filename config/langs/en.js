@@ -40,6 +40,7 @@ export default {
     log_out: 'Log out',
     search: 'Search',
     follow: 'Follow',
+    unfollow: 'Unfollow',
     add_post: 'Post'
   },
 
