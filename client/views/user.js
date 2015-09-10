@@ -10,25 +10,25 @@ import moment from 'moment';
 
 
 export default class User extends Component {
-  title() {
+  title () {
     return `${lang.brand.name}`;
   }
 
   //FIXME: fix this shit
-  componentWillMount() {
+  componentWillMount () {
     this.setState({data: this.props.data});
   }
 
-  componentWillReceiveProps(props) {
+  componentWillReceiveProps (props) {
     this.setState({data: props.data});
   }
 
-  addNewPost(post) {
+  addNewPost (post) {
     this.state.data.posts.unshift(post);
     this.setState(this.state);
   }
 
-  render() {
+  render () {
     var { user, posts, isOwner } = this.state.data;
 
     return <div className="p-user l-layout">
@@ -60,7 +60,7 @@ export default class User extends Component {
                 {!isOwner
                   ?
                     <div className="m-p-follow">
-                      <FollowToggle/>
+                      <FollowToggle />
                     </div>
                   : false}
                 <ul className="m-p-statistics">
