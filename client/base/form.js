@@ -27,7 +27,7 @@ export default class Form extends Component {
       return alert(lang.errors[error]);
     }
 
-    var messages = [];
+    let messages = [];
 
     for (let key in error) {
       let message = _.capitalize(format(lang.errors[error[key]], key));
@@ -43,7 +43,8 @@ export default class Form extends Component {
 
   handleSubmit (event) {
     event.preventDefault();
-    var model = _.clone(this.state.model);
+
+    let model = _.clone(this.state.model);
     this.save(model);
   }
 

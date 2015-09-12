@@ -7,6 +7,6 @@ export default class Footer extends Component {
   render () {
     return <div className="c-footer">
       © 2015 {lang.brand.name} | <a href="/about">{lang.captions.about}</a>
-    </div>
+    </div>;
   }
 }

@@ -7,7 +7,7 @@ class Session extends Model {
   defaults () {
     return {
       _id: 'static',
-      timestamp: 0
+      timestamp: 0,
     };
   }
 

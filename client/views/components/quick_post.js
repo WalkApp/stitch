@@ -8,18 +8,15 @@ export default class QuickPost extends Form {
   initState () {
     return {
       active: false,
-      model: { description: '' }
-    }
+      model: { description: '' },
+    };
   }
 
   save (model) {
-    var
-      dfd,
-      post = new PostModel(model);
-
+    let post = new PostModel(model);
     post.username = 'profile';
 
-    dfd = post.save();
+    let dfd = post.save();
     dfd.fail((xhr) => this.handleAPIError(xhr));
     dfd.done(() => {
       this.trigger('save', post.toJSON());
@@ -48,6 +45,6 @@ export default class QuickPost extends Form {
             </div>
           </div>
       }
-    </form>
+    </form>;
   }
 }

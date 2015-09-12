@@ -36,6 +36,6 @@ export default class Welcome extends Component {
       </div>
       <div className="p-w-bottom"></div>
       <Footer />
-    </div>
+    </div>;
   }
 }

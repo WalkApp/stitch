@@ -30,7 +30,7 @@ createSymlink = function (key, path) {
 gulp.task('jscs', function () {
   gulp
     .src(['client/**/*.js'])
-    .pipe(jscs(require('./styleguide.json')))
+    .pipe(jscs())
     // hook to check over than 16 files
     // see https://github.com/jscs-dev/gulp-jscs/issues/22
     .pipe(through2.obj(function(file, encoding, callback) {

@@ -9,11 +9,9 @@ import currentuser from '../modules/user';
 
 export default class UserController extends Controller {
   index (ctx, done) {
-    var
-      dfd,
-      { username } = ctx.params,
-      user = new UserModel(),
-      posts = new PostsCollection();
+    let { username } = ctx.params;
+    let user = new UserModel();
+    let posts = new PostsCollection();
 
     user.username = username;
     posts.username = username;
@@ -22,12 +20,12 @@ export default class UserController extends Controller {
     this.xhrs.user = user.fetch();
     this.xhrs.posts = posts.fetch();
 
-    dfd = $.when(this.xhrs.user, this.xhrs.posts);
+    let dfd = $.when(this.xhrs.user, this.xhrs.posts);
     dfd.done(() => {
-      var data = {
+      let data = {
         user: user.toJSON(),
         posts: posts.toJSON(),
-        isOwner: username === currentuser.get('username')
+        isOwner: username === currentuser.get('username'),
       };
 
       this.renderView(<UserView data={data} />, done);

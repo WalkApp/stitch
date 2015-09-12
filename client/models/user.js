@@ -4,7 +4,7 @@ import user from '../modules/user';
 
 export default class UserModel extends Model {
   urlPath () {
-    var urlPath = '/users';
+    let urlPath = '/users';
 
     if (this.username) {
       urlPath += `/${this.username}`;

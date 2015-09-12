@@ -45,6 +45,7 @@
   "devDependencies": {
     "babelify": "^6.1.3",
     "browserify": "^11.0.1",
+    "esprima-fb": "^15001.1001.0-dev-harmony-fb",
     "gulp": "^3.9.0",
     "gulp-jscs": "^2.0.0",
     "gulp-nodemon": "^2.0.3",

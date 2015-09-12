@@ -4,7 +4,7 @@ import Component from '../../base/component';
 
 export default class Post extends Component {
   render () {
-    var { post } = this.props.data;
+    let { post } = this.props.data;
 
     return <div className="c-post m-panel">
       {post.image_url
@@ -19,6 +19,6 @@ export default class Post extends Component {
           {post.description}
         </p>
       </div>
-    </div>
+    </div>;
   }
 }

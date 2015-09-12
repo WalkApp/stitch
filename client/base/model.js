@@ -10,7 +10,7 @@ export default class Model extends Backbone.Model {
   }
 
   url () {
-    var url = this.baseUrl();
+    let url = this.baseUrl();
 
     if (this.id) {
       url += `/${this.id}`;

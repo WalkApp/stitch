@@ -1,8 +1,7 @@
 import React from 'react';
 
-var
-  appNode = document.getElementById('app-node'),
-  titleNode = document.getElementsByTagName('title')[0];
+const appNode = document.getElementById('app-node');
+const titleNode = document.getElementsByTagName('title')[0];
 
 export default class Controller {
   constructor () {
@@ -18,7 +17,7 @@ export default class Controller {
   }
 
   renderView (View, callback) {
-    var view = React.render(View, appNode, callback);
+    let view = React.render(View, appNode, callback);
     titleNode.innerText = view.title();
   }
 }
