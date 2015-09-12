@@ -8,7 +8,7 @@ import lang from '../lang';
 import moment from 'moment';
 
 
-export default class Upcomming extends Component {
+export default class Upcoming extends Component {
   title () {
     return `${lang.brand.name}`;
   }
@@ -34,7 +34,7 @@ export default class Upcomming extends Component {
             <div className="pure-u-16-24">
               <nav className="p-u-tabs">
                 <a href="/user">{lang.captions.posts}</a>
-                <a className="active" href={`/user/${user.username}/upcomming`}>{lang.captions.upcomming}</a>
+                <a className="active" href={`/user/${user.username}/upcoming`}>{lang.captions.upcoming}</a>
               </nav>
             </div>
           </div>

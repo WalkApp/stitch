@@ -2,7 +2,7 @@ import $ from 'jquery';
 import React from 'react';
 import Controller from '../base/controller';
 import UserView from '../views/user';
-import UpcommingView from '../views/upcomming';
+import UpcomingView from '../views/upcoming';
 import UserModel from '../models/user';
 import PostsCollection from '../models/posts';
 import EventsCollection from '../models/events';
@@ -36,7 +36,7 @@ export default class UserController extends Controller {
     });
   }
 
-  upcomming (ctx, done) {
+  upcoming (ctx, done) {
     var
       dfd,
       { username } = ctx.params,
@@ -58,7 +58,7 @@ export default class UserController extends Controller {
         isOwner: username === currentUser.get('username')
       };
 
-      this.renderView(<UpcommingView data={data}/>, done);
+      this.renderView(<UpcomingView data={data}/>, done);
     });
   }
 }
