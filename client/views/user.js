@@ -41,7 +41,7 @@ export default class User extends Component {
             <div className="pure-u-16-24">
               <nav className="p-u-tabs">
                 <a className="active" href="/user">{lang.captions.posts}</a>
-                <a href={location.pathname + '/upcomming'}>{lang.captions.upcomming}</a>
+                <a href={`/user/${user.username}/upcomming`}>{lang.captions.upcomming}</a>
               </nav>
             </div>
           </div>
