@@ -2,14 +2,13 @@ import React from 'react';
 import Component from '../base/component';
 import Header from './components/header';
 import Footer from './components/footer';
-import Post from './components/post';
-import QuickPost from './components/quick_post';
+import Event from './components/event';
 import FollowToggle from './components/follow_toggle.js';
 import lang from '../lang';
 import moment from 'moment';
 
 
-export default class User extends Component {
+export default class Upcomming extends Component {
   title () {
     return `${lang.brand.name}`;
   }
@@ -23,13 +22,8 @@ export default class User extends Component {
     this.setState({data: props.data});
   }
 
-  addNewPost (post) {
-    this.state.data.posts.unshift(post);
-    this.setState(this.state);
-  }
-
   render () {
-    var { user, posts, isOwner } = this.state.data;
+    var { user, events, isOwner } = this.state.data;
 
     return <div className="p-user l-layout">
       <Header />
@@ -40,8 +34,8 @@ export default class User extends Component {
             <div className="pure-u-6-24"></div>
             <div className="pure-u-16-24">
               <nav className="p-u-tabs">
-                <a className="active" href="/user">{lang.captions.posts}</a>
-                <a href={location.pathname + '/upcomming'}>{lang.captions.upcomming}</a>
+                <a href="/user">{lang.captions.posts}</a>
+                <a className="active" href={location.pathname}>{lang.captions.upcomming}</a>
               </nav>
             </div>
           </div>
@@ -59,9 +53,9 @@ export default class User extends Component {
                 </ul>
                 {!isOwner
                   ?
-                    <div className="m-p-follow">
-                      <FollowToggle />
-                    </div>
+                  <div className="m-p-follow">
+                    <FollowToggle />
+                  </div>
                   : false}
                 <ul className="m-p-statistics">
                   <li><strong>00</strong>
@@ -75,11 +69,10 @@ export default class User extends Component {
             </div>
             <div className="pure-u-16-24">
               <div className="p-u-content">
-                {isOwner ? <QuickPost onSave={this.addNewPost.bind(this)}/> : false}
                 <div className="m-wall">
-                  {posts.map((post, index) => {
+                  {events.map((event, index) => {
                     return <div key={index} className="m-w-row">
-                      <Post data={{ post }}/>
+                      <Event data={{ event }}/>
                     </div>
                   })}
                 </div>
