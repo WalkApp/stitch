@@ -35,11 +35,9 @@ export default class UserController extends Controller {
   }
 
   upcoming (ctx, done) {
-    var
-      dfd,
-      { username } = ctx.params,
-      user = new UserModel(),
-      events = new EventsCollection();
+    let { username } = ctx.params;
+    let user = new UserModel();
+    let events = new EventsCollection();
 
     user.username = username;
     events.username = username;
@@ -48,12 +46,12 @@ export default class UserController extends Controller {
     this.xhrs.user = user.fetch();
     this.xhrs.events = events.fetch();
 
-    dfd = $.when(this.xhrs.user, this.xhrs.events);
+    let dfd = $.when(this.xhrs.user, this.xhrs.events);
     dfd.done(() => {
-      var data = {
+      let data = {
         user: user.toJSON(),
         events: events.toJSON(),
-        isOwner: username === currentUser.get('username')
+        isOwner: username === currentUser.get('username'),
       };
 
       this.renderView(<UpcomingView data={data}/>, done);

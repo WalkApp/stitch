@@ -19,6 +19,6 @@ export default class Event extends Component {
           {event.description}
         </p>
       </div>
-    </div>
+    </div>;
   }
 }
