@@ -48,7 +48,7 @@ export default class User extends Component {
                     </div>
                   </li>
                 })
-              : <h3>{lang.messages.no_records_found}</h3>}
+              : <h4>{lang.messages.no_records_found}</h4>}
           </ul>
         </div>
       </div>
