@@ -31,7 +31,7 @@ class Router extends BaseRouter {
     this.route('/signup', 'welcome.signup');
     this.route('/user/:username', 'user.index');
     this.route('/search', 'search.index');
-    this.route('/user/:username/upcomming', 'user.upcomming');
+    this.route('/user/:username/upcoming', 'user.upcoming');
   }
 }
 

@@ -11,12 +11,12 @@ export default class UserController extends ViewController {
     this.renderEmptyView(req, res, 'user');
   }
 
-  upcomming (req, res) {
-    this.renderEmptyView(req, res, 'upcomming');
+  upcoming (req, res) {
+    this.renderEmptyView(req, res, 'upcoming');
   }
 
   router () {
     this.get('/user/:username', this.user);
-    this.get('/user/:username/upcomming', this.upcomming);
+    this.get('/user/:username/upcoming', this.upcoming);
   }
 }

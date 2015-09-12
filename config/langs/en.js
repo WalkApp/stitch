@@ -32,7 +32,7 @@ export default {
     sign_in: 'Sign in',
     sign_up: 'Sign up',
     posts: 'Posts',
-    upcomming: 'Upcomming',
+    upcoming: 'Upcoming',
     followers: 'Followers',
     following: 'Following',
     profile: 'Profile',
