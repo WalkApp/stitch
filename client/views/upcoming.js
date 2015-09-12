@@ -2,19 +2,18 @@ import React from 'react';
 import Component from '../base/component';
 import Header from './components/header';
 import Footer from './components/footer';
-import Post from './components/post';
-import QuickPost from './components/quick_post';
+import Event from './components/event';
 import FollowToggle from './components/follow_toggle.js';
 import lang from '../lang';
 import moment from 'moment';
 
 
-export default class User extends Component {
+export default class Upcoming extends Component {
   title () {
     return `${lang.brand.name}`;
   }
 
-  // FIXME: fix this shit
+  //FIXME: fix this shit
   componentWillMount () {
     this.setState({data: this.props.data});
   }
@@ -23,25 +22,19 @@ export default class User extends Component {
     this.setState({data: props.data});
   }
 
-  addNewPost (post) {
-    this.state.data.posts.unshift(post);
-    this.setState(this.state);
-  }
-
   render () {
-    let { user, posts, isOwner } = this.state.data;
+    var { user, events, isOwner } = this.state.data;
 
     return <div className="p-user l-layout">
       <Header />
-
       <div className="l-wrapper">
         <div className="l-container p-u-top">
           <div className="pure-g">
             <div className="pure-u-6-24"></div>
             <div className="pure-u-16-24">
               <nav className="p-u-tabs">
-                <a className="active" href="/user">{lang.captions.posts}</a>
-                <a href={`/user/${user.username}/upcoming`}>{lang.captions.upcoming}</a>
+                <a href="/user">{lang.captions.posts}</a>
+                <a className="active" href={`/user/${user.username}/upcoming`}>{lang.captions.upcoming}</a>
               </nav>
             </div>
           </div>
@@ -58,11 +51,11 @@ export default class User extends Component {
                   <li><i className="icon-clock"></i>{moment(user.created).format('MMM DD, YYYY')}</li>
                 </ul>
                 {!isOwner
-                  ? <div className="m-p-follow">
-                      <FollowToggle />
-                    </div>
-                  : false
-                }
+                  ?
+                  <div className="m-p-follow">
+                    <FollowToggle />
+                  </div>
+                  : false}
                 <ul className="m-p-statistics">
                   <li><strong>00</strong>
                     <small>{lang.captions.followers}</small>
@@ -75,12 +68,11 @@ export default class User extends Component {
             </div>
             <div className="pure-u-16-24">
               <div className="p-u-content">
-                {isOwner ? <QuickPost onSave={this.addNewPost.bind(this)}/> : false}
                 <div className="m-wall">
-                  {posts.map((post, index) => {
+                  {events.map((event, index) => {
                     return <div key={index} className="m-w-row">
-                      <Post data={{ post }}/>
-                    </div>;
+                      <Event data={{ event }}/>
+                    </div>
                   })}
                 </div>
               </div>
@@ -89,6 +81,6 @@ export default class User extends Component {
         </div>
       </div>
       <Footer />
-    </div>;
+    </div>
   }
 }
