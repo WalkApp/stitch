@@ -10,7 +10,9 @@ var
   nodemon = require('gulp-nodemon'),
   browserify = require('browserify'),
   source = require('vinyl-source-stream'),
-  symlink = require('gulp-symlink');
+  symlink = require('gulp-symlink'),
+  jscs = require('gulp-jscs'),
+  through2 = require('through2');
 
 
 SYMLINKS = {
@@ -25,9 +27,20 @@ createSymlink = function (key, path) {
     .pipe(symlink(path[1].trim() + '/' + key, { force: true }));
 };
 
+gulp.task('jscs', function () {
+  gulp
+    .src(['client/**/*.js'])
+    .pipe(jscs(require('./styleguide.json')))
+    // hook to check over than 16 files
+    // see https://github.com/jscs-dev/gulp-jscs/issues/22
+    .pipe(through2.obj(function(file, encoding, callback) {
+      callback();
+    }));
+});
+
 gulp.task('symlink', function () {
   for (var key in SYMLINKS) {
-    createSymlink(key, SYMLINKS[key])
+    createSymlink(key, SYMLINKS[key]);
   };
 });
 
