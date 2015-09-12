@@ -33,7 +33,6 @@ export default class User extends Component {
 
     return <div className="p-user l-layout">
       <Header />
-
       <div className="l-wrapper">
         <div className="l-container p-u-top">
           <div className="pure-g">

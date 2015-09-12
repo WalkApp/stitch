@@ -71,8 +71,8 @@ export default class Router {
   }
 
   createQuery (ctx, next) {
-    const query = {};
-    const params = ctx.querystring.split('&');
+    let query = {};
+    let params = ctx.querystring.split('&');
 
     for (let [index, param] of params.entries()) {
       param = param.split('=');
