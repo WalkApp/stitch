@@ -15,7 +15,7 @@ export default class Signin extends Form {
   }
 
   save (model) {
-    var dfd = user.signin(model);
+    let dfd = user.signin(model);
     dfd.fail((xhr) => this.handleAPIError(xhr));
   }
 
@@ -50,6 +50,6 @@ export default class Signin extends Form {
       </div>
       <div className="p-l-bottom"></div>
       <Footer />
-    </div>
+    </div>;
   }
 }

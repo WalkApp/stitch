@@ -6,21 +6,19 @@ import UsersCollection from '../models/users';
 
 export default class SearchController extends Controller {
   index (ctx, done) {
-    var
-      dfd,
-      q = ctx.query.q,
-      users = new UsersCollection();
+    let q = ctx.query.q;
+    let users = new UsersCollection();
 
     if (q) {
       users.filter = {
-        username: { contains: q }
+        username: { contains: q },
       };
     }
 
-    dfd = this.xhrs.users = users.fetch();
+    let dfd = this.xhrs.users = users.fetch();
     dfd.done(() => {
-      var data = {
-        results: users.toJSON()
+      let data = {
+        results: users.toJSON(),
       };
 
       this.renderView(<SearchView data={data} />, done);

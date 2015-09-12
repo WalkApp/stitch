@@ -11,11 +11,9 @@ import currentUser from '../modules/user';
 
 export default class UserController extends Controller {
   index (ctx, done) {
-    var
-      dfd,
-      { username } = ctx.params,
-      user = new UserModel(),
-      posts = new PostsCollection();
+    let { username } = ctx.params;
+    let user = new UserModel();
+    let posts = new PostsCollection();
 
     user.username = username;
     posts.username = username;
@@ -24,12 +22,12 @@ export default class UserController extends Controller {
     this.xhrs.user = user.fetch();
     this.xhrs.posts = posts.fetch();
 
-    dfd = $.when(this.xhrs.user, this.xhrs.posts);
+    let dfd = $.when(this.xhrs.user, this.xhrs.posts);
     dfd.done(() => {
-      var data = {
+      let data = {
         user: user.toJSON(),
         posts: posts.toJSON(),
-        isOwner: username === currentUser.get('username')
+        isOwner: username === currentUser.get('username'),
       };
 
       this.renderView(<UserView data={data}/>, done);
@@ -37,11 +35,9 @@ export default class UserController extends Controller {
   }
 
   upcoming (ctx, done) {
-    var
-      dfd,
-      { username } = ctx.params,
-      user = new UserModel(),
-      events = new EventsCollection();
+    let { username } = ctx.params;
+    let user = new UserModel();
+    let events = new EventsCollection();
 
     user.username = username;
     events.username = username;
@@ -50,12 +46,12 @@ export default class UserController extends Controller {
     this.xhrs.user = user.fetch();
     this.xhrs.events = events.fetch();
 
-    dfd = $.when(this.xhrs.user, this.xhrs.events);
+    let dfd = $.when(this.xhrs.user, this.xhrs.events);
     dfd.done(() => {
-      var data = {
+      let data = {
         user: user.toJSON(),
         events: events.toJSON(),
-        isOwner: username === currentUser.get('username')
+        isOwner: username === currentUser.get('username'),
       };
 
       this.renderView(<UpcomingView data={data}/>, done);

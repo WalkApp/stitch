@@ -16,5 +16,5 @@ $.ajaxSetup({
     if (_.isObject(this.data) && this.type.toLowerCase() !== 'get') {
       this.data = JSON.stringify(this.data);
     }
-  }
+  },
 });

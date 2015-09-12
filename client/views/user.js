@@ -14,7 +14,7 @@ export default class User extends Component {
     return `${lang.brand.name}`;
   }
 
-  //FIXME: fix this shit
+  // FIXME: fix this shit
   componentWillMount () {
     this.setState({data: this.props.data});
   }
@@ -29,11 +29,10 @@ export default class User extends Component {
   }
 
   render () {
-    var { user, posts, isOwner } = this.state.data;
+    let { user, posts, isOwner } = this.state.data;
 
     return <div className="p-user l-layout">
       <Header />
-
       <div className="l-wrapper">
         <div className="l-container p-u-top">
           <div className="pure-g">
@@ -58,11 +57,11 @@ export default class User extends Component {
                   <li><i className="icon-clock"></i>{moment(user.created).format('MMM DD, YYYY')}</li>
                 </ul>
                 {!isOwner
-                  ?
-                    <div className="m-p-follow">
+                  ? <div className="m-p-follow">
                       <FollowToggle />
                     </div>
-                  : false}
+                  : false
+                }
                 <ul className="m-p-statistics">
                   <li><strong>00</strong>
                     <small>{lang.captions.followers}</small>
@@ -80,7 +79,7 @@ export default class User extends Component {
                   {posts.map((post, index) => {
                     return <div key={index} className="m-w-row">
                       <Post data={{ post }}/>
-                    </div>
+                    </div>;
                   })}
                 </div>
               </div>
@@ -89,6 +88,6 @@ export default class User extends Component {
         </div>
       </div>
       <Footer />
-    </div>
+    </div>;
   }
 }

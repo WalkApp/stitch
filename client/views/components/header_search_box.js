@@ -22,6 +22,6 @@ export default class HeaderSearchBox extends Form {
         <span className="m-cg-icon icon-search"></span>
         <input valueLink={this.linkState('model.text')} type="text" className="m-control" placeholder={lang.captions.search} />
       </div>
-    </form>
+    </form>;
   }
 };

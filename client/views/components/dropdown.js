@@ -18,7 +18,8 @@ export default class Dropdown extends Component {
 
   handleToggle (event) {
     event.stopPropagation();
-    var show = !this.state.show;
+
+    let show = !this.state.show;
     this.setState({ show });
   }
 
@@ -41,6 +42,6 @@ export default class Dropdown extends Component {
   render () {
     return <div className={this.cx('c-dropdown', { show: this.state.show })}>
       {this.props.children}
-    </div>
+    </div>;
   }
 }

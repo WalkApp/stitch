@@ -24,7 +24,7 @@ export default class Router {
 
     this.page.start();
 
-    vent.on('routeTo', (url) => this.routeTo(url))
+    vent.on('routeTo', (url) => this.routeTo(url));
   }
 
   routeTo (url) {
@@ -32,10 +32,9 @@ export default class Router {
   }
 
   route (url, action) {
-    var
-      temp = action.split('.'),
-      method = temp[1],
-      Controller = this.controllers[temp[0]];
+    let temp = action.split('.');
+    let method = temp[1];
+    let Controller = this.controllers[temp[0]];
 
     if (!Controller) {
       throw new Error(`undefined controller "${temp[0]}"`);
@@ -72,9 +71,8 @@ export default class Router {
   }
 
   createQuery (ctx, next) {
-    var
-      query = {},
-      params = ctx.querystring.split('&');
+    let query = {};
+    let params = ctx.querystring.split('&');
 
     for (let [index, param] of params.entries()) {
       param = param.split('=');

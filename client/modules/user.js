@@ -6,12 +6,12 @@ import $ from 'jquery';
 
 class User extends Model {
   _setTokenHeaders () {
-    var headers = { 'X-Access-Token': this.get('token').value };
+    let headers = { 'X-Access-Token': this.get('token').value };
     $.ajaxSetup({ headers });
   }
 
   _unsetTokenHeaders () {
-    var headers = { 'X-Access-Token': '' };
+    let headers = { 'X-Access-Token': '' };
     $.ajaxSetup({ headers });
   };
 
@@ -22,7 +22,7 @@ class User extends Model {
   defaults () {
     return {
       _id: 0,
-      timestamp: 0
+      timestamp: 0,
     };
   }
 
@@ -31,9 +31,7 @@ class User extends Model {
       return;
     }
 
-    var
-      dfd,
-      _id = session.get('user_id');
+    let _id = session.get('user_id');
 
     if (!_id) {
       return;
@@ -43,7 +41,7 @@ class User extends Model {
     this.fetch();
     this._setTokenHeaders();
 
-    dfd = this.fetch({ ajaxSync: true });
+    let dfd = this.fetch({ ajaxSync: true });
     dfd.fail(() => this.signout());
 
     dfd.done((resp) => {
@@ -60,10 +58,10 @@ class User extends Model {
   }
 
   signin (data) {
-    var dfd = this.$({
+    let dfd = this.$({
+      data,
       url: `${this.apiRoot}/auth`,
       type: 'post',
-      data: data
     });
 
     dfd.done((user) => {

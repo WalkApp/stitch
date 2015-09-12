@@ -38,7 +38,7 @@ class Router extends BaseRouter {
 Router.prototype.controllers = {
   welcome: require('./controllers/welcome'),
   user: require('./controllers/user'),
-  search: require('./controllers/search')
+  search: require('./controllers/search'),
 };
 
 export default new Router();

@@ -20,12 +20,9 @@ export default class Signup extends Form {
       return this.showError('invalid_confirm_password');
     }
 
-    var
-      dfd,
-      newUser = new UserModel(model);
-
-    dfd = newUser.save().then(() => {
-      return user.signin(newUser.toJSON())
+    let newUser = new UserModel(model);
+    let dfd = newUser.save().then(() => {
+      return user.signin(newUser.toJSON());
     });
 
     dfd.fail((xhr) => this.handleAPIError(xhr));
@@ -70,6 +67,6 @@ export default class Signup extends Form {
       </div>
       <div className="p-l-bottom"></div>
       <Footer />
-    </div>
+    </div>;
   }
 }

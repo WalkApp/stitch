@@ -14,7 +14,7 @@ export default class User extends Component {
   }
 
   render () {
-    var { results } = this.props.data;
+    let { results } = this.props.data;
 
     return <div className="p-search l-layout">
       <Header />
@@ -28,31 +28,31 @@ export default class User extends Component {
           <ul className="m-user-list">
             {results.length
               ? results.map((user, index) => {
-                  return <li key={index} className="m-ul-item">
-                    <div className="m-ul-i-avatar">
-                      <a href={`/user/${user.username}`}>
-                        <div style={{ backgroundImage: `url(${user.image_url})` }} className="m-ul-i-a-img"></div>
-                      </a>
+                return <li key={index} className="m-ul-item">
+                  <div className="m-ul-i-avatar">
+                    <a href={`/user/${user.username}`}>
+                      <div style={{ backgroundImage: `url(${user.image_url})` }} className="m-ul-i-a-img"></div>
+                    </a>
+                  </div>
+                  <div className="m-ul-i-info">
+                    <a href={`/user/${user.username}`} className="m-ul-i-i-login">
+                      {user.username}
+                    </a>
+                    {user.full_name ? <div className="m-ul-i-i-fullname">| {user.full_name}</div> : false}
+                    <div className="m-ul-i-i-joined">
+                      <i className="icon-clock"></i>{moment(user.created).format('MMM DD, YYYY')}
                     </div>
-                    <div className="m-ul-i-info">
-                      <a href={`/user/${user.username}`} className="m-ul-i-i-login">
-                        {user.username}
-                      </a>
-                      {user.full_name ? <div className="m-ul-i-i-fullname">| {user.full_name}</div> : false}
-                      <div className="m-ul-i-i-joined">
-                        <i className="icon-clock"></i>{moment(user.created).format('MMM DD, YYYY')}
-                      </div>
-                    </div>
-                    <div className="m-ul-i-actions">
-                      <FollowToggle user={user}/>
-                    </div>
-                  </li>
-                })
+                  </div>
+                  <div className="m-ul-i-actions">
+                    <FollowToggle user={user}/>
+                  </div>
+                </li>;
+              })
               : <h4>{lang.messages.no_records_found}</h4>}
           </ul>
         </div>
       </div>
       <Footer />
-    </div>
+    </div>;
   }
 }

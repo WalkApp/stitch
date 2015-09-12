@@ -6,12 +6,11 @@ import urlQuery from 'libs/url_query';
 
 export default class BaseCollection extends Collection {
   url () {
-    var
-      params = {},
-      url = `${this.apiRoot}${_.result(this, 'urlPath')}`;
+    let params = {};
+    let url = `${this.apiRoot}${_.result(this, 'urlPath')}`;
 
     if (this.order) {
-      params.order = this.order
+      params.order = this.order;
     }
 
     if (this.filter) {

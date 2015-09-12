@@ -25,7 +25,7 @@ export default class Header extends Component {
     this.setState({ currentPath:ctx.pathname });
   }
 
-  signout() {
+  signout () {
     user.signout();
   }
 
@@ -40,13 +40,13 @@ export default class Header extends Component {
           </div>
           <div className="pure-u-18-24">
             <ul className="c-h-menu">
-              <li className={this.cx({'active': this.state.currentPath === `/user/${user.get('username')}` })}>
+              <li className={this.cx({active: this.state.currentPath === `/user/${user.get('username')}` })}>
                 <a href="/user">
                   <span className="icon-home"></span>
                 </a>
                 <span className="c-h-m-underline"></span>
               </li>
-              <li className={this.cx({'active': this.state.currentPath === '/feed' })}>
+              <li className={this.cx({active: this.state.currentPath === '/feed' })}>
                 <a href="/feed">
                   <span className="icon-newspaper"></span>
                 </a>
@@ -73,6 +73,6 @@ export default class Header extends Component {
           </div>
         </div>
       </div>
-    </div>
+    </div>;
   }
 }

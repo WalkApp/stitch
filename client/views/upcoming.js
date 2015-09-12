@@ -13,7 +13,7 @@ export default class Upcoming extends Component {
     return `${lang.brand.name}`;
   }
 
-  //FIXME: fix this shit
+  // FIXME: fix this shit
   componentWillMount () {
     this.setState({data: this.props.data});
   }
@@ -23,7 +23,7 @@ export default class Upcoming extends Component {
   }
 
   render () {
-    var { user, events, isOwner } = this.state.data;
+    let { user, events, isOwner } = this.state.data;
 
     return <div className="p-user l-layout">
       <Header />
@@ -51,11 +51,11 @@ export default class Upcoming extends Component {
                   <li><i className="icon-clock"></i>{moment(user.created).format('MMM DD, YYYY')}</li>
                 </ul>
                 {!isOwner
-                  ?
-                  <div className="m-p-follow">
-                    <FollowToggle />
-                  </div>
-                  : false}
+                  ? <div className="m-p-follow">
+                      <FollowToggle />
+                    </div>
+                  : false
+                }
                 <ul className="m-p-statistics">
                   <li><strong>00</strong>
                     <small>{lang.captions.followers}</small>
@@ -72,7 +72,7 @@ export default class Upcoming extends Component {
                   {events.map((event, index) => {
                     return <div key={index} className="m-w-row">
                       <Event data={{ event }}/>
-                    </div>
+                    </div>;
                   })}
                 </div>
               </div>
@@ -81,6 +81,6 @@ export default class Upcoming extends Component {
         </div>
       </div>
       <Footer />
-    </div>
+    </div>;
   }
 }
