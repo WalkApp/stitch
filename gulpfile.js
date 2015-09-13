@@ -91,3 +91,4 @@ gulp.task('watch', function () {
 });
 
 gulp.task('dev', ['server', 'js', 'css', 'watch']);
+gulp.task('test', ['jscs']);
