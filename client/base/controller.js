@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const appNode = document.getElementById('app-node');
 const titleNode = document.getElementsByTagName('title')[0];
 

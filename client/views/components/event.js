@@ -4,7 +4,7 @@ import Component from '../../base/component';
 
 export default class Event extends Component {
   render () {
-    var { event } = this.props.data;
+    let { event } = this.props.data;
 
     return <div className="c-post m-panel">
       {event.image_url

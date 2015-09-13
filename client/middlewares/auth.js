@@ -1,7 +1,8 @@
 import page from 'page';
 import user from '../modules/user';
 
-export default function (ctx, next) {
+
+export default function auth (ctx, next) {
   if (!user.authorized()) {
     return page.redirect('/signin');
   }
