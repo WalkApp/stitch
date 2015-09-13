@@ -1,1 +1,1 @@
-export default window.app.config
+export default window.app.config;

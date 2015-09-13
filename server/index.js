@@ -20,7 +20,7 @@ class Server {
 
   preRouteMiddleware () {
     this.app.use((req, res, next) => {
-      var _domain = domain.create();
+      let _domain = domain.create();
       _domain.add(req);
       _domain.add(res);
       _domain.run(next);
@@ -39,7 +39,7 @@ class Server {
     this.app.use(middlewares.lang);
 
     // Parse application/json.
-    this.app.use(bodyParser.json({ limit: 1024*1024 }));
+    this.app.use(bodyParser.json({ limit: 1024 * 1024 }));
 
     // Get Access token from API.
     this.app.use(middlewares.accessToken);
@@ -49,7 +49,7 @@ class Server {
     if (config.debug) {
       this.app.use(errorhandler({
         dumpExceptions: true,
-        showStack: true
+        showStack: true,
       }));
     } else {
       this.app.use((err, req, res, next) => {

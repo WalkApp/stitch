@@ -27,7 +27,7 @@ export default class Controller {
   }
 
   _handler (type, route, callbacks) {
-    var boundCallbacks = this._bind(callbacks);
+    let boundCallbacks = this._bind(callbacks);
 
     if (_.isArray(route)) {
       while (route.length) {

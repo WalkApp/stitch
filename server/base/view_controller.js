@@ -8,7 +8,7 @@ import env from 'libs/env';
 
 export default class ViewController extends Controller {
   renderEmptyView (req, res, viewName) {
-    var ViewClass = require(`../../client/views/${viewName}`);
+    let ViewClass = require(`../../client/views/${viewName}`);
 
     res.render('layout', {
       config: config._client,
@@ -16,15 +16,14 @@ export default class ViewController extends Controller {
       langs: _.pick(langs, [req.lang]),
 
       title: ViewClass.prototype.title(),
-      body: ''
+      body: '',
     });
   }
 
   renderView (req, res, viewName, data) {
-    var
-      ViewClass = require(`../../client/views/${viewName}`),
-      View = React.createFactory(ViewClass),
-      html = React.renderToString(View(data));
+    let ViewClass = require(`../../client/views/${viewName}`);
+    let View = React.createFactory(ViewClass);
+    let html = React.renderToString(View(data));
 
     res.render('layout', {
       config: config._client,
@@ -32,7 +31,7 @@ export default class ViewController extends Controller {
       langs: _.pick(langs, [req.lang]),
 
       title: ViewClass.prototype.title(),
-      body: html
+      body: html,
     });
   }
 }

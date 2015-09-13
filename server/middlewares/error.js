@@ -8,12 +8,12 @@ import langs from 'config/langs';
 // code  - The HTTP status code as {Number}.
 
 export default function (res, error, code)  {
-  var lang = (res.locals || {}).lang || 'en';
+  let lang = (res.locals || {}).lang || 'en';
 
   res.status(code).json({
     error: {
       code: error,
-      message: langs.errorMessage(lang, error)
-    }
+      message: langs.errorMessage(lang, error),
+    },
   }).end();
 }

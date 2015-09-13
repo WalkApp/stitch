@@ -1,11 +1,12 @@
 import _ from 'lodash';
 
-module.exports = function (url, params) {
+
+export default function urlQuery (url, params) {
   if (!params) {
     return url;
   }
 
-  var query = '';
+  let query = '';
 
   for (let key in params) {
     if (key === 'filter') {

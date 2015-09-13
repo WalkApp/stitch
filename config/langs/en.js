@@ -11,19 +11,19 @@ export default {
     already_exists: '%s has already registered',
     non_existent: '%s doesn\'t exist',
     invalid_username_or_password: 'Wrong username or password',
-    invalid_confirm_password: 'Confirm password isn\'t same with password'
+    invalid_confirm_password: 'Confirm password isn\'t same with password',
   },
 
   brand: {
     name: 'Walk',
-    tagline: 'Where do you go today'
+    tagline: 'Where do you go today',
   },
 
   titles: {
     welcome: 'Welcome',
     sign_in: 'Sign in',
     sign_up: 'Sign up',
-    search: 'Search results'
+    search: 'Search results',
   },
 
   captions: {
@@ -41,7 +41,7 @@ export default {
     search: 'Search',
     follow: 'Follow',
     unfollow: 'Unfollow',
-    add_post: 'Post'
+    add_post: 'Post',
   },
 
   fields: {
@@ -50,12 +50,12 @@ export default {
     confirm_password: 'Confirm password',
     full_name: 'Full name',
     address: 'Address',
-    image_url: 'Image url'
+    image_url: 'Image url',
   },
 
   messages: {
     type_search_text: 'Start typing',
     add_post: 'Tell the world about visited place',
-    no_records_found: 'No records found'
-  }
+    no_records_found: 'No records found',
+  },
 };

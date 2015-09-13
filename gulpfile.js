@@ -29,7 +29,7 @@ createSymlink = function (key, path) {
 
 gulp.task('jscs', function () {
   gulp
-    .src(['client/**/*.js'])
+    .src(['./client/**/*.js', './server/**/*.js', './config/**/*.js', './libs/**/*.js'])
     .pipe(jscs())
     // hook to check over than 16 files
     // see https://github.com/jscs-dev/gulp-jscs/issues/22

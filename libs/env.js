@@ -27,7 +27,7 @@ class Environment {
   }
 
   toJSON () {
-    return _.clone(this.attributes)
+    return _.clone(this.attributes);
   }
 }
 
