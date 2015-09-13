@@ -1,4 +1,4 @@
-# Stitch
+# Stitch ![Status](https://magnum.travis-ci.com/walkapp/stitch.svg?token=Z19FeJpZXaFRzpyeLyvy)
 Main website
 
 ![Stitch](http://i.imgur.com/HBlNjlU.jpg)
