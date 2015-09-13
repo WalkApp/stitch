@@ -19,7 +19,7 @@ export default class HeaderSearchBox extends Form {
   render () {
     return <form className="c-h-searchbox" onSubmit={this.handleSubmit}>
       <div className="m-control-group">
-        <input valueLink={this.linkState('model.text')} type="text" className="m-control m-control-sm" placeholder={lang.messages.type_search_text} />
+        <input valueLink={this.linkState('model.text')} type="text" className="m-control m-control-sm" placeholder={lang.captions.search} />
         <label type="submit" className="m-btn"><i className="icon-search"></i><button type="submit"></button></label>
       </div>
     </form>;
