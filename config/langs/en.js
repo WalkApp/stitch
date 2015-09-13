@@ -42,6 +42,7 @@ export default {
     follow: 'Follow',
     unfollow: 'Unfollow',
     add_post: 'Post',
+    add_event: 'Event',
   },
 
   fields: {
@@ -51,11 +52,13 @@ export default {
     full_name: 'Full name',
     address: 'Address',
     image_url: 'Image url',
+    event_date: 'Date',
   },
 
   messages: {
     type_search_text: 'Start typing',
     add_post: 'Tell the world about visited place',
     no_records_found: 'No records found',
+    add_event: 'Tell the world about visited event',
   },
 };

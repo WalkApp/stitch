@@ -3,6 +3,7 @@ import Component from '../base/component';
 import Header from './components/header';
 import Footer from './components/footer';
 import Event from './components/event';
+import QuickEvent from './components/quick_event';
 import FollowToggle from './components/follow_toggle.js';
 import lang from '../lang';
 import moment from 'moment';
@@ -20,6 +21,11 @@ export default class Upcoming extends Component {
 
   componentWillReceiveProps (props) {
     this.setState({data: props.data});
+  }
+
+  addNewEvent (event) {
+    this.state.data.events.unshift(event);
+    this.setState(this.state);
   }
 
   render () {
@@ -68,6 +74,7 @@ export default class Upcoming extends Component {
             </div>
             <div className="pure-u-16-24">
               <div className="p-u-content">
+                {isOwner ? <QuickEvent onSave={this.addNewEvent.bind(this)}/> : false}
                 <div className="m-wall">
                   {events.map((event, index) => {
                     return <div key={index} className="m-w-row">
