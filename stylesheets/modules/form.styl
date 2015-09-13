@@ -4,16 +4,12 @@
   padding: 12px 15px
   border: 1px solid #dedede
   border-radius: 3px
-  font-size: 14px
+  font-size: 12px
 
   placeholder(color $placeholder_color, font-weight normal)
 
-  &.m-control-sm
-    padding: 6px 15px
-    font-size: 12px
-
 .m-control-static
-  height: 44px
+  height: 42px
   resize: none
   overflow: hidden
 
@@ -45,6 +41,11 @@
 
   .m-cg-icon ~ .m-control
     padding-left: 0
+
+  &.m-control-group-sm
+    .m-control
+      padding: 6px 15px
+      font-size: 12px
 
 .m-control-list
   margin: 5px 0;

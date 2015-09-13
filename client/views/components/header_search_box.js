@@ -17,10 +17,10 @@ export default class HeaderSearchBox extends Form {
   }
 
   render () {
-    return <form className="c-header-search-box" onSubmit={this.handleSubmit}>
+    return <form className="c-h-searchbox" onSubmit={this.handleSubmit}>
       <div className="m-control-group">
-        <span className="m-cg-icon icon-search"></span>
-        <input valueLink={this.linkState('model.text')} type="text" className="m-control" placeholder={lang.captions.search} />
+        <input valueLink={this.linkState('model.text')} type="text" className="m-control m-control-sm" placeholder={lang.captions.search} />
+        <label type="submit" className="m-btn"><i className="icon-search"></i><button type="submit"></button></label>
       </div>
     </form>;
   }
