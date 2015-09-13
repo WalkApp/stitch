@@ -4,26 +4,27 @@ import Q from 'q';
 import { contains } from 'libs/utils';
 
 
-var METHOD_MAP = {
+const METHOD_MAP = {
   create: 'POST',
   update: 'PUT',
   patch:  'PATCH',
   delete: 'DELETE',
-  read:   'GET'
-},
+  read:   'GET',
+};
 
-network = {
-  request: function (options, callback) {
+let network = {
+  request (options, callback) {
     if (!options.url) {
       throw new Error('Provide URL via options');
     }
 
     options = _.assign({ headers: 'User-Agent' }, options);
+
     request(options, (err, res, body) => {
-      var
-        resource, error,
-        status = _.result(res, 'statusCode') || 0,
-        headers =  _.result(res, 'headers');
+      let resource;
+      let error;
+      let status = _.result(res, 'statusCode') || 0;
+      let headers =  _.result(res, 'headers');
 
       if (err || status !== 200) {
         error = { status: status, message: `Couldn't fetch resource: ${status}@${options.url}` };
@@ -47,18 +48,15 @@ network = {
     });
   },
 
-  sync: function (method, model, params = {}) {
-    var
-      xhr,
-      dfd = Q.defer(),
-      xhr = null,
-      data = params.data || params.attrs || {},
-      options = {
-        headers: {},
-        method: METHOD_MAP[method],
-        dataType: 'json',
-        url: params.url || _.result(model, 'url'),
-      };
+  sync (method, model, params = {}) {
+    let dfd = Q.defer();
+    let data = params.data || params.attrs || {};
+    let options = {
+      headers: {},
+      method: METHOD_MAP[method],
+      dataType: 'json',
+      url: params.url || _.result(model, 'url'),
+    };
 
     if (params.headers) {
       options.headers = params.headers;
@@ -74,8 +72,8 @@ network = {
       options.qs = data;
     }
 
-    xhr = network.request.call(this, options, (error, resource, headers) => {
-      var statusText = error ? 'error' : 'success';
+    let xhr = network.request.call(this, options, (error, resource, headers) => {
+      let statusText = error ? 'error' : 'success';
 
       if (params.complete) {
         params.complete(xhr, statusText, error);
@@ -101,7 +99,7 @@ network = {
 
     model.trigger('request', model, xhr, params);
     return dfd.promise;
-  }
+  },
 };
 
 export default network;

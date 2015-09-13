@@ -5,7 +5,8 @@ export function getValue (keyPath, field) {
     if (!field) {
       throw new Error(`undefined field`);
     }
-    field = field[keyPath.shift()]
+
+    field = field[keyPath.shift()];
   }
 
   return field;
@@ -18,7 +19,8 @@ export function updateValue (keyPath, value, object) {
     if (!object) {
       throw new Error(`undefined field`);
     }
-    object = object[keyPath.shift()]
+
+    object = object[keyPath.shift()];
   }
 
   if (!object) {
