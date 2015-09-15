@@ -48,7 +48,6 @@
   "requireSpaceBeforeBinaryOperators": true,
   "requireSpaceAfterBinaryOperators": true,
   "requireCamelCaseOrUpperCaseIdentifiers": "ignoreProperties",
-  "requireLineFeedAtFileEnd": true,
   "requireCapitalizedConstructors": true,
   "requireDotNotation": true,
   "requireSpacesInForStatement": true,

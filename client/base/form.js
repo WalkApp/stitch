@@ -23,7 +23,7 @@ export default class Form extends Component {
   }
 
   showError (code) {
-    var message = error(code);
+    let message = error(code);
     alert(message);
   }
 
