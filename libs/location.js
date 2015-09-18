@@ -7,6 +7,11 @@ let getParams = function () {
 };
 
 let buildUrl = function (url, params) {
+  for (let key in params) {
+    if (_.isString(params[key])) params[key] = params[key].trim();
+    if (!params[key]) delete params[key];
+  }
+
   let query = querystring.stringify(params);
 
   if (query.length) {
