@@ -2,7 +2,6 @@ import React from 'react';
 import Component from '../../base/component';
 import FollowingUser from '../../models/following_user';
 import lang from '../../lang';
-import currentUser from '../../modules/user.js';
 import _ from 'lodash';
 
 
@@ -17,19 +16,18 @@ export default class FollowToggle extends Component {
 
   initState () {
     return {
-      isFollowed: this.props.user.isFollowed,
+      isFollowed: true//this.props.user.isFollowed,
     };
   }
 
   handleToggle () {
-    let followingUser = new FollowingUser();
+    let followingUser = new FollowingUser({ _id: this.props.user.username });
 
-    followingUser.username = currentUser.get('username');
     followingUser.followeeUsername = this.props.user.username;
-
+    debugger;
     let dfd;
     if (this.state.isFollowed) {
-      dfd = followingUser.destroy();
+      dfd = followingUser.destroy({isNew:false});
     } else {
       dfd = followingUser.save();
     }
