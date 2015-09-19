@@ -4,9 +4,9 @@ import classnames from 'classnames';
 
 
 export default class Component extends React.Component {
-  constructor () {
+  constructor (props) {
     super();
-    this.state = this.initState();
+    this.state = this.initState(props);
   }
 
   refreshState () {
