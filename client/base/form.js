@@ -22,13 +22,21 @@ export default class Form extends Component {
     return getValue(keyPath, this.state);
   }
 
+  initState () {
+    return {validationMessage: ''}
+  }
+
   showError (code) {
+    debugger;
     let message = error(code);
-    alert(message);
+    this.setState({validationMessage: message});
+    //alert(message);
   }
 
   handleAPIError (xhr) {
-    this.showError('unexpected_error');
+    debugger;
+    let obj = JSON.parse(xhr.responseText);
+    this.showError(obj.error);
   }
 
   handleSubmit (event) {

@@ -34,4 +34,12 @@ export default {
   contains (array, item) {
     return array.indexOf(item) >= 0;
   },
+
+  format (string, ...args) {
+    while (args.length) {
+      string = string.replace('%s', args.shift());
+    }
+
+    return string;
+  }
 };
