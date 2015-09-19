@@ -34,7 +34,7 @@ export default class UserController extends Controller {
       this.renderView(<UserView data={data}/>, done);
     })
     .fail(() => {
-      this.renderView(<ErrorView />)
+      this.renderView(<ErrorView />);
     });
   }
 

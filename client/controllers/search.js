@@ -25,7 +25,7 @@ export default class SearchController extends Controller {
       this.renderView(<SearchView data={data} />, done);
     })
     .fail(() => {
-        this.renderView(<ErrorView />)
+        this.renderView(<ErrorView />);
     });
   }
 }
