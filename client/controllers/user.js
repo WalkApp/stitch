@@ -3,6 +3,7 @@ import React from 'react';
 import Controller from '../base/controller';
 import UserView from '../views/user';
 import UpcomingView from '../views/upcoming';
+import ErrorView from '../views/error';
 import UserModel from '../models/user';
 import PostsCollection from '../models/posts';
 import EventsCollection from '../models/events';
@@ -31,6 +32,9 @@ export default class UserController extends Controller {
       };
 
       this.renderView(<UserView data={data}/>, done);
+    })
+    .fail(() => {
+      this.renderView(<ErrorView />)
     });
   }
 
