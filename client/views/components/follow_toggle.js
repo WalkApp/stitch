@@ -1,17 +1,18 @@
 import React from 'react';
 import Component from '../../base/component';
-import FollowingUser from '../../models/followingUser';
+import FollowingUser from '../../models/following_user';
 import lang from '../../lang';
 import currentUser from '../../modules/user.js';
 import _ from 'lodash';
 
 
+const TOGGLE_LIMIT = 200;
+
 export default class FollowToggle extends Component {
-  const TOGGLE_LIMIT = 200;
 
   constructor () {
     super();
-    this.handleToggle = _.debounce(this.handleToggle.bind(this), this.TOGGLE_LIMIT)
+    this.handleToggle = _.debounce(this.handleToggle.bind(this), TOGGLE_LIMIT);
   }
 
   initState () {
