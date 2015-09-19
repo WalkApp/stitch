@@ -85,6 +85,7 @@ class User extends Model {
   authorized () {
     return !!this.id;
   }
+
 }
 
 if (process.browser) {
