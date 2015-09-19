@@ -40,7 +40,7 @@ export default class Signin extends Form {
               </div>
             </div>
             { this.state.validationMessage
-              ? <div className="m-message"><span>{this.state.validationMessage}</span></div>
+              ? <div className="m-message"><span><strong>Error:</strong> {this.state.validationMessage}</span></div>
               : null }
             <p className="l-text-center">
               <button type="submit" className="m-btn">{lang.captions.sign_in}</button>

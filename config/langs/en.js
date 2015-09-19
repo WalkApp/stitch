@@ -11,7 +11,7 @@ export default {
     already_exists: '%s has already registered',
     non_existent: '%s doesn\'t exist',
     invalid_username_or_password: 'Wrong username or password',
-    invalid_confirm_password: 'Confirm password isn\'t same with password',
+    invalid_confirm_password: 'Confirm password isn\'t the same with password',
     unknown_user: 'Unknown username',
   },
 

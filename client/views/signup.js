@@ -56,6 +56,9 @@ export default class Signup extends Form {
                 <input valueLink={this.linkState('model.confirm_password')} type="password" className="m-control" placeholder={lang.fields.confirm_password} required />
               </div>
             </div>
+            { this.state.validationMessage
+              ? <div className="m-message"><strong>Error: </strong>{this.state.validationMessage}</div>
+              : null }
             <p className="l-text-center">
               <button type="submit" className="m-btn">{lang.captions.sign_up}</button>
             </p>
