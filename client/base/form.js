@@ -22,22 +22,18 @@ export default class Form extends Component {
     return getValue(keyPath, this.state);
   }
 
-  initState () {
-    return {validationMessage: ''}
-  }
-
   showError (code) {
     let message = error(code);
-    this.updateValidationMessage(message);
+    this.showValidationMessage(message);
   }
 
-  updateValidationMessage (message) {
+  showValidationMessage (message) {
     this.setState({validationMessage: message});
+    this.forceUpdate();
   }
 
   handleAPIError (xhr) {
-    let formattedMessage;
-    let response = JSON.parse(xhr.responseText);
+    let response = xhr.responseJSON;
 
     var messages = [];
     var hasFields = _.has(response, 'error.fields');
@@ -45,14 +41,11 @@ export default class Form extends Component {
       _.forEach(response.error.fields, function (field) {
         messages.push(field.message);
       });
-    }
-    else {
+    } else {
       messages.push(response.error.message);
     }
 
-    formattedMessage = messages.join('\n');
-
-    this.updateValidationMessage(formattedMessage);
+    this.showValidationMessage(messages.join('\n'));
   }
 
   handleSubmit (event) {

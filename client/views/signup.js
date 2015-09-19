@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from '../base/form';
 import Footer from './components/footer';
+import ErrorMessage from './components/error-message';
 import lang from '../lang';
 import UserModel from '../models/user';
 import user from '../modules/user';
@@ -56,9 +57,7 @@ export default class Signup extends Form {
                 <input valueLink={this.linkState('model.confirm_password')} type="password" className="m-control" placeholder={lang.fields.confirm_password} required />
               </div>
             </div>
-            { this.state.validationMessage
-              ? <div className="m-message"><strong>Error: </strong>{this.state.validationMessage}</div>
-              : null }
+            <ErrorMessage message = {this.state.validationMessage}/>
             <p className="l-text-center">
               <button type="submit" className="m-btn">{lang.captions.sign_up}</button>
             </p>
