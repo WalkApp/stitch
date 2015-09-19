@@ -3,9 +3,17 @@ import Component from '../../base/component';
 import FollowingUser from '../../models/followingUser';
 import lang from '../../lang';
 import currentUser from '../../modules/user.js';
+import _ from 'lodash';
 
 
 export default class FollowToggle extends Component {
+  const TOGGLE_LIMIT = 200;
+
+  constructor () {
+    super();
+    this.handleToggle = _.debounce(this.handleToggle.bind(this), this.TOGGLE_LIMIT)
+  }
+
   initState () {
     return {
       isFollowed: this.props.user.isFollowed,
@@ -29,14 +37,13 @@ export default class FollowToggle extends Component {
       let toggle = !this.state.isFollowed;
       this.setState({isFollowed: toggle});
     });
-
   }
 
   render () {
     return <button
-      className={this.cx('m-btn m-btn-block m-btn-sm m-btn-success', {'m-btn-active': this.state.isFollow})}
+      className={this.cx('m-btn m-btn-block m-btn-sm m-btn-success', {'m-btn-active': this.state.isFollowed})}
       onClick={this.handleToggle.bind(this)}>
-      {this.state.isFollow ? lang.captions.unfollow : lang.captions.follow}
+      {this.state.isFollowed ? lang.captions.unfollow : lang.captions.follow}
     </button>;
   }
 
