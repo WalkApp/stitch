@@ -6,7 +6,7 @@ import lang from '../../lang';
 
 export default class FormStatus extends Component {
   render () {
-    let type = _.result(this.props, 'message.type')
+    let type = _.result(this.props, 'message.type');
     let isError = type === 'error';
     let prefix = '';
 
