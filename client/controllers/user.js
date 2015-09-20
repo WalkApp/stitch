@@ -6,6 +6,7 @@ import UpcomingView from '../views/upcoming';
 import UserModel from '../models/user';
 import PostsCollection from '../models/posts';
 import EventsCollection from '../models/events';
+import FollowerCountModel from '../models/follower_count';
 import currentUser from '../modules/user';
 
 
@@ -14,6 +15,7 @@ export default class UserController extends Controller {
     let { username } = ctx.params;
     let user = new UserModel();
     let posts = new PostsCollection();
+    let followerCount = new FollowerCountModel();
 
     user.username = username;
     posts.username = username;
@@ -21,12 +23,15 @@ export default class UserController extends Controller {
 
     this.xhrs.user = user.fetch();
     this.xhrs.posts = posts.fetch();
+    this.xhrs.followerCount = followerCount.fetch();
 
-    let dfd = $.when(this.xhrs.user, this.xhrs.posts);
+    let dfd = $.when(this.xhrs.user, this.xhrs.posts, this.xhrs.followerCount);
     dfd.done(() => {
+      debugger;
       let data = {
         user: user.toJSON(),
         posts: posts.toJSON(),
+        followerCount: followerCount.toJSON()[0].xhr.responseText,
         isOwner: username === currentUser.get('username'),
       };
 

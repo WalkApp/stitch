@@ -29,7 +29,7 @@ export default class User extends Component {
   }
 
   render () {
-    let { user, posts, isOwner } = this.state.data;
+    let { user, posts, followerCount, isOwner } = this.state.data;
 
     return <div className="p-user l-layout">
       <Header />
@@ -63,7 +63,7 @@ export default class User extends Component {
                   : false
                 }
                 <ul className="m-p-statistics">
-                  <li><strong>00</strong>
+                  <li><strong>{followerCount}</strong>
                     <small>{lang.captions.followers}</small>
                   </li>
                   <li><strong>00</strong>
