@@ -7,6 +7,7 @@ import UserModel from '../models/user';
 import PostsCollection from '../models/posts';
 import EventsCollection from '../models/events';
 import FollowersCollection from '../models/followers';
+import FollowingsCollection from '../models/followings.js';
 import currentUser from '../modules/user';
 
 
@@ -16,6 +17,7 @@ export default class UserController extends Controller {
     let user = new UserModel();
     let posts = new PostsCollection();
     let followers = new FollowersCollection();
+    let followings = new FollowingsCollection();
 
     user.username = username;
     posts.username = username;
@@ -24,6 +26,7 @@ export default class UserController extends Controller {
     this.xhrs.user = user.fetch();
     this.xhrs.posts = posts.fetch();
     this.xhrs.followers = followers.fetchCount();
+    this.xhrs.followings = followings.fetchCount();
 
 
     let dfd = $.when(this.xhrs.followers, this.xhrs.user, this.xhrs.posts);
@@ -33,6 +36,7 @@ export default class UserController extends Controller {
         user: user.toJSON(),
         posts: posts.toJSON(),
         followerCount: followers.count,
+        followingCount: followings.count,
         isOwner: username === currentUser.get('username'),
       };
 
