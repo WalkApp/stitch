@@ -1,4 +1,6 @@
 import React from 'react';
+import ErrorView from '../views/error';
+
 
 
 const appNode = document.getElementById('app-node');
@@ -19,6 +21,11 @@ export default class Controller {
 
   renderView (View, callback) {
     let view = React.render(View, appNode, callback);
+    titleNode.innerText = view.title();
+  }
+
+  renderErrorView (xhr) {
+    let view = React.render(<ErrorView />, appNode);
     titleNode.innerText = view.title();
   }
 }

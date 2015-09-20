@@ -1,7 +1,6 @@
 import React from 'react';
 import Controller from '../base/controller';
 import SearchView from '../views/search';
-import ErrorView from '../views/error';
 import UsersCollection from '../models/users';
 
 
@@ -25,7 +24,7 @@ export default class SearchController extends Controller {
       this.renderView(<SearchView data={data} />, done);
     })
     .fail(() => {
-        this.renderView(<ErrorView />);
+        this.renderErrorView(dfd);
     });
   }
 }
