@@ -1,7 +1,7 @@
 import React from 'react';
 import Form from '../base/form';
 import Footer from './components/footer';
-import ErrorMessage from './components/error-message';
+import FormStatus from './components/form_status';
 import lang from '../lang';
 import user from '../modules/user';
 
@@ -40,7 +40,7 @@ export default class Signin extends Form {
                 <input valueLink={this.linkState('model.password')} type="password" className="m-control" placeholder={lang.fields.password} required />
               </div>
             </div>
-            <ErrorMessage message = {this.state.validationMessage}/>
+            <FormStatus {...this.state} />
             <p className="l-text-center">
               <button type="submit" className="m-btn">{lang.captions.sign_in}</button>
             </p>

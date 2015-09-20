@@ -24,28 +24,27 @@ export default class Form extends Component {
 
   showError (code) {
     let message = error(code);
-    this.showValidationMessage(message);
+    this.showMessage('error', message);
   }
 
-  showValidationMessage (message) {
-    this.setState({validationMessage: message});
+  showMessage (type, text) {
+    this.setState({ message: { type, text } });
     this.forceUpdate();
   }
 
   handleAPIError (xhr) {
     let response = xhr.responseJSON;
+    let messages = [];
 
-    var messages = [];
-    var hasFields = _.has(response, 'error.fields');
-    if (hasFields) {
-      _.forEach(response.error.fields, function (field) {
+    if (_.has(response, 'error.fields')) {
+      _.forEach(response.error.fields, (field) => {
         messages.push(field.message);
       });
     } else {
       messages.push(response.error.message);
     }
 
-    this.showValidationMessage(messages.join('\n'));
+    this.showMessage('error', messages.join('\n'));
   }
 
   handleSubmit (event) {
