@@ -16,7 +16,7 @@ export default class FollowToggle extends Component {
 
   initState () {
     return {
-      isFollowed: true//this.props.user.isFollowed,
+      isFollowed: false,
     };
   }
 
