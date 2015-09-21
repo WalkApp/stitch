@@ -1,35 +1,33 @@
+import moment from 'moment';
 import React from 'react';
 import Component from '../base/component';
 import Header from './components/header';
 import Footer from './components/footer';
 import Event from './components/event';
 import QuickEvent from './components/quick_event';
-import FollowToggle from './components/follow_toggle.js';
-import lang from '../lang';
-import moment from 'moment';
+import FollowToggle from './components/follow_toggle';
+import userStore from '../stores/user';
 
 
 export default class Upcoming extends Component {
   title () {
-    return `${lang.brand.name}`;
+    return `${this.lang.brand.name}`;
   }
 
-  // FIXME: fix this shit
-  componentWillMount () {
-    this.setState({data: this.props.data});
+  initState () {
+    return userStore.getState();
   }
 
-  componentWillReceiveProps (props) {
-    this.setState({data: props.data});
+  componentDidMount () {
+    userStore.listen(this.refreshState);
   }
 
-  addNewEvent (event) {
-    this.state.data.events.unshift(event);
-    this.setState(this.state);
+  componentWillUnmount () {
+    userStore.unlisten(this.refreshState);
   }
 
   render () {
-    let { user, events, isOwner } = this.state.data;
+    let { user, events, isOwner } = this.state;
 
     return <div className="p-user l-layout">
       <Header />
@@ -39,8 +37,8 @@ export default class Upcoming extends Component {
             <div className="pure-u-6-24"></div>
             <div className="pure-u-16-24">
               <nav className="p-u-tabs">
-                <a href={`/user/${user.username}`}>{lang.captions.posts}</a>
-                <a className="active" href={`/user/${user.username}/upcoming`}>{lang.captions.upcoming}</a>
+                <a href={`/user/${user.username}`}>{this.lang.captions.posts}</a>
+                <a className="active" href={`/user/${user.username}/upcoming`}>{this.lang.captions.upcoming}</a>
               </nav>
             </div>
           </div>
@@ -64,10 +62,10 @@ export default class Upcoming extends Component {
                 }
                 <ul className="m-p-statistics">
                   <li><strong>00</strong>
-                    <small>{lang.captions.followers}</small>
+                    <small>{this.lang.captions.followers}</small>
                   </li>
                   <li><strong>00</strong>
-                    <small>{lang.captions.following}</small>
+                    <small>{this.lang.captions.following}</small>
                   </li>
                 </ul>
               </div>

@@ -1,12 +1,11 @@
 import React from 'react';
 import Component from '../base/component';
 import Footer from './components/footer';
-import lang from '../lang';
 
 
 export default class Welcome extends Component {
   title () {
-    return `${lang.brand.name} | ${lang.titles.welcome}`;
+    return `${this.lang.brand.name} | ${this.lang.titles.welcome}`;
   }
 
   render () {
@@ -16,11 +15,11 @@ export default class Welcome extends Component {
         <div className="p-w-container">
           <section>
             <div className="m-logo m-logo-large">
-              <h1 className="m-l-title">{lang.brand.name}</h1>
-              <h2 className="m-l-tagline">{lang.brand.tagline}</h2>
+              <h1 className="m-l-title">{this.lang.brand.name}</h1>
+              <h2 className="m-l-tagline">{this.lang.brand.tagline}</h2>
             </div>
             <p>
-              <a href="/signin" className="m-btn">{lang.captions.start}</a>
+              <a href="/signin" className="m-btn">{this.lang.captions.start}</a>
             </p>
           </section>
           <section>

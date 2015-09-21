@@ -4,7 +4,7 @@ import vent from '../modules/vent';
 
 
 export default class Router {
-  constructor () {
+  run () {
     this.page = page;
     this.ctor = null;
 
@@ -29,6 +29,10 @@ export default class Router {
 
   routeTo (url) {
     this.page(url);
+  }
+
+  use (...args) {
+    this.page(...args);
   }
 
   route (url, action) {

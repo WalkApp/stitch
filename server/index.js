@@ -7,7 +7,7 @@ import env from 'libs/env';
 import morgan from 'morgan';
 import errorhandler from 'errorhandler';
 import middlewares from './middlewares';
-import controllers from './controllers';
+import Router from './router';
 
 
 class Server {
@@ -16,6 +16,7 @@ class Server {
     this.logPrefix = 'server';
     this.app = express();
     this.app.set('view engine', 'jade');
+    this.router = new Router();
   }
 
   preRouteMiddleware () {
@@ -61,15 +62,9 @@ class Server {
     this.app.use((req, res, next) => middlewares.notFound(res));
   }
 
-  initControllers () {
-    for (let Controller of controllers) {
-      new Controller().use(this.app);
-    }
-  }
-
   run () {
     this.preRouteMiddleware();
-    this.initControllers();
+    this.router.run(this.app);
     this.postRouteMiddleware();
 
     this.app.set('port', config.server.port);

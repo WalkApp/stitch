@@ -2,6 +2,7 @@ import React from 'react';
 import Controller from '../base/controller';
 import SearchView from '../views/search';
 import UsersCollection from '../models/users';
+import searchActions from '../actions/search';
 
 
 export default class SearchController extends Controller {
@@ -16,12 +17,15 @@ export default class SearchController extends Controller {
     }
 
     let dfd = this.xhrs.users = users.fetch();
-    dfd.done(() => {
-      let data = {
-        results: users.toJSON(),
-      };
 
-      this.renderView(<SearchView data={data} />, done);
+    dfd.done(() => {
+      this.setInitData({
+        SearchStore: {
+          users: users.toJSON(),
+        }
+      });
+
+      this.renderView(SearchView, done);
     });
   }
 }

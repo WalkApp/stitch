@@ -1,4 +1,4 @@
-import $ from 'jquery';
+import Q from 'q';
 import React from 'react';
 import Controller from '../base/controller';
 import UserView from '../views/user';
@@ -22,15 +22,17 @@ export default class UserController extends Controller {
     this.xhrs.user = user.fetch();
     this.xhrs.posts = posts.fetch();
 
-    let dfd = $.when(this.xhrs.user, this.xhrs.posts);
-    dfd.done(() => {
-      let data = {
-        user: user.toJSON(),
-        posts: posts.toJSON(),
-        isOwner: username === currentUser.get('username'),
-      };
+    let dfd = Q.all([this.xhrs.user, this.xhrs.posts]);
 
-      this.renderView(<UserView data={data}/>, done);
+    dfd.done(() => {
+      this.setInitData({
+        UserStore: {
+          user: user.toJSON(),
+          posts: posts.toJSON(),
+        }
+      });
+
+      this.renderView(UserView, done);
     });
   }
 
@@ -46,15 +48,16 @@ export default class UserController extends Controller {
     this.xhrs.user = user.fetch();
     this.xhrs.events = events.fetch();
 
-    let dfd = $.when(this.xhrs.user, this.xhrs.events);
+    let dfd = Q.all([this.xhrs.user, this.xhrs.events]);
     dfd.done(() => {
-      let data = {
-        user: user.toJSON(),
-        events: events.toJSON(),
-        isOwner: username === currentUser.get('username'),
-      };
+      this.setInitData({
+        UserStore: {
+          user: user.toJSON(),
+          events: events.toJSON(),
+        },
+      });
 
-      this.renderView(<UpcomingView data={data}/>, done);
+      this.renderView(UpcomingView, done);
     });
   }
 }

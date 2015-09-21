@@ -20,6 +20,7 @@
     ]
   },
   "dependencies": {
+    "alt": "^0.17.3",
     "backbone": "^1.2.1",
     "backbone.localstorage": "^1.1.16",
     "body-parser": "^1.13.3",
@@ -27,6 +28,7 @@
     "cookies": "^0.5.0",
     "errorhandler": "^1.4.2",
     "express": "^4.13.1",
+    "iso": "^4.2.0",
     "jade": "^1.11.0",
     "jquery": "^2.1.4",
     "lodash": "^3.10.0",

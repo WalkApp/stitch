@@ -7,14 +7,14 @@ import SignupView from '../views/signup';
 
 export default class WelcomeController extends Controller {
   index (ctx, done) {
-    this.renderView(<WelcomeView />, done);
+    this.renderView(WelcomeView, done);
   }
 
   signin (ctx, done) {
-    this.renderView(<SigninView />, done);
+    this.renderView(SigninView, done);
   }
 
   signup (ctx, done) {
-    this.renderView(<SignupView />, done);
+    this.renderView(SignupView, done);
   }
 }
