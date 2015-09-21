@@ -29,7 +29,7 @@ export default class User extends Component {
           <ul className="m-user-list">
             {results.length
               ? results.map((user, index) => {
-                let isCurrentUser = user.username === currentUser.username;
+                let isCurrentUser = user.username === currentUser.get('username');
                 return <li key={index} className="m-ul-item">
                   <div className="m-ul-i-avatar">
                     <a href={`/user/${user.username}`}>
