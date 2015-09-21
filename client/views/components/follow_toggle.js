@@ -14,10 +14,9 @@ export default class FollowToggle extends Component {
     this.handleToggle = _.debounce(this.handleToggle.bind(this), TOGGLE_LIMIT);
   }
 
-  initState () {
-    return {
-      isFollowed: false,
-    };
+  componentDidMount () {
+    var isFollowed = this.props.user.isFollowed;
+    this.setState({isFollowed});
   }
 
   handleToggle () {
