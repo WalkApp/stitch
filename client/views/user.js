@@ -59,7 +59,7 @@ export default class User extends Component {
                 </ul>
                 {!isOwner
                   ? <div className="m-p-follow">
-                      <FollowToggle />
+                      <FollowToggle user={user} />
                     </div>
                   : false
                 }
