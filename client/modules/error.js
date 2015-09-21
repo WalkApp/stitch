@@ -6,13 +6,13 @@ import {format} from '../../libs/utils';
 
 export default function (error) {
   if (_.isString(error)) {
-    return langs.errorMessage(env.get('lang'), error);
+    return langs[env.get('lang')].errors[error];
   }
 
   let messages = [];
 
   for (let key in error) {
-    let message = _.capitalize(format(angs.errorMessage(env.get('lang'), error), key));
+    let message = _.capitalize(format(langs[env.get('lang')].errors[error[key]]), key);
     messages.push(message);
   }
 
