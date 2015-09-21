@@ -22,13 +22,14 @@ export default class UserController extends Controller {
     user.username = username;
     posts.username = username;
     posts.order = '-created';
+
     this.xhrs.user = user.fetch();
     this.xhrs.posts = posts.fetch();
     this.xhrs.followers = followers.fetchCount();
     this.xhrs.followings = followings.fetchCount();
 
 
-    let dfd = $.when(this.xhrs.followers, this.xhrs.user, this.xhrs.posts);
+    let dfd = $.when(this.xhrs.followers, this.xhrs.followings, this.xhrs.user, this.xhrs.posts);
     dfd.done(() => {
       let data = {
         user: user.toJSON(),

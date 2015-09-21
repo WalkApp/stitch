@@ -1,8 +1,8 @@
+import _ from 'lodash';
 import React from 'react';
 import Component from '../../base/component';
-import FollowingUser from '../../models/following_user';
+import FolloweeModel from '../../models/followee';
 import lang from '../../lang';
-import _ from 'lodash';
 
 
 const TOGGLE_LIMIT = 200;
@@ -15,20 +15,18 @@ export default class FollowToggle extends Component {
   }
 
   componentDidMount () {
-    var isFollowed = this.props.user.isFollowed;
+    let isFollowed = this.props.user.isFollowed;
     this.setState({isFollowed});
   }
 
   handleToggle () {
-    let followingUser = new FollowingUser({_id: this.props.user.username});
-
-    followingUser.followeeUsername = this.props.user.username;
+    let followeeModel = new FolloweeModel({_id: this.props.user.username});
 
     let dfd;
     if (this.state.isFollowed) {
-      dfd = followingUser.destroy();
+      dfd = followeeModel.destroy();
     } else {
-      dfd = followingUser.save(null, {
+      dfd = followeeModel.save(null, {
         type: 'POST',
       });
     }
