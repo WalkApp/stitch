@@ -30,7 +30,7 @@ export default class FollowToggle extends Component {
       dfd = followingUser.destroy();
     } else {
       dfd = followingUser.save(null, {
-        type: 'POST'
+        type: 'POST',
       });
     }
 
