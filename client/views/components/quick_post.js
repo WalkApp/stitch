@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from '../../base/form';
 import PostModel from '../../models/post';
+import userActions from '../../actions/user';
 
 
 export default class QuickPost extends Form {
@@ -18,7 +19,7 @@ export default class QuickPost extends Form {
     let dfd = post.save();
     dfd.fail((xhr) => this.handleAPIError(xhr));
     dfd.done(() => {
-      this.trigger('save', post.toJSON());
+      userActions.addPost(post.toJSON());
       this.refreshState();
     });
   }

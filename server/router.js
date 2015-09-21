@@ -55,10 +55,11 @@ export default class Router extends ClientRouter {
 
       let cb = function (data) {
         res.locals.env.lang = req.lang;
+        res.locals.env.user = req.user;
 
         data.config = config._client;
         data.env = env.toJSON();
-        data.langs = _.pick(langs, [res.locals.lang]);
+        data.langs = _.pick(langs, [req.lang]);
 
         res.render('layout', data);
       };

@@ -8,6 +8,7 @@ export default {
     auth_required: 'Authorization required',
     access_denied: 'Access denied',
     invalid_value: 'Invalid value',
+    bad_token: 'Bad token',
     already_exists: '%s has already registered',
     non_existent: '%s doesn\'t exist',
     invalid_username_or_password: 'Wrong username or password',

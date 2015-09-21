@@ -1,6 +1,7 @@
 import config from 'config';
 import domain from 'domain';
 import express from 'express';
+import session from 'express-session';
 import bodyParser from 'body-parser';
 import log from 'libs/logger';
 import env from 'libs/env';
@@ -28,6 +29,13 @@ class Server {
       _domain.run(next);
       _domain.on('error', next);
     });
+
+    this.app.use(session({
+      secret: config.session.secret,
+      cookie: { maxAge: config.session.maxAge },
+      resave: false,
+      saveUninitialized: false,
+    }));
 
     this.app.use(morgan(config.debug ? 'dev' : 'combined'));
 
@@ -72,6 +80,7 @@ class Server {
   run () {
     this.preRouteMiddleware();
     this.router.run(this.app);
+    this.initControllers();
     this.postRouteMiddleware();
 
     this.app.set('port', config.server.port);

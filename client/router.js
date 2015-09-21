@@ -11,12 +11,13 @@ export default class Router extends BaseRouter {
   }
 
   middleware () {
-    // this.use('/', notAuth);
-    // this.use('/signin', notAuth);
-    // this.use('/signup', notAuth);
-    // this.use('/user/:username', auth);
-    // this.use('/user', auth);
-    // this.use('/search', auth);
+    this.use('/', this.notAuth);
+    this.use('/signin', this.notAuth);
+    this.use('/signup', this.notAuth);
+    this.use('/search', this.auth);
+    this.use('/user', this.auth);
+    this.use('/user/:username', this.auth);
+    this.use('/user/:username/upcoming', this.auth);
   }
 
   redirect () {

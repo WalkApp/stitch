@@ -62,6 +62,10 @@ let network = {
       options.headers = params.headers;
     }
 
+    if (params.token) {
+      options.headers['x-access-token'] = params.token.value;
+    }
+
     if (model.requestHeaders) {
       _.assign(options.headers, model.requestHeaders);
     }

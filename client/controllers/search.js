@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React from 'react';
 import Controller from '../base/controller';
 import SearchView from '../views/search';
@@ -15,7 +16,7 @@ export default class SearchController extends Controller {
       };
     }
 
-    let dfd = this.xhrs.users = users.fetch();
+    let dfd = this.xhrs.users = users.fetch({ token: _.result(ctx, 'user.token') });
 
     dfd.done(() => {
       this.setInitData({

@@ -1,6 +1,6 @@
 import Model from '../base/model';
 import vent from './vent';
-import session from './session';
+import env from 'libs/env';
 import $ from 'jquery';
 
 
@@ -19,55 +19,34 @@ class User extends Model {
     return `${this.apiRoot}/users/profile`;
   }
 
-  defaults () {
-    return {
-      _id: 0,
-      timestamp: 0,
-    };
-  }
-
   initialize () {
     if (!process.browser) {
       return;
     }
 
-    let _id = session.get('user_id');
-
-    if (!_id) {
-      return;
-    }
-
-    this.set({ _id });
-    this.fetch();
-    this._setTokenHeaders();
-
-    let dfd = this.fetch({ ajaxSync: true });
-    dfd.fail(() => this.signout());
-
-    dfd.done((resp) => {
-      this.set({ timestamp: Date.now() }, { silent: true });
-      this.save(resp);
-    });
-  }
-
-  reset () {
-    this.destroy();
-    this.clear({ silent: true });
-    this.set(this.defaults(), { silent: true });
-    this.save();
+    this.set(env.get('user'));
+    if (this.authorized()) this._setTokenHeaders();
   }
 
   signin (data) {
+    let user = null;
+
     let dfd = this.$({
       data,
       url: `${this.apiRoot}/auth`,
       type: 'post',
-    });
+    })
+    .then((_user) => {
+      user = _user;
 
-    dfd.done((user) => {
-      this.set({ timestamp: Date.now() }, { silent: true });
-      this.save(user);
-      session.set({ user_id: this.id });
+      return this.$({
+        url: '/auth/login',
+        type: 'post',
+        data: user,
+      });
+    })
+    .then(() => {
+      this.set(user);
       this._setTokenHeaders();
       vent.trigger('user:signin');
     });
@@ -76,19 +55,18 @@ class User extends Model {
   }
 
   signout () {
-    this.reset();
-    this._unsetTokenHeaders();
-    session.reset();
-    vent.trigger('user:signout');
+    let dfd = this.$('/auth/logout').done(() => {
+      this.clear();
+      this._unsetTokenHeaders();
+      vent.trigger('user:signout');
+    });
+
+    return dfd;
   }
 
   authorized () {
     return !!this.id;
   }
-}
-
-if (process.browser) {
-  User.prototype.localStorage = new Backbone.LocalStorage('walk:user');
 }
 
 export default new User();

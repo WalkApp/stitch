@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import Q from 'q';
 import React from 'react';
 import Controller from '../base/controller';
@@ -19,8 +20,8 @@ export default class UserController extends Controller {
     posts.username = username;
     posts.order = '-created';
 
-    this.xhrs.user = user.fetch();
-    this.xhrs.posts = posts.fetch();
+    this.xhrs.user = user.fetch({ token: _.result(ctx, 'user.token') });
+    this.xhrs.posts = posts.fetch({ token: _.result(ctx, 'user.token') });
 
     let dfd = Q.all([this.xhrs.user, this.xhrs.posts]);
     dfd.done(() => {
@@ -28,6 +29,7 @@ export default class UserController extends Controller {
         UserStore: {
           user: user.toJSON(),
           posts: posts.toJSON(),
+          isOwner: currentUser.get('username') === user.get('username'),
         },
       });
 
@@ -44,8 +46,8 @@ export default class UserController extends Controller {
     events.username = username;
     events.order = '-created';
 
-    this.xhrs.user = user.fetch();
-    this.xhrs.events = events.fetch();
+    this.xhrs.user = user.fetch({ token: _.result(ctx, 'user.token') });
+    this.xhrs.events = events.fetch({ token: _.result(ctx, 'user.token') });
 
     let dfd = Q.all([this.xhrs.user, this.xhrs.events]);
     dfd.done(() => {
@@ -53,6 +55,7 @@ export default class UserController extends Controller {
         UserStore: {
           user: user.toJSON(),
           events: events.toJSON(),
+          isOwner: currentUser.get('username') === user.get('username'),
         },
       });
 

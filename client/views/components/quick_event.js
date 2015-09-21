@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from '../../base/form';
 import EventModel from '../../models/event';
+import userActions from '../../actions/user';
 
 
 export default class QuickEvent extends Form {
@@ -18,7 +19,7 @@ export default class QuickEvent extends Form {
     let dfd = event.save();
     dfd.fail((xhr) => this.handleAPIError(xhr));
     dfd.done(() => {
-      this.trigger('save', event.toJSON());
+      userActions.addEvent(event.toJSON());
       this.refreshState();
     });
   }
