@@ -20,13 +20,13 @@ export default class FollowToggle extends Component {
   }
 
   handleToggle () {
-    let followeeModel = new FolloweeModel({_id: this.props.user.username});
+    let followee = new FolloweeModel({_id: this.props.user.username});
 
     let dfd;
     if (this.state.isFollowed) {
-      dfd = followeeModel.destroy();
+      dfd = followee.destroy();
     } else {
-      dfd = followeeModel.save(null, {
+      dfd = followee.save(null, {
         type: 'POST',
       });
     }

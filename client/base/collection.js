@@ -34,6 +34,7 @@ export default class BaseCollection extends Collection {
     return dfd;
   }
 }
+
 BaseCollection.prototype.$ = $.ajax;
 BaseCollection.prototype.apiRoot = config.api_root || config._client.api_root;
 BaseCollection.prototype.idAttribute = '_id';
