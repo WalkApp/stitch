@@ -12,7 +12,7 @@ export default function (error) {
   let messages = [];
 
   for (let key in error) {
-    let message = _.capitalize(format(langs[env.get('lang')].errors[error[key]]), key);
+    let message = _.capitalize(format(langs[env.get('lang')].errors[error[key]], key));
     messages.push(message);
   }
 

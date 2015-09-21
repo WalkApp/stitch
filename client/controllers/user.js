@@ -23,7 +23,6 @@ export default class UserController extends Controller {
     this.xhrs.posts = posts.fetch();
 
     let dfd = Q.all([this.xhrs.user, this.xhrs.posts]);
-
     dfd.done(() => {
       this.setInitData({
         UserStore: {

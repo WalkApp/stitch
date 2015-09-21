@@ -1,10 +1,10 @@
 import alt from '../alt';
-import searchActions from '../actions/search';
+import userActions from '../actions/user';
 
 
 export default alt.createStore(class UserStore {
   constructor() {
-    this.bindActions(searchActions);
+    this.bindActions(userActions);
     this.user = {};
     this.posts = [];
     this.events = [];

@@ -2,7 +2,6 @@ import React from 'react';
 import Controller from '../base/controller';
 import SearchView from '../views/search';
 import UsersCollection from '../models/users';
-import searchActions from '../actions/search';
 
 
 export default class SearchController extends Controller {

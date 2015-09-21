@@ -7,6 +7,7 @@ import env from 'libs/env';
 import morgan from 'morgan';
 import errorhandler from 'errorhandler';
 import middlewares from './middlewares';
+import controllers from './controllers';
 import Router from './router';
 
 
@@ -44,6 +45,12 @@ class Server {
 
     // Get Access token from API.
     this.app.use(middlewares.accessToken);
+  }
+
+  initControllers () {
+    for (let Controller of controllers) {
+      new Controller().use(this.app);
+    }
   }
 
   postRouteMiddleware () {

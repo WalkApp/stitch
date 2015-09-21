@@ -72,7 +72,7 @@ export default class Upcoming extends Component {
             </div>
             <div className="pure-u-16-24">
               <div className="p-u-content">
-                {isOwner ? <QuickEvent onSave={this.addNewEvent.bind(this)}/> : false}
+                {isOwner ? <QuickEvent /> : false}
                 <div className="m-wall">
                   {events.map((event, index) => {
                     return <div key={index} className="m-w-row">
