@@ -15,7 +15,7 @@ export default class FollowToggle extends Component {
   }
 
   componentDidMount () {
-    let isFollowed = this.props.user.isFollowed;
+    let isFollowed = this.props.user.is_followed;
     this.setState({isFollowed});
   }
 
