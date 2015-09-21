@@ -10,7 +10,7 @@ export default class SearchController extends Controller {
     let users = new UsersCollection();
 
     if (q) {
-      users.filter = {
+      users.filterModel = {
         username: { contains: q },
       };
     }

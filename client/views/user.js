@@ -7,6 +7,7 @@ import QuickPost from './components/quick_post';
 import FollowToggle from './components/follow_toggle.js';
 import lang from '../lang';
 import moment from 'moment';
+import _ from 'lodash';
 
 
 export default class User extends Component {
@@ -29,7 +30,7 @@ export default class User extends Component {
   }
 
   render () {
-    let { user, posts, isOwner } = this.state.data;
+    let { user, posts, followerCount, followingCount, isOwner } = this.state.data;
 
     return <div className="p-user l-layout">
       <Header />
@@ -63,10 +64,10 @@ export default class User extends Component {
                   : false
                 }
                 <ul className="m-p-statistics">
-                  <li><strong>00</strong>
+                  <li><strong>{_.padLeft(followerCount, '2', '0')}</strong>
                     <small>{lang.captions.followers}</small>
                   </li>
-                  <li><strong>00</strong>
+                  <li><strong>{_.padLeft(followingCount, '2', '0')}</strong>
                     <small>{lang.captions.following}</small>
                   </li>
                 </ul>
