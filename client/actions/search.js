@@ -2,7 +2,7 @@ import alt from '../alt';
 
 
 class SearchActions {
-  constructor() {
+  constructor () {
     this.generateActions();
   }
 }

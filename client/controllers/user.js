@@ -28,7 +28,7 @@ export default class UserController extends Controller {
         UserStore: {
           user: user.toJSON(),
           posts: posts.toJSON(),
-        }
+        },
       });
 
       this.renderView(UserView, done);

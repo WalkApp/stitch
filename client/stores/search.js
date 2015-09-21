@@ -3,7 +3,7 @@ import searchActions from '../actions/search';
 
 
 export default alt.createStore(class SearchStore {
-  constructor() {
+  constructor () {
     this.bindActions(searchActions);
     this.users = [];
   }

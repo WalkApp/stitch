@@ -2,7 +2,7 @@ import alt from '../alt';
 
 
 class UserActions {
-  constructor() {
+  constructor () {
     this.generateActions();
   }
 }

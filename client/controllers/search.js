@@ -21,7 +21,7 @@ export default class SearchController extends Controller {
       this.setInitData({
         SearchStore: {
           users: users.toJSON(),
-        }
+        },
       });
 
       this.renderView(SearchView, done);

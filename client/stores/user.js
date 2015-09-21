@@ -3,7 +3,7 @@ import userActions from '../actions/user';
 
 
 export default alt.createStore(class UserStore {
-  constructor() {
+  constructor () {
     this.bindActions(userActions);
     this.user = {};
     this.posts = [];

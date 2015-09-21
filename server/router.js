@@ -58,7 +58,7 @@ export default class Router extends ClientRouter {
 
         data.config = config._client;
         data.env = env.toJSON();
-        data.langs = _.pick(langs, [res.locals.lang])
+        data.langs = _.pick(langs, [res.locals.lang]);
 
         res.render('layout', data);
       };
