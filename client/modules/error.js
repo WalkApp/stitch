@@ -5,6 +5,10 @@ import {format} from '../../libs/utils';
 
 
 export default function (error) {
+  if (!process.browser) {
+    throw new Error('Can\' call error module on server side');
+  }
+
   if (_.isString(error)) {
     return langs[env.get('lang')].errors[error];
   }

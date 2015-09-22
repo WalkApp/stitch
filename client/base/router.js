@@ -4,24 +4,18 @@ import vent from '../modules/vent';
 
 
 export default class Router {
+  _mapRoutes () {
+    if (this.middleware) this.middleware();
+    if (this.redirect) this.redirect();
+    if (this.router) this.router();
+  }
+
   run () {
     this.page = page;
     this.ctor = null;
 
     this.page('*', this.createQuery);
-
-    if (this.middleware) {
-      this.middleware();
-    }
-
-    if (this.redirect) {
-      this.redirect();
-    }
-
-    if (this.router) {
-      this.router();
-    }
-
+    this._mapRoutes();
     this.page.start();
 
     vent.on('routeTo', (url) => this.routeTo(url));

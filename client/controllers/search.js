@@ -8,7 +8,7 @@ import UsersCollection from '../models/users';
 export default class SearchController extends Controller {
   index (ctx, done) {
     let q = ctx.query.q;
-    let users = new UsersCollection();
+    let users = this.wrapModel(new UsersCollection());
 
     if (q) {
       users.filter = {
@@ -16,7 +16,7 @@ export default class SearchController extends Controller {
       };
     }
 
-    let dfd = this.xhrs.users = users.fetch({ token: _.result(ctx, 'user.token') });
+    let dfd = this.xhrs.users = users.fetch();
 
     dfd.done(() => {
       this.setInitData({

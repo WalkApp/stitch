@@ -1,7 +1,7 @@
 import Model from '../base/model';
 import vent from './vent';
-import env from 'libs/env';
 import $ from 'jquery';
+import env from 'libs/env';
 
 
 class User extends Model {

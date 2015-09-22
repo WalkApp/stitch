@@ -51,6 +51,8 @@ let network = {
   sync (method, model, params = {}) {
     let dfd = Q.defer();
     let data = params.data || params.attrs || {};
+    let token = _.result(this, 'security.token') || params.token;
+
     let options = {
       headers: {},
       method: METHOD_MAP[method],
@@ -62,8 +64,8 @@ let network = {
       options.headers = params.headers;
     }
 
-    if (params.token) {
-      options.headers['x-access-token'] = params.token.value;
+    if (token) {
+      options.headers['x-access-token'] = token.value;
     }
 
     if (model.requestHeaders) {

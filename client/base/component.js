@@ -26,5 +26,5 @@ export default class Component extends React.Component {
   }
 }
 
-Component.prototype.lang = langs[env.get('lang')];
+if (process.browser) Component.prototype.lang = langs[env.get('lang')];
 Component.prototype.cx = classnames;

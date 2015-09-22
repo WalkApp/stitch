@@ -7,6 +7,12 @@ export default class Controller {
     this.xhrs = {};
   }
 
+  // Fake method for client side
+  // wrap all models and collections by this method
+  wrapModel (model) {
+    return model;
+  }
+
   setInitData (data) {
     alt.bootstrap(JSON.stringify(data));
   }

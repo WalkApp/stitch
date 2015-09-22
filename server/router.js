@@ -3,30 +3,20 @@ import Backbone from 'backbone';
 import ClientRouter from '../client/router';
 import ClientController from '../client/base/controller';
 import { sync } from './mixins/network';
-import { renderView } from './mixins/isomorphic';
+import { renderView, wrapModel } from './mixins/isomorphic_controller';
 import langs from 'config/langs';
 import config from 'config';
-import env from 'libs/env';
 
 
+// Override client methods to call them on server side
 Backbone.Model.prototype.sync = Backbone.Collection.prototype.sync = sync;
 ClientController.prototype.renderView = renderView;
+ClientController.prototype.wrapModel = wrapModel;
 
 export default class Router extends ClientRouter {
   run (app) {
     this._app = app;
-
-    if (this.middleware) {
-      this.middleware();
-    }
-
-    if (this.redirect) {
-      this.redirect();
-    }
-
-    if (this.router) {
-      this.router();
-    }
+    this._mapRoutes();
   }
 
   use (...args) {
@@ -49,28 +39,21 @@ export default class Router extends ClientRouter {
     this._app.get(url, (req, res, next) => {
       let ctor = new Controller();
 
+      // Add req, res to controller to return response to client in it
+      ctor.req = req;
+      ctor.res = res;
+
       if (!ctor[method]) {
         throw new Error(`undefined method "${method}" of "${temp[0]}" controller`);
       }
 
-      let cb = function (data) {
-        res.locals.env.lang = req.lang;
-        res.locals.env.user = req.user;
-
-        data.config = config._client;
-        data.env = env.toJSON();
-        data.langs = _.pick(langs, [req.lang]);
-
-        res.render('layout', data);
-      };
-
-      cb.req = req;
-      cb.res = res;
-
-      ctor[method](req, cb);
+      // Generate ctx from req
+      let ctx = _.pick(req, ['params', 'query']);
+      ctor[method](ctx);
     });
   }
 }
 
+// Override client middlewares
 Router.prototype.auth = require('./middlewares/auth');
 Router.prototype.notAuth = require('./middlewares/not_auth');

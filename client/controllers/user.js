@@ -13,15 +13,15 @@ import currentUser from '../modules/user';
 export default class UserController extends Controller {
   index (ctx, done) {
     let { username } = ctx.params;
-    let user = new UserModel();
-    let posts = new PostsCollection();
+    let user = this.wrapModel(new UserModel());
+    let posts = this.wrapModel(new PostsCollection());
 
     user.username = username;
     posts.username = username;
     posts.order = '-created';
 
-    this.xhrs.user = user.fetch({ token: _.result(ctx, 'user.token') });
-    this.xhrs.posts = posts.fetch({ token: _.result(ctx, 'user.token') });
+    this.xhrs.user = user.fetch();
+    this.xhrs.posts = posts.fetch();
 
     let dfd = Q.all([this.xhrs.user, this.xhrs.posts]);
     dfd.done(() => {
@@ -39,15 +39,15 @@ export default class UserController extends Controller {
 
   upcoming (ctx, done) {
     let { username } = ctx.params;
-    let user = new UserModel();
-    let events = new EventsCollection();
+    let user = this.wrapModel(new UserModel());
+    let events = this.wrapModel(new EventsCollection());
 
     user.username = username;
     events.username = username;
     events.order = '-created';
 
-    this.xhrs.user = user.fetch({ token: _.result(ctx, 'user.token') });
-    this.xhrs.events = events.fetch({ token: _.result(ctx, 'user.token') });
+    this.xhrs.user = user.fetch();
+    this.xhrs.events = events.fetch();
 
     let dfd = Q.all([this.xhrs.user, this.xhrs.events]);
     dfd.done(() => {

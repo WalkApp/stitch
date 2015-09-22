@@ -4,7 +4,6 @@ import express from 'express';
 import session from 'express-session';
 import bodyParser from 'body-parser';
 import log from 'libs/logger';
-import env from 'libs/env';
 import morgan from 'morgan';
 import errorhandler from 'errorhandler';
 import middlewares from './middlewares';
@@ -19,6 +18,14 @@ class Server {
     this.app = express();
     this.app.set('view engine', 'jade');
     this.router = new Router();
+  }
+
+  generateEnv (req, res, next) {
+    res.locals.env = {};
+    res.locals.env.lang = req.lang;
+    res.locals.env.user = req.user;
+
+    next();
   }
 
   preRouteMiddleware () {
@@ -42,9 +49,6 @@ class Server {
     // Set publis assets.
     this.app.use(express.static('public'));
 
-    // Create environment
-    this.app.use(env.create);
-
     // Set language.
     this.app.use(middlewares.lang);
 
@@ -53,6 +57,9 @@ class Server {
 
     // Get Access token from API.
     this.app.use(middlewares.accessToken);
+
+    // Create environment
+    this.app.use(this.generateEnv);
   }
 
   initControllers () {
