@@ -5,6 +5,7 @@ import Header from './components/header';
 import Footer from './components/footer';
 import SearchBox from './components/search_box';
 import FollowToggle from './components/follow_toggle.js';
+import currentUser from '../stores/current_user';
 import searchStore from '../stores/search';
 
 
@@ -40,6 +41,8 @@ export default class User extends Component {
           <ul className="m-user-list">
             {users.length
               ? users.map((user, index) => {
+                let isCurrentUser = user.username === currentUser.get('username');
+
                 return <li key={index} className="m-ul-item">
                   <div className="m-ul-i-avatar">
                     <a href={`/user/${user.username}`}>
@@ -56,7 +59,7 @@ export default class User extends Component {
                     </div>
                   </div>
                   <div className="m-ul-i-actions">
-                    <FollowToggle user={user}/>
+                    {isCurrentUser ? false : <FollowToggle user={user}/>}
                   </div>
                 </li>;
               })

@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 
 export default function urlQuery (url, params) {
-  if (!params) {
+  if (_.isEmpty(params)) {
     return url;
   }
 

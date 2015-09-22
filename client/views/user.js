@@ -8,6 +8,7 @@ import QuickPost from './components/quick_post';
 import FollowToggle from './components/follow_toggle';
 import userStore from '../stores/user';
 import currentUser from '../stores/current_user';
+import _ from 'lodash';
 
 
 export default class User extends Component {
@@ -31,7 +32,7 @@ export default class User extends Component {
   }
 
   render () {
-    let { user, posts, isOwner } = this.state;
+    let { user, posts, followerCount, followingCount, isOwner } = this.state;
 
     return <div className="p-user l-layout">
       <Header />
@@ -60,15 +61,15 @@ export default class User extends Component {
                 </ul>
                 {!isOwner
                   ? <div className="m-p-follow">
-                      <FollowToggle />
+                      <FollowToggle user={user} />
                     </div>
                   : false
                 }
                 <ul className="m-p-statistics">
-                  <li><strong>00</strong>
+                  <li><strong>{_.padLeft(followerCount, '2', '0')}</strong>
                     <small>{this.lang.captions.followers}</small>
                   </li>
-                  <li><strong>00</strong>
+                  <li><strong>{_.padLeft(followingCount, '2', '0')}</strong>
                     <small>{this.lang.captions.following}</small>
                   </li>
                 </ul>

@@ -5,6 +5,8 @@ import UpcomingView from '../views/upcoming';
 import UserModel from '../models/user';
 import PostsCollection from '../models/posts';
 import EventsCollection from '../models/events';
+import FollowersCollection from '../models/followers';
+import FollowingsCollection from '../models/followings.js';
 
 
 export default class UserController extends Controller {
@@ -12,6 +14,8 @@ export default class UserController extends Controller {
     let { username } = ctx.params;
     let user = this.wrapModel(new UserModel());
     let posts = this.wrapModel(new PostsCollection());
+    let followers = this.wrapModel(new FollowersCollection());
+    let followings = this.wrapModel(new FollowingsCollection());
 
     user.username = username;
     posts.username = username;
@@ -19,13 +23,17 @@ export default class UserController extends Controller {
 
     this.xhrs.user = user.fetch();
     this.xhrs.posts = posts.fetch();
+    this.xhrs.followers = followers.fetchCount();
+    this.xhrs.followings = followings.fetchCount();
 
-    let dfd = Q.all([this.xhrs.user, this.xhrs.posts]);
+    let dfd = Q.all([this.xhrs.user, this.xhrs.posts, this.xhrs.followers, this.xhrs.followings]);
     dfd.done(() => {
       this.setInitData({
         UserStore: {
           user: user.toJSON(),
           posts: posts.toJSON(),
+	  followerCount: followers.count,
+          followingCount: followings.count,
         },
       });
 

@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import $ from 'jquery';
 import { Collection } from 'backbone';
 import config from 'config';
 import urlQuery from 'libs/url_query';
@@ -13,8 +14,8 @@ export default class BaseCollection extends Collection {
       params.order = this.order;
     }
 
-    if (this.filter) {
-      params.filter = this.filter;
+    if (this.filterModel) {
+      params.filter = this.filterModel;
     }
 
     return urlQuery(url, params);
@@ -23,7 +24,17 @@ export default class BaseCollection extends Collection {
   parse (resp) {
     return resp.collection;
   }
+
+  fetchCount () {
+    let dfd = this.$(`${this.url()}/count`);
+    dfd.done((resp) => {
+      this.count = resp;
+    });
+
+    return dfd;
+  }
 }
 
+BaseCollection.prototype.$ = $.ajax;
 BaseCollection.prototype.apiRoot = config.api_root || config._client.api_root;
 BaseCollection.prototype.idAttribute = '_id';
