@@ -21,7 +21,7 @@ export default function (req, res, next) {
     });
 
     dfd.fail(() => {
-      error('bad_token');
+      error(res, 'bad_token', 401);
     });
   }
 }

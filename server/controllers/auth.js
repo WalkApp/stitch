@@ -21,7 +21,7 @@ export default class AuthController extends Controller {
     });
 
     dfd.fail(() => {
-      this.error('bad_token');
+      this.error(res, 'bad_token', 401);
     });
   }
 
