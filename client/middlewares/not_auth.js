@@ -1,9 +1,9 @@
 import page from 'page';
-import user from '../modules/user';
+import currentUser from '../stores/current_user';
 
 
 export default function notAuth (ctx, next) {
-  if (user.authorized()) {
+  if (currentUser.authorized()) {
     return page.redirect('/user');
   }
 

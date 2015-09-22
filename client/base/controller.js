@@ -1,12 +1,20 @@
 import React from 'react';
+import alt from '../alt';
 
-
-const appNode = document.getElementById('app-node');
-const titleNode = document.getElementsByTagName('title')[0];
 
 export default class Controller {
   constructor () {
     this.xhrs = {};
+  }
+
+  // Fake method for client side
+  // wrap all models and collections by this method
+  wrapModel (model) {
+    return model;
+  }
+
+  setInitData (data) {
+    alt.bootstrap(JSON.stringify(data));
   }
 
   destroy () {
@@ -18,7 +26,7 @@ export default class Controller {
   }
 
   renderView (View, callback) {
-    let view = React.render(View, appNode, callback);
-    titleNode.innerText = view.title();
+    let view = React.render(<View />, window.appNode, callback);
+    window.titleNode.innerText = view.title();
   }
 }

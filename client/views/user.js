@@ -1,36 +1,38 @@
 import React from 'react';
+import moment from 'moment';
 import Component from '../base/component';
 import Header from './components/header';
 import Footer from './components/footer';
 import Post from './components/post';
 import QuickPost from './components/quick_post';
-import FollowToggle from './components/follow_toggle.js';
-import lang from '../lang';
-import moment from 'moment';
+import FollowToggle from './components/follow_toggle';
+import userStore from '../stores/user';
+import currentUser from '../stores/current_user';
 import _ from 'lodash';
 
 
 export default class User extends Component {
   title () {
-    return `${lang.brand.name}`;
+    return `${this.lang.brand.name}`;
   }
 
-  // FIXME: fix this shit
-  componentWillMount () {
-    this.setState({data: this.props.data});
+  initState () {
+    let state = userStore.getState();
+    state.isOwner = state.user.username === currentUser.get('username');
+
+    return state;
   }
 
-  componentWillReceiveProps (props) {
-    this.setState({data: props.data});
+  componentDidMount () {
+    userStore.listen(this.refreshState);
   }
 
-  addNewPost (post) {
-    this.state.data.posts.unshift(post);
-    this.setState(this.state);
+  componentWillUnmount () {
+    userStore.unlisten(this.refreshState);
   }
 
   render () {
-    let { user, posts, followerCount, followingCount, isOwner } = this.state.data;
+    let { user, posts, followerCount, followingCount, isOwner } = this.state;
 
     return <div className="p-user l-layout">
       <Header />
@@ -40,8 +42,8 @@ export default class User extends Component {
             <div className="pure-u-6-24"></div>
             <div className="pure-u-16-24">
               <nav className="p-u-tabs">
-                <a className="active" href={`/user/${user.username}`}>{lang.captions.posts}</a>
-                <a href={`/user/${user.username}/upcoming`}>{lang.captions.upcoming}</a>
+                <a className="active" href={`/user/${user.username}`}>{this.lang.captions.posts}</a>
+                <a href={`/user/${user.username}/upcoming`}>{this.lang.captions.upcoming}</a>
               </nav>
             </div>
           </div>
@@ -65,17 +67,17 @@ export default class User extends Component {
                 }
                 <ul className="m-p-statistics">
                   <li><strong>{_.padLeft(followerCount, '2', '0')}</strong>
-                    <small>{lang.captions.followers}</small>
+                    <small>{this.lang.captions.followers}</small>
                   </li>
                   <li><strong>{_.padLeft(followingCount, '2', '0')}</strong>
-                    <small>{lang.captions.following}</small>
+                    <small>{this.lang.captions.following}</small>
                   </li>
                 </ul>
               </div>
             </div>
             <div className="pure-u-16-24">
               <div className="p-u-content">
-                {isOwner ? <QuickPost onSave={this.addNewPost.bind(this)}/> : false}
+                {isOwner ? <QuickPost /> : false}
                 <div className="m-wall">
                   {posts.map((post, index) => {
                     return <div key={index} className="m-w-row">

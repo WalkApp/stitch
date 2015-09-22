@@ -2,7 +2,6 @@ import _ from 'lodash';
 import React from 'react';
 import Component from '../../base/component';
 import FolloweeModel from '../../models/followee';
-import lang from '../../lang';
 
 
 const TOGGLE_LIMIT = 200;
@@ -40,9 +39,8 @@ export default class FollowToggle extends Component {
   render () {
     return <button
       className={this.cx('m-btn m-btn-block m-btn-sm m-btn-success', {'m-btn-active': this.state.isFollowed})}
-      onClick={this.handleToggle.bind(this)}>
-      {this.state.isFollowed ? lang.captions.unfollow : lang.captions.follow}
+      onClick={this.handleToggle}>
+      {this.state.isFollowed ? this.lang.captions.unfollow : this.lang.captions.follow}
     </button>;
   }
-
 }

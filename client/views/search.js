@@ -1,21 +1,33 @@
 import React from 'react';
+import moment from 'moment';
 import Component from '../base/component';
 import Header from './components/header';
 import Footer from './components/footer';
 import SearchBox from './components/search_box';
 import FollowToggle from './components/follow_toggle.js';
-import currentUser from '../modules/user';
-import lang from '../lang';
-import moment from 'moment';
+import currentUser from '../stores/current_user';
+import searchStore from '../stores/search';
 
 
 export default class User extends Component {
   title () {
-    return `${lang.titles.search}`;
+    return `${this.lang.titles.search}`;
+  }
+
+  initState () {
+    return searchStore.getState();
+  }
+
+  componentDidMount () {
+    searchStore.listen(this.refreshState);
+  }
+
+  componentWillUnmount () {
+    searchStore.unlisten(this.refreshState);
   }
 
   render () {
-    let { results } = this.props.data;
+    let { users } = this.state;
 
     return <div className="p-search l-layout">
       <Header />
@@ -27,8 +39,8 @@ export default class User extends Component {
         </div>
         <div className="p-s-container">
           <ul className="m-user-list">
-            {results.length
-              ? results.map((user, index) => {
+            {users.length
+              ? users.map((user, index) => {
                 let isCurrentUser = user.username === currentUser.get('username');
 
                 return <li key={index} className="m-ul-item">
@@ -51,7 +63,7 @@ export default class User extends Component {
                   </div>
                 </li>;
               })
-              : <h4>{lang.messages.no_records_found}</h4>}
+              : <h4>{this.lang.messages.no_records_found}</h4>}
           </ul>
         </div>
       </div>

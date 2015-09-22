@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
 import Component from '../../base/component';
-import lang from '../../lang';
 
 
 export default class FormStatus extends Component {
@@ -10,7 +9,7 @@ export default class FormStatus extends Component {
     let isError = type === 'error';
     let prefix = '';
 
-    if (isError) prefix = lang.captions.error;
+    if (isError) prefix = this.lang.captions.error;
 
     return <div>{this.props.message
       ? <div className={this.cx('m-message', { 'm-message-danger': isError })}>

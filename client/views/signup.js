@@ -2,14 +2,13 @@ import React from 'react';
 import Form from '../base/form';
 import Footer from './components/footer';
 import FormStatus from './components/form_status';
-import lang from '../lang';
 import UserModel from '../models/user';
-import user from '../modules/user';
+import auth from '../modules/auth';
 
 
 export default class Signup extends Form {
   title () {
-    return `${lang.brand.name} | ${lang.titles.sign_up}`;
+    return `${this.lang.brand.name} | ${this.lang.titles.sign_up}`;
   }
 
   initState () {
@@ -23,7 +22,7 @@ export default class Signup extends Form {
 
     let newUser = new UserModel(model);
     let dfd = newUser.save().then(() => {
-      return user.signin(newUser.toJSON());
+      return auth.signin(newUser.toJSON());
     });
 
     dfd.fail((xhr) => this.handleAPIError(xhr));
@@ -35,35 +34,35 @@ export default class Signup extends Form {
       <div className="p-l-body">
         <div className="p-l-container">
           <a href="/" className="m-logo centered">
-            <h1 className="m-l-title">{lang.brand.name}</h1>
-            <h2 className="m-l-tagline">{lang.brand.tagline}</h2>
+            <h1 className="m-l-title">{this.lang.brand.name}</h1>
+            <h2 className="m-l-tagline">{this.lang.brand.tagline}</h2>
           </a>
           <form className="p-l-form" onSubmit={this.handleSubmit}>
             <div className="m-control-group">
               <span className="m-cg-icon icon-user"></span>
-              <input valueLink={this.linkState('model.full_name')} type="text" className="m-control" placeholder={lang.fields.full_name} />
+              <input valueLink={this.linkState('model.full_name')} type="text" className="m-control" placeholder={this.lang.fields.full_name} />
             </div>
             <div className="m-control-group">
               <span className="m-cg-icon icon-user"></span>
-              <input valueLink={this.linkState('model.username')} type="text" className="m-control" placeholder={lang.fields.username} required />
+              <input valueLink={this.linkState('model.username')} type="text" className="m-control" placeholder={this.lang.fields.username} required />
             </div>
             <div className="m-control-list">
               <div className="m-control-group">
                 <span className="m-cg-icon icon-lock"></span>
-                <input valueLink={this.linkState('model.password')} type="password" className="m-control" placeholder={lang.fields.password} required />
+                <input valueLink={this.linkState('model.password')} type="password" className="m-control" placeholder={this.lang.fields.password} required />
               </div>
               <div className="m-control-group">
                 <span className="m-cg-icon icon-lock"></span>
-                <input valueLink={this.linkState('model.confirm_password')} type="password" className="m-control" placeholder={lang.fields.confirm_password} required />
+                <input valueLink={this.linkState('model.confirm_password')} type="password" className="m-control" placeholder={this.lang.fields.confirm_password} required />
               </div>
             </div>
             <FormStatus {...this.state} />
             <p className="l-text-center">
-              <button type="submit" className="m-btn">{lang.captions.sign_up}</button>
+              <button type="submit" className="m-btn">{this.lang.captions.sign_up}</button>
             </p>
           </form>
           <p>
-            <a href="/signin" className="m-btn m-btn-block m-btn-link">{lang.captions.sign_in}</a>
+            <a href="/signin" className="m-btn m-btn-block m-btn-link">{this.lang.captions.sign_in}</a>
           </p>
         </div>
       </div>
