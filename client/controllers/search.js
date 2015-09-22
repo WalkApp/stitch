@@ -1,5 +1,3 @@
-import _ from 'lodash';
-import React from 'react';
 import Controller from '../base/controller';
 import SearchView from '../views/search';
 import UsersCollection from '../models/users';

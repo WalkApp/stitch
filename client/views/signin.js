@@ -2,7 +2,7 @@ import React from 'react';
 import Form from '../base/form';
 import Footer from './components/footer';
 import FormStatus from './components/form_status';
-import user from '../modules/user';
+import auth from '../modules/auth';
 
 
 export default class Signin extends Form {
@@ -15,7 +15,7 @@ export default class Signin extends Form {
   }
 
   save (model) {
-    let dfd = user.signin(model);
+    let dfd = auth.signin(model);
     dfd.fail((xhr) => this.handleAPIError(xhr));
   }
 

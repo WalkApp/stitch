@@ -7,6 +7,7 @@ import Event from './components/event';
 import QuickEvent from './components/quick_event';
 import FollowToggle from './components/follow_toggle';
 import userStore from '../stores/user';
+import currentUser from '../stores/current_user';
 
 
 export default class Upcoming extends Component {
@@ -15,7 +16,10 @@ export default class Upcoming extends Component {
   }
 
   initState () {
-    return userStore.getState();
+    let state = userStore.getState();
+    state.isOwner = state.user.username === currentUser.get('username');
+
+    return state;
   }
 
   componentDidMount () {

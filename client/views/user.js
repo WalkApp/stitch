@@ -7,6 +7,7 @@ import Post from './components/post';
 import QuickPost from './components/quick_post';
 import FollowToggle from './components/follow_toggle';
 import userStore from '../stores/user';
+import currentUser from '../stores/current_user';
 
 
 export default class User extends Component {
@@ -15,7 +16,10 @@ export default class User extends Component {
   }
 
   initState () {
-    return userStore.getState();
+    let state = userStore.getState();
+    state.isOwner = state.user.username === currentUser.get('username');
+
+    return state;
   }
 
   componentDidMount () {

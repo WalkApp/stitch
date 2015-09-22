@@ -1,5 +1,5 @@
 import Controller from '../base/controller';
-import user from '../../client/modules/user';
+import UserModel from '../../client/models/user';
 
 
 export default class AuthController extends Controller {
@@ -9,7 +9,11 @@ export default class AuthController extends Controller {
     }
 
     let { token } = req.body;
-    let dfd = user.fetch({ token });
+    let user = new UserModel();
+    user.username = 'profile';
+    user.security = { token: token };
+
+    let dfd = user.fetch();
 
     dfd.done(() => {
       req.session.token = token;

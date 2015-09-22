@@ -33,7 +33,7 @@ let network = {
       } else {
         try {
           resource = JSON.parse(body);
-        } catch (_error) {
+        } catch (e) {
 
         }
 
@@ -51,7 +51,7 @@ let network = {
   sync (method, model, params = {}) {
     let dfd = Q.defer();
     let data = params.data || params.attrs || {};
-    let token = _.result(this, 'security.token') || params.token;
+    let token = _.result(this, 'security.token');
 
     let options = {
       headers: {},

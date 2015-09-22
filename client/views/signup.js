@@ -3,7 +3,7 @@ import Form from '../base/form';
 import Footer from './components/footer';
 import FormStatus from './components/form_status';
 import UserModel from '../models/user';
-import user from '../modules/user';
+import auth from '../modules/auth';
 
 
 export default class Signup extends Form {
@@ -22,7 +22,7 @@ export default class Signup extends Form {
 
     let newUser = new UserModel(model);
     let dfd = newUser.save().then(() => {
-      return user.signin(newUser.toJSON());
+      return auth.signin(newUser.toJSON());
     });
 
     dfd.fail((xhr) => this.handleAPIError(xhr));

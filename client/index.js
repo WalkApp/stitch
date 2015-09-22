@@ -1,6 +1,5 @@
 import './dependencies';
 import './modules/window_events';
-import './modules/user';
 import './app_state';
 
 import Router from './router';

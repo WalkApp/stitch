@@ -23,7 +23,6 @@ class Server {
   generateEnv (req, res, next) {
     res.locals.env = {};
     res.locals.env.lang = req.lang;
-    res.locals.env.user = req.user;
 
     next();
   }

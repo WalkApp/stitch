@@ -4,16 +4,19 @@ import Iso from 'iso';
 import config from 'config';
 import langs from 'config/langs';
 import alt from '../../client/alt';
-import currentUser from '../../client/modules/user';
 import Component from '../../client/base/component';
 
 
 export default {
-  wrapModel (model) {
+  setInitData (data) {
+    data.CurrentUserStore = { user: this.req.user };
+    alt.bootstrap(JSON.stringify(data));
+  },
 
+  wrapModel (model) {
     // Add token to  model, it's needed to send requests to API
     model.security = {
-      token: _.result(this.req, 'user.token')
+      token: _.result(this.req, 'user.token'),
     };
 
     return model;
@@ -22,8 +25,7 @@ export default {
   renderView (ViewClass) {
     let { res, req } = this;
 
-    // Hack to set current user and language to render html
-    currentUser.set(res.locals.env.user);
+    // Hack to set language to render html
     Component.prototype.lang = langs[res.locals.lang];
 
     let View = React.createFactory(ViewClass);
@@ -32,7 +34,6 @@ export default {
     let title = ViewClass.prototype.title();
 
     // clear data for a next request
-    currentUser.clear();
     Component.prototype.lang = null;
 
     res.render('layout', {

@@ -1,13 +1,10 @@
-import _ from 'lodash';
 import Q from 'q';
-import React from 'react';
 import Controller from '../base/controller';
 import UserView from '../views/user';
 import UpcomingView from '../views/upcoming';
 import UserModel from '../models/user';
 import PostsCollection from '../models/posts';
 import EventsCollection from '../models/events';
-import currentUser from '../modules/user';
 
 
 export default class UserController extends Controller {
@@ -29,7 +26,6 @@ export default class UserController extends Controller {
         UserStore: {
           user: user.toJSON(),
           posts: posts.toJSON(),
-          isOwner: currentUser.get('username') === user.get('username'),
         },
       });
 
@@ -55,7 +51,6 @@ export default class UserController extends Controller {
         UserStore: {
           user: user.toJSON(),
           events: events.toJSON(),
-          isOwner: currentUser.get('username') === user.get('username'),
         },
       });
 

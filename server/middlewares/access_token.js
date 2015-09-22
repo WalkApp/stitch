@@ -1,4 +1,5 @@
-import user from '../../client/modules/user';
+import UserModel from '../../client/models/user';
+import { wrapModel } from '../mixins/isomorphic_controller';
 import error from './error';
 
 
@@ -6,7 +7,11 @@ export default function (req, res, next) {
   if (!req.session.token) {
     return next();
   } else {
-    let dfd = user.fetch({ token: req.session.token });
+    let user = new UserModel();
+    user.username = 'profile';
+    user.security = { token: req.session.token };
+
+    let dfd = user.fetch();
 
     dfd.done(() => {
       req.user = user.toJSON();

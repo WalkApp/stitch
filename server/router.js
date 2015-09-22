@@ -3,7 +3,7 @@ import Backbone from 'backbone';
 import ClientRouter from '../client/router';
 import ClientController from '../client/base/controller';
 import { sync } from './mixins/network';
-import { renderView, wrapModel } from './mixins/isomorphic_controller';
+import { renderView, wrapModel, setInitData } from './mixins/isomorphic_controller';
 import langs from 'config/langs';
 import config from 'config';
 
@@ -12,6 +12,7 @@ import config from 'config';
 Backbone.Model.prototype.sync = Backbone.Collection.prototype.sync = sync;
 ClientController.prototype.renderView = renderView;
 ClientController.prototype.wrapModel = wrapModel;
+ClientController.prototype.setInitData = setInitData;
 
 export default class Router extends ClientRouter {
   run (app) {

@@ -3,7 +3,8 @@ import Component from '../../base/component';
 import Dropdown from './dropdown';
 import HeaderSearchBox from './header_search_box';
 import vent from '../../modules/vent';
-import user from '../../modules/user';
+import currentUser from '../../stores/current_user';
+import auth from '../../modules/auth';
 
 
 export default class Header extends Component {
@@ -21,11 +22,11 @@ export default class Header extends Component {
   }
 
   setActivePath (ctx) {
-    this.setState({ currentPath:ctx.pathname });
+    this.setState({ currentPath: ctx.pathname });
   }
 
   signout () {
-    user.signout();
+    auth.signout();
   }
 
   render () {
@@ -37,7 +38,7 @@ export default class Header extends Component {
           </a>
         </div>
         <ul className="c-h-nav">
-          <li className={this.cx({active: this.state.currentPath === `/user/${user.get('username')}` })}>
+          <li className={this.cx({active: this.state.currentPath === `/user/${currentUser.get('username')}` })}>
             <a href="/user">
               <span className="icon-home"></span>
             </a>
@@ -53,7 +54,7 @@ export default class Header extends Component {
         <HeaderSearchBox />
         <div className="c-h-nav-right">
           <div className="c-h-nr-avatar">
-            <span className="c-h-nr-a-img" data-dropdown-toggle="account-dropdown" style={{ backgroundImage: 'url(/images/default_avatar.jpg)' }}></span>
+            <span className="c-h-nr-a-img" data-dropdown-toggle="account-dropdown" style={{ backgroundImage: `url(${currentUser.get('image_url')})` }}></span>
             <Dropdown id="account-dropdown">
               <ul className="c-d-menu">
                 <li><a href="/profile">{this.lang.captions.profile}</a></li>
