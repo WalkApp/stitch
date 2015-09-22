@@ -14,7 +14,7 @@ const METHOD_MAP = {
 
 let parseBody = (body) => {
   let number = parseInt(body, 10);
-  console.log('NUMBER', number)
+
   if (number) {
     return number;
   }
