@@ -20,6 +20,8 @@ export default class UserController extends Controller {
     user.username = username;
     posts.username = username;
     posts.order = '-created';
+    followers.username = username;
+    followings.username = username;
 
     this.xhrs.user = user.fetch();
     this.xhrs.posts = posts.fetch();
