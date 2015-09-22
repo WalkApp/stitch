@@ -60,7 +60,7 @@ export default class Upcoming extends Component {
                 </ul>
                 {!isOwner
                   ? <div className="m-p-follow">
-                      <FollowToggle />
+                      <FollowToggle user={user} />
                     </div>
                   : false
                 }

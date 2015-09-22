@@ -32,7 +32,7 @@ export default class UserController extends Controller {
         UserStore: {
           user: user.toJSON(),
           posts: posts.toJSON(),
-	  followerCount: followers.count,
+          followerCount: followers.count,
           followingCount: followings.count,
         },
       });

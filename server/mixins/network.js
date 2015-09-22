@@ -12,6 +12,17 @@ const METHOD_MAP = {
   read:   'GET',
 };
 
+let parseBody = (body) => {
+  let number = parseInt(body, 10);
+  console.log('NUMBER', number)
+  if (number) {
+    return number;
+  }
+
+  let res = JSON.parse(body);
+  return res;
+};
+
 let network = {
   request (options, callback) {
     if (!options.url) {
@@ -21,31 +32,79 @@ let network = {
     options = _.assign({ headers: 'User-Agent' }, options);
 
     request(options, (err, res, body) => {
-      let resource;
+      let resource = null;
       let error;
       let status = _.result(res, 'statusCode') || 0;
       let headers =  _.result(res, 'headers');
 
       if (err || status !== 200) {
         error = { status: status, message: `Couldn't fetch resource: ${status}@${options.url}` };
-        callback.call(this, error, null, headers);
+        callback(error, null, headers);
         return;
       } else {
         try {
-          resource = JSON.parse(body);
+          resource = parseBody(body);
         } catch (e) {
 
         }
 
-        if (resource) {
-          callback.call(this, null, resource, headers);
+        if (resource !== null) {
+          callback(null, resource, headers);
           return;
         }
       }
 
       error = { status: status, message: `Couldn't parse API response: ${status}@${options.url}` };
-      callback.call(this, error, null, headers);
+      callback(error, null, headers);
     });
+  },
+
+  $ (opts = {}) {
+    let url = '';
+    let dfd = Q.defer();
+    let data = opts.data || {};
+    let token = _.result(this, 'security.token');
+
+    if (_.isString(opts)) {
+      url = opts;
+    } else {
+      url = opts.url;
+    }
+
+    let options = {
+      headers: opts.headers || {},
+      method: opts.type || 'GET',
+      dataType: 'json',
+      url: url,
+      data: data,
+    };
+
+    if (token) {
+      options.headers['x-access-token'] = token.value;
+    }
+
+    let xhr = network.request(options, (error, resource, headers) => {
+      let statusText = error ? 'error' : 'success';
+
+      if (error) {
+        dfd.reject(error);
+
+        if (opts.error) {
+          opts.error(xhr, statusText, error);
+        }
+      } else {
+        this._resource = resource;
+        this._headers = headers;
+
+        dfd.resolve(resource);
+
+        if (opts.success) {
+          opts.success(resource, statusText, xhr);
+        }
+      }
+    });
+
+    return dfd.promise;
   },
 
   sync (method, model, params = {}) {
@@ -78,7 +137,7 @@ let network = {
       options.qs = data;
     }
 
-    let xhr = network.request.call(this, options, (error, resource, headers) => {
+    let xhr = network.request(options, (error, resource, headers) => {
       let statusText = error ? 'error' : 'success';
 
       if (params.complete) {

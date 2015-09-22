@@ -1,8 +1,10 @@
 import _ from 'lodash';
 import Backbone from 'backbone';
+import ClientModel from '../client/base/model';
+import ClientCollection from '../client/base/collection';
 import ClientRouter from '../client/router';
 import ClientController from '../client/base/controller';
-import { sync } from './mixins/network';
+import { sync, $ } from './mixins/network';
 import { renderView, wrapModel, setInitData } from './mixins/isomorphic_controller';
 import langs from 'config/langs';
 import config from 'config';
@@ -10,6 +12,8 @@ import config from 'config';
 
 // Override client methods to call them on server side
 Backbone.Model.prototype.sync = Backbone.Collection.prototype.sync = sync;
+ClientModel.prototype.$ = ClientCollection.prototype.$ = $;
+
 ClientController.prototype.renderView = renderView;
 ClientController.prototype.wrapModel = wrapModel;
 ClientController.prototype.setInitData = setInitData;
