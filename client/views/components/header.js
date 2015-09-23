@@ -61,8 +61,7 @@ export default class Header extends Component {
 
         <div className="c-h-nav-right">
           <div className="c-h-nr-avatar">
-            <span className="c-h-nr-a-img" data-dropdown-toggle="account-dropdown"
-                  style={{ backgroundImage: `url(${currentUser.get('image_url')})` }}></span>
+            <span className="c-h-nr-a-img" data-dropdown-toggle="account-dropdown" style={{ backgroundImage: `url(${currentUser.get('image_url')})` }}></span>
             <Dropdown id="account-dropdown">
               <ul className="c-d-menu">
                 <li><a href="/profile">{this.lang.captions.profile}</a></li>
