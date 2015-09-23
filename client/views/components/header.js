@@ -58,7 +58,6 @@ export default class Header extends Component {
           </li>
         </ul>
         <HeaderSearchBox />
-
         <div className="c-h-nav-right">
           <div className="c-h-nr-avatar">
             <span className="c-h-nr-a-img" data-dropdown-toggle="account-dropdown" style={{ backgroundImage: `url(${currentUser.get('image_url')})` }}></span>
