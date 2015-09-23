@@ -33,11 +33,11 @@ export default class User extends Component {
       <Header />
       <div className="l-wrapper">
         <div className="p-s-top">
-          <div className="p-s-container">
+          <div className="l-container">
             <SearchBox />
           </div>
         </div>
-        <div className="p-s-container">
+        <div className="l-container">
           <ul className="m-user-list">
             {users.length
               ? users.map((user, index) => {
