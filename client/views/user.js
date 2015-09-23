@@ -40,7 +40,7 @@ export default class User extends Component {
         <div className="l-container p-u-top">
           <div className="pure-g">
             <div className="pure-u-6-24"></div>
-            <div className="pure-u-16-24">
+            <div className="pure-u-18-24">
               <nav className="p-u-tabs">
                 <a className="active" href={`/user/${user.username}`}>{this.lang.captions.posts}</a>
                 <a href={`/user/${user.username}/upcoming`}>{this.lang.captions.upcoming}</a>
@@ -75,7 +75,7 @@ export default class User extends Component {
                 </ul>
               </div>
             </div>
-            <div className="pure-u-16-24">
+            <div className="pure-u-18-24">
               <div className="p-u-content">
                 {isOwner ? <QuickPost /> : false}
                 <div className="m-wall">

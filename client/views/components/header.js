@@ -44,15 +44,15 @@ export default class Header extends Component {
             </a>
             <span className="c-h-n-underline"></span>
           </li>
-          <li className={this.cx({active: this.state.currentPath === '/feed' })}>
-            <a href="/feed">
-              <span className="icon-newspaper"></span>
-            </a>
-            <span className="c-h-n-underline"></span>
-          </li>
           <li className={this.cx({active: this.state.currentPath === `/user/${currentUser.get('username')}/upcoming` })}>
             <a href={`/user/${currentUser.get('username')}/upcoming`}>
               <span className="icon-upcoming"></span>
+            </a>
+            <span className="c-h-n-underline"></span>
+          </li>
+          <li className={this.cx({active: this.state.currentPath === '/feed' })}>
+            <a href="/feed">
+              <span className="icon-newspaper"></span>
             </a>
             <span className="c-h-n-underline"></span>
           </li>
