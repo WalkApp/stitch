@@ -10,7 +10,7 @@ import auth from '../../modules/auth';
 export default class Header extends Component {
 
   initState () {
-    return { currentPath: '' };
+    return {currentPath: ''};
   }
 
   componentWillMount () {
@@ -22,7 +22,7 @@ export default class Header extends Component {
   }
 
   setActivePath (ctx) {
-    this.setState({ currentPath: ctx.pathname });
+    this.setState({currentPath: ctx.pathname});
   }
 
   signout () {
@@ -41,6 +41,12 @@ export default class Header extends Component {
           <li className={this.cx({active: this.state.currentPath === `/user/${currentUser.get('username')}` })}>
             <a href="/user">
               <span className="icon-home"></span>
+            </a>
+            <span className="c-h-n-underline"></span>
+          </li>
+          <li className={this.cx({active: this.state.currentPath === `/user/${currentUser.get('username')}/upcoming` })}>
+            <a href={`/user/${currentUser.get('username')}/upcoming`}>
+              <span className="icon-upcoming"></span>
             </a>
             <span className="c-h-n-underline"></span>
           </li>

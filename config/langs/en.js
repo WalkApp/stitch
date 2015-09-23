@@ -44,7 +44,7 @@ export default {
     follow: 'Follow',
     unfollow: 'Unfollow',
     add_post: 'Post',
-    add_event: 'Event',
+    add_event: 'Create event',
     error: 'Error',
     load_more: 'Load more',
   },
@@ -63,6 +63,6 @@ export default {
     type_search_text: 'Start typing',
     add_post: 'Tell the world about visited place',
     no_records_found: 'No records found',
-    add_event: 'Tell the world about visited event',
+    add_event: 'Let\'s walk',
   },
 };

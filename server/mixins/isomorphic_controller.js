@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import React from 'react';
-import Iso from 'iso';
 import config from 'config';
 import langs from 'config/langs';
 import alt from '../../client/alt';
@@ -29,8 +28,7 @@ export default {
     Component.prototype.lang = langs[res.locals.lang];
 
     let View = React.createFactory(ViewClass);
-    let reactString = React.renderToString(View());
-    let html = Iso.render(reactString, alt.flush());
+    let html = React.renderToString(View());
     let title = ViewClass.prototype.title();
 
     // clear data for a next request
@@ -42,6 +40,7 @@ export default {
       env: res.locals.env,
       langs: _.pick(langs, [res.locals.lang]),
       config: config._client,
+      stores: alt.flush(),
     });
   },
 };
