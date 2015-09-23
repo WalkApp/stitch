@@ -6,6 +6,8 @@ import LocalStorage from 'backbone.localstorage';
 
 window.Backbone = Backbone;
 window.Backbone.LocalStorage = LocalStorage;
+window.appNode = document.getElementById('app-node');
+window.titleNode =  document.getElementsByTagName('title')[0];
 
 $.ajaxSetup({
   crossDomain: true,
