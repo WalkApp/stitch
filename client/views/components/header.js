@@ -10,7 +10,7 @@ import auth from '../../modules/auth';
 export default class Header extends Component {
 
   initState () {
-    return { currentPath: '' };
+    return {currentPath: ''};
   }
 
   componentWillMount () {
@@ -22,7 +22,7 @@ export default class Header extends Component {
   }
 
   setActivePath (ctx) {
-    this.setState({ currentPath: ctx.pathname });
+    this.setState({currentPath: ctx.pathname});
   }
 
   signout () {
@@ -50,11 +50,19 @@ export default class Header extends Component {
             </a>
             <span className="c-h-n-underline"></span>
           </li>
+          <li className={this.cx({active: this.state.currentPath === `/user/${currentUser.get('username')}/upcoming` })}>
+            <a href={`/user/${currentUser.get('username')}/upcoming`}>
+              <span className="icon-upcoming"></span>
+            </a>
+            <span className="c-h-n-underline"></span>
+          </li>
         </ul>
         <HeaderSearchBox />
+
         <div className="c-h-nav-right">
           <div className="c-h-nr-avatar">
-            <span className="c-h-nr-a-img" data-dropdown-toggle="account-dropdown" style={{ backgroundImage: `url(${currentUser.get('image_url')})` }}></span>
+            <span className="c-h-nr-a-img" data-dropdown-toggle="account-dropdown"
+                  style={{ backgroundImage: `url(${currentUser.get('image_url')})` }}></span>
             <Dropdown id="account-dropdown">
               <ul className="c-d-menu">
                 <li><a href="/profile">{this.lang.captions.profile}</a></li>
