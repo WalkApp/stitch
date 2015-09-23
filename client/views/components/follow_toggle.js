@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React from 'react';
 import Component from '../../base/component';
 import FolloweeModel from '../../models/followee';
+import userActions from '../../actions/user';
 
 
 const TOGGLE_LIMIT = 200;
@@ -31,8 +32,14 @@ export default class FollowToggle extends Component {
     }
 
     dfd.done(() => {
-      let toggle = !this.state.isFollowed;
-      this.setState({isFollowed: toggle});
+      let isFollowed = !this.state.isFollowed;
+      this.setState({isFollowed});
+
+      if (isFollowed) {
+        userActions.follow();
+      } else {
+        userActions.unfollow();
+      }
     });
   }
 
