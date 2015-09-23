@@ -6,8 +6,6 @@ import ClientRouter from '../client/router';
 import ClientController from '../client/base/controller';
 import { sync, $ } from './mixins/network';
 import { renderView, wrapModel, setInitData } from './mixins/isomorphic_controller';
-import langs from 'config/langs';
-import config from 'config';
 
 
 // Override client methods to call them on server side

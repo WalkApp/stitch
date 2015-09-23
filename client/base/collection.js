@@ -6,9 +6,28 @@ import urlQuery from 'libs/url_query';
 
 
 export default class BaseCollection extends Collection {
+  constructor (attrs, opts) {
+    super(attrs, opts);
+    this.paginationConfig = this.paginationDefault();
+  }
+
+  paginationDefault () {
+    return {
+      page: 1,
+      perPage: 2,
+    };
+  }
+
+  baseUrl () {
+    return `${this.apiRoot}${_.result(this, 'urlPath')}`;
+  }
+
   url () {
-    let params = {};
-    let url = `${this.apiRoot}${_.result(this, 'urlPath')}`;
+    let url = this.baseUrl();
+    let params = {
+      page: this.paginationConfig.page,
+      per_page: this.paginationConfig.perPage,
+    };
 
     if (this.order) {
       params.order = this.order;
@@ -26,7 +45,7 @@ export default class BaseCollection extends Collection {
   }
 
   fetchCount () {
-    let dfd = this.$(`${this.url()}/count`);
+    let dfd = this.$(`${this.baseUrl()}/count`);
     dfd.done((resp) => {
       this.count = resp.count;
     });

@@ -46,6 +46,7 @@ export default {
     add_post: 'Post',
     add_event: 'Event',
     error: 'Error',
+    load_more: 'Load more',
   },
 
   fields: {
