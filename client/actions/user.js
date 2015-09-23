@@ -3,7 +3,7 @@ import alt from '../alt';
 
 class UserActions {
   constructor () {
-    this.generateActions('addPost', 'addEvent');
+    this.generateActions('addPost', 'addEvent', 'unfollow');
   }
 }
 

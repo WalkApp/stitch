@@ -17,4 +17,8 @@ export default alt.createStore(class UserStore {
   onAddEvent (event) {
     this.events.unshift(event);
   }
+
+  onUnfollow () {
+
+  }
 });
