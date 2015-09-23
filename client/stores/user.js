@@ -8,6 +8,8 @@ export default alt.createStore(class UserStore {
     this.user = {};
     this.posts = [];
     this.events = [];
+    this.followerCount;
+    this.followingCount;
   }
 
   onAddPost (post) {
@@ -19,6 +21,10 @@ export default alt.createStore(class UserStore {
   }
 
   onUnfollow () {
+    this.followerCount -= 1;
+  }
 
+  onFollow () {
+    this.followerCount += 1;
   }
 });
