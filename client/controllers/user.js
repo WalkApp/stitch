@@ -47,20 +47,28 @@ export default class UserController extends Controller {
     let { username } = ctx.params;
     let user = this.wrapModel(new UserModel());
     let events = this.wrapModel(new EventsCollection());
+    let followers = this.wrapModel(new FollowersCollection());
+    let followings = this.wrapModel(new FollowingsCollection());
 
     user.username = username;
     events.username = username;
     events.order = '-created';
+    followers.username = username;
+    followings.username = username;
 
     this.xhrs.user = user.fetch();
     this.xhrs.events = events.fetch();
+    this.xhrs.followers = followers.fetchCount();
+    this.xhrs.followings = followings.fetchCount();
 
-    let dfd = Q.all([this.xhrs.user, this.xhrs.events]);
+    let dfd = Q.all([this.xhrs.user, this.xhrs.events, this.xhrs.followers, this.xhrs.followings]);
     dfd.done(() => {
       this.setInitData({
         UserStore: {
           user: user.toJSON(),
           events: events.toJSON(),
+          followerCount: followers.count,
+          followingCount: followings.count,
         },
       });
 
