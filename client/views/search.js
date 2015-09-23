@@ -38,10 +38,10 @@ export default class User extends Component {
           </div>
         </div>
         <div className="l-container">
-          <ul className="m-user-list">
-            {users.length
-              ? users.map((user, index) => {
-                let isCurrentUser = user.username === currentUser.get('username');
+          {users.length
+            ? <ul className="m-user-list">
+                {users.map((user, index) => {
+                  let isCurrentUser = user.username === currentUser.get('username');
 
                   return <li key={index} className="m-ul-item">
                     <div className="m-ul-i-avatar">
