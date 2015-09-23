@@ -44,7 +44,7 @@ export default {
     follow: 'Follow',
     unfollow: 'Unfollow',
     add_post: 'Post',
-    add_event: 'Event',
+    add_event: 'Create event',
     error: 'Error',
   },
 
