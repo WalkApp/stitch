@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import moment from 'moment';
 import React from 'react';
 import Component from '../base/component';
@@ -31,7 +32,7 @@ export default class Upcoming extends Component {
   }
 
   render () {
-    let { user, events, isOwner } = this.state;
+    let { user, events, followerCount, followingCount, isOwner } = this.state;
 
     return <div className="p-user l-layout">
       <Header />
@@ -65,10 +66,10 @@ export default class Upcoming extends Component {
                   : false
                 }
                 <ul className="m-p-statistics">
-                  <li><strong>00</strong>
+                  <li><strong>{_.padLeft(followerCount, '2', '0')}</strong>
                     <small>{this.lang.captions.followers}</small>
                   </li>
-                  <li><strong>00</strong>
+                  <li><strong>{_.padLeft(followingCount, '2', '0')}</strong>
                     <small>{this.lang.captions.following}</small>
                   </li>
                 </ul>

@@ -28,7 +28,7 @@ export default class BaseCollection extends Collection {
   fetchCount () {
     let dfd = this.$(`${this.url()}/count`);
     dfd.done((resp) => {
-      this.count = resp;
+      this.count = resp.count;
     });
 
     return dfd;

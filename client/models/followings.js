@@ -3,6 +3,6 @@ import Collection from '../base/collection';
 
 export default class Followings extends Collection {
   urlPath () {
-    return '/users/profile/following';
+    return `/users/${this.username}/following`;
   }
 }
