@@ -3,7 +3,7 @@ import alt from '../alt';
 
 class SearchActions {
   constructor () {
-    this.generateActions();
+    this.generateActions('pushUsers');
   }
 }
 

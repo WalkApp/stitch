@@ -9,14 +9,15 @@ const TOGGLE_LIMIT = 200;
 
 export default class FollowToggle extends Component {
 
-  constructor () {
-    super();
+  constructor (props) {
+    super(props);
     this.handleToggle = _.debounce(this.handleToggle.bind(this), TOGGLE_LIMIT);
   }
 
-  componentDidMount () {
-    let isFollowed = this.props.user.is_followed;
-    this.setState({isFollowed});
+  initState (props) {
+    return {
+      isFollowed: props.user.is_followed,
+    };
   }
 
   handleToggle () {

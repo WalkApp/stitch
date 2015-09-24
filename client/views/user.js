@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import PostsCollection from '../models/posts';
 import Component from '../base/component';
 import Header from './components/header';
 import Footer from './components/footer';
@@ -8,6 +9,7 @@ import QuickPost from './components/quick_post';
 import FollowToggle from './components/follow_toggle';
 import userStore from '../stores/user';
 import currentUser from '../stores/current_user';
+import userActions from '../actions/user';
 import _ from 'lodash';
 
 
@@ -29,6 +31,18 @@ export default class User extends Component {
 
   componentWillUnmount () {
     userStore.unlisten(this.refreshState);
+  }
+
+  loadMore () {
+    let { filter, pagination } = this.state.posts;
+    let posts = new PostsCollection(null, { filter, pagination });
+    posts.pagination.page += 1;
+    posts.username = this.state.user.username;
+
+    let dfd = posts.fetch();
+    dfd.done(() => {
+      userActions.pushPosts(posts.toJSON());
+    });
   }
 
   render () {
@@ -79,11 +93,17 @@ export default class User extends Component {
               <div className="p-u-content">
                 {isOwner ? <QuickPost /> : false}
                 <div className="m-wall">
-                  {posts.map((post, index) => {
+                  {posts.items.map((post, index) => {
                     return <div key={index} className="m-w-row">
                       <Post data={{ post }}/>
                     </div>;
                   })}
+                  {posts.canLoadMore
+                    ? <button className="m-btn m-btn-load-more" onClick={this.loadMore.bind(this)}>
+                        {this.lang.captions.load_more}
+                      </button>
+                    : false
+                  }
                 </div>
               </div>
             </div>

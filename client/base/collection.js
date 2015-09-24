@@ -6,9 +6,31 @@ import urlQuery from 'libs/url_query';
 
 
 export default class BaseCollection extends Collection {
+  constructor (models, opts = {}) {
+    super(models, opts);
+    this.pagination = this.paginationDefault();
+
+    if (opts.filter) this.filter = opts.filter;
+    if (opts.pagination) _.assign(this.pagination, opts.pagination);
+  }
+
+  paginationDefault () {
+    return {
+      page: 1,
+      perPage: 20,
+    };
+  }
+
+  baseUrl () {
+    return `${this.apiRoot}${_.result(this, 'urlPath')}`;
+  }
+
   url () {
-    let params = {};
-    let url = `${this.apiRoot}${_.result(this, 'urlPath')}`;
+    let url = this.baseUrl();
+    let params = {
+      page: this.pagination.page,
+      per_page: this.pagination.perPage,
+    };
 
     if (this.order) {
       params.order = this.order;
@@ -22,11 +44,27 @@ export default class BaseCollection extends Collection {
   }
 
   parse (resp) {
+    this.pagination.total = resp.total;
+    this.pagination.totalPages = Math.ceil(this.pagination.total / this.pagination.perPage);
+
     return resp.collection;
   }
 
+  canLoadMore () {
+    return this.pagination.page < this.pagination.totalPages;
+  }
+
+  toJSON () {
+    let pagination = this.pagination;
+    let filter = this.filter;
+    let canLoadMore = this.canLoadMore();
+    let items = super.toJSON();
+
+    return { items, canLoadMore, pagination, filter };
+  }
+
   fetchCount () {
-    let dfd = this.$(`${this.url()}/count`);
+    let dfd = this.$(`${this.baseUrl()}/count`);
     dfd.done((resp) => {
       this.count = resp.count;
     });

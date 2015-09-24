@@ -13,11 +13,11 @@ export default alt.createStore(class UserStore {
   }
 
   onAddPost (post) {
-    this.posts.unshift(post);
+    this.posts.items.unshift(post);
   }
 
   onAddEvent (event) {
-    this.events.unshift(event);
+    this.events.items.unshift(event);
   }
 
   onUnfollow () {
@@ -26,5 +26,17 @@ export default alt.createStore(class UserStore {
 
   onFollow () {
     this.followerCount += 1;
+  }
+
+  onPushPosts (posts) {
+    let items = this.posts.items.concat(posts.items);
+    this.posts = posts;
+    this.posts.items = items;
+  }
+
+  onPushEvents (events) {
+    let items = this.events.items.concat(events.items);
+    this.events = events;
+    this.events.items = items;
   }
 });
