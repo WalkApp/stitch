@@ -6,15 +6,18 @@ import urlQuery from 'libs/url_query';
 
 
 export default class BaseCollection extends Collection {
-  constructor (attrs, opts) {
-    super(attrs, opts);
-    this.paginationConfig = this.paginationDefault();
+  constructor (models, opts = {}) {
+    super(models, opts);
+    this.pagination = this.paginationDefault();
+
+    if (opts.filter) this.filter = opts.filter;
+    if (opts.pagination) _.assign(this.pagination, opts.pagination);
   }
 
   paginationDefault () {
     return {
       page: 1,
-      perPage: 2,
+      perPage: 20,
     };
   }
 
@@ -25,8 +28,8 @@ export default class BaseCollection extends Collection {
   url () {
     let url = this.baseUrl();
     let params = {
-      page: this.paginationConfig.page,
-      per_page: this.paginationConfig.perPage,
+      page: this.pagination.page,
+      per_page: this.pagination.perPage,
     };
 
     if (this.order) {
@@ -41,7 +44,23 @@ export default class BaseCollection extends Collection {
   }
 
   parse (resp) {
+    this.pagination.total = resp.total;
+    this.pagination.totalPages = Math.ceil(this.pagination.total / this.pagination.perPage);
+
     return resp.collection;
+  }
+
+  canLoadMore () {
+    return this.pagination.page < this.pagination.totalPages;
+  }
+
+  toJSON () {
+    let pagination = this.pagination;
+    let filter = this.filter;
+    let canLoadMore = this.canLoadMore();
+    let items = super.toJSON();
+
+    return { items, canLoadMore, pagination, filter };
   }
 
   fetchCount () {

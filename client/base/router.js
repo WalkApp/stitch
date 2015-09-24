@@ -6,7 +6,6 @@ import vent from '../modules/vent';
 export default class Router {
   _mapRoutes () {
     if (this.middleware) this.middleware();
-    if (this.redirect) this.redirect();
     if (this.router) this.router();
   }
 

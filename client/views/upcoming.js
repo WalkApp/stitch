@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import moment from 'moment';
 import React from 'react';
+import EventsCollection from '../models/events';
 import Component from '../base/component';
 import Header from './components/header';
 import Footer from './components/footer';
@@ -8,6 +9,7 @@ import Event from './components/event';
 import QuickEvent from './components/quick_event';
 import FollowToggle from './components/follow_toggle';
 import userStore from '../stores/user';
+import userActions from '../actions/user';
 import currentUser from '../stores/current_user';
 
 
@@ -29,6 +31,18 @@ export default class Upcoming extends Component {
 
   componentWillUnmount () {
     userStore.unlisten(this.refreshState);
+  }
+
+  loadMore () {
+    let { filter, pagination } = this.state.events;
+    let events = new EventsCollection(null, { filter, pagination });
+    events.pagination.page += 1;
+    events.username = this.state.user.username;
+
+    let dfd = events.fetch();
+    dfd.done(() => {
+      userActions.pushEvents(events.toJSON());
+    });
   }
 
   render () {
@@ -79,11 +93,17 @@ export default class Upcoming extends Component {
               <div className="p-u-content">
                 {isOwner ? <QuickEvent /> : false}
                 <div className="m-wall">
-                  {events.map((event, index) => {
+                  {events.items.map((event, index) => {
                     return <div key={index} className="m-w-row">
                       <Event data={{ event }}/>
                     </div>;
                   })}
+                  {events.canLoadMore
+                    ? <button className="m-btn m-btn-load-more" onClick={this.loadMore.bind(this)}>
+                        {this.lang.captions.load_more}
+                      </button>
+                    : false
+                  }
                 </div>
               </div>
             </div>

@@ -26,10 +26,6 @@ export default class Router extends ClientRouter {
     this._app.get(...args);
   }
 
-  redirect () {
-
-  }
-
   route (url, action) {
     let temp = action.split('.');
     let method = temp[1];

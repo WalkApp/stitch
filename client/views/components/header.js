@@ -8,7 +8,6 @@ import auth from '../../modules/auth';
 
 
 export default class Header extends Component {
-
   initState () {
     return {currentPath: ''};
   }
@@ -30,27 +29,31 @@ export default class Header extends Component {
   }
 
   render () {
+    let { currentPath } = this.state;
+    let homeUrl = `/user/${currentUser.get('username')}`;
+    let upcomingUrl = `/user/${currentUser.get('username')}/upcoming`;
+
     return <div className="c-header">
       <div className="l-container">
         <div className="c-h-brand">
-          <a href="/user" className="m-logo m-logo-small">
+          <a href={homeUrl} className="m-logo m-logo-small">
             <h1 className="m-l-title">{this.lang.brand.name}</h1>
           </a>
         </div>
         <ul className="c-h-nav">
-          <li className={this.cx({active: this.state.currentPath === `/user/${currentUser.get('username')}` })}>
-            <a href="/user">
+          <li className={this.cx({active: currentPath === homeUrl })}>
+            <a href={homeUrl}>
               <span className="icon-home"></span>
             </a>
             <span className="c-h-n-underline"></span>
           </li>
-          <li className={this.cx({active: this.state.currentPath === `/user/${currentUser.get('username')}/upcoming` })}>
-            <a href={`/user/${currentUser.get('username')}/upcoming`}>
+          <li className={this.cx({active: currentPath === upcomingUrl })}>
+            <a href={upcomingUrl}>
               <span className="icon-upcoming"></span>
             </a>
             <span className="c-h-n-underline"></span>
           </li>
-          <li className={this.cx({active: this.state.currentPath === '/feed' })}>
+          <li className={this.cx({active: currentPath === '/feed' })}>
             <a href="/feed">
               <span className="icon-newspaper"></span>
             </a>

@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import UsersCollection from '../models/users';
 import Component from '../base/component';
 import Header from './components/header';
 import Footer from './components/footer';
@@ -7,6 +8,7 @@ import SearchBox from './components/search_box';
 import FollowToggle from './components/follow_toggle.js';
 import currentUser from '../stores/current_user';
 import searchStore from '../stores/search';
+import searchActions from '../actions/search';
 
 
 export default class User extends Component {
@@ -26,6 +28,17 @@ export default class User extends Component {
     searchStore.unlisten(this.refreshState);
   }
 
+  loadMore () {
+    let { filter, pagination } = this.state.users;
+    let users = new UsersCollection(null, { filter, pagination });
+    users.pagination.page += 1;
+
+    let dfd = users.fetch();
+    dfd.done(() => {
+      searchActions.pushUsers(users.toJSON());
+    });
+  }
+
   render () {
     let { users } = this.state;
 
@@ -38,9 +51,9 @@ export default class User extends Component {
           </div>
         </div>
         <div className="l-container">
-          {users.length
+          {users.items.length
             ? <ul className="m-user-list">
-                {users.map((user, index) => {
+                {users.items.map((user, index) => {
                   let isCurrentUser = user.username === currentUser.get('username');
 
                   return <li key={index} className="m-ul-item">
@@ -63,7 +76,12 @@ export default class User extends Component {
                     </div>
                   </li>;
                 })}
-                <button className="m-btn m-btn-load-more">{this.lang.captions.load_more}</button>
+                {users.canLoadMore
+                  ? <button className="m-btn m-btn-load-more" onClick={this.loadMore.bind(this)}>
+                      {this.lang.captions.load_more}
+                    </button>
+                  : false
+                }
               </ul>
             : <h4>{this.lang.messages.no_records_found}</h4>
           }
