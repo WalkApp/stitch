@@ -40,6 +40,9 @@ export default class UserController extends Controller {
       });
 
       this.renderView(UserView, done);
+    })
+    .fail(() => {
+      this.renderErrorView(dfd);
     });
   }
 

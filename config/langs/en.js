@@ -26,6 +26,7 @@ export default {
     sign_in: 'Sign in',
     sign_up: 'Sign up',
     search: 'Search results',
+    error: 'Error',
   },
 
   captions: {
@@ -64,5 +65,7 @@ export default {
     add_post: 'Tell the world about visited place',
     no_records_found: 'No records found',
     add_event: 'Let\'s walk',
+    error_title: 'Oops...',
+    error_description: 'Something went wrong',
   },
 };
