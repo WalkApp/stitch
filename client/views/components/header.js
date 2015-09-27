@@ -5,6 +5,7 @@ import HeaderSearchBox from './header_search_box';
 import vent from '../../modules/vent';
 import currentUser from '../../stores/current_user';
 import auth from '../../modules/auth';
+import { format } from 'libs/utils';
 
 
 export default class Header extends Component {
@@ -66,6 +67,10 @@ export default class Header extends Component {
             <span className="c-h-nr-a-img" data-dropdown-toggle="account-dropdown" style={{ backgroundImage: `url(${currentUser.get('image_url')})` }}></span>
             <Dropdown id="account-dropdown">
               <ul className="c-d-menu">
+                <li className="c-d-m-static">
+                  <span>{this.lang.messages.signed_in} <strong>{currentUser.get('username')}</strong></span>
+                </li>
+                <li className="c-d-divider"></li>
                 <li><a href="/profile">{this.lang.captions.profile}</a></li>
                 <li><a href="/settings">{this.lang.captions.settings}</a></li>
                 <div className="c-d-footer">

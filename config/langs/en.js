@@ -71,5 +71,6 @@ export default {
     profile: 'Profile info',
     success: 'Your data was tasty',
     joined: 'Joined on',
+    signed_in: 'Signed in as',
   },
 };
