@@ -1,0 +1,34 @@
+.m-navigation
+  padding: 0
+  margin: 0
+  list-style: none
+  font-size: 12px
+  color: $muted_color
+
+  li
+    position: relative
+    margin-bottom: 5px
+
+    a
+      display: block
+      padding: 5px 7px
+      color: $muted_color
+
+      &:hover
+        text-decoration: none
+        background: #f5fcff
+
+    .m-n-line
+      display: none
+      absolute: left top
+      width: 2px
+      height: 100%
+      border-radius: 3px
+      background: $base_link_color
+
+    &.active
+      a
+        color: $secondary_color
+
+      .m-n-line
+        display: block

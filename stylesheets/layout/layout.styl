@@ -1,5 +1,4 @@
-#app-node,
-.___iso-html___
+#app-node
   height: 100%
 
 .l-layout
@@ -12,10 +11,17 @@
 .l-wrapper
   flex: 1 0 auto
 
-.l-container
+.l-container,
+.l-content
   position: relative
   margin: 0 auto
   width: $site_width
+
+.l-content
+  padding-top: 20px
+
+.l-right
+  padding-left: 30px
 
 .l-selectable
   selectable()

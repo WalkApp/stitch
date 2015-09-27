@@ -55,10 +55,12 @@ export default class Upcoming extends Component {
           <div className="pure-g">
             <div className="pure-u-6-24"></div>
             <div className="pure-u-18-24">
-              <nav className="p-u-tabs">
-                <a href={`/user/${user.username}`}>{this.lang.captions.posts}</a>
-                <a className="active" href={`/user/${user.username}/upcoming`}>{this.lang.captions.upcoming}</a>
-              </nav>
+              <div className="l-right">
+                <nav className="p-u-tabs">
+                  <a href={`/user/${user.username}`}>{this.lang.captions.posts}</a>
+                  <a className="active" href={`/user/${user.username}/upcoming`}>{this.lang.captions.upcoming}</a>
+                </nav>
+              </div>
             </div>
           </div>
         </div>
@@ -90,7 +92,7 @@ export default class Upcoming extends Component {
               </div>
             </div>
             <div className="pure-u-18-24">
-              <div className="p-u-content">
+              <div className="l-right">
                 {isOwner ? <QuickEvent /> : false}
                 <div className="m-wall">
                   {events.items.map((event, index) => {
