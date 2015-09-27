@@ -59,7 +59,7 @@ export default class User extends Component {
                 { user.full_name ? <div className="m-p-fullname">{user.full_name}</div> : false }
                 <div className="m-p-username">{user.username}</div>
                 <ul className="m-p-info">
-                  <li><i className="icon-clock"></i>{moment(user.created).format('MMM DD, YYYY')}</li>
+                  <li><i className="icon-clock"></i>{this.lang.messages.joined} {moment(user.created).format('MMM DD, YYYY')}</li>
                 </ul>
                 {!isOwner
                   ? <div className="m-p-follow">

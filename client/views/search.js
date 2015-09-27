@@ -52,7 +52,8 @@ export default class User extends Component {
         </div>
         <div className="l-container">
           {users.items.length
-            ? <ul className="m-user-list">
+            ?
+              <ul className="m-user-list">
                 {users.items.map((user, index) => {
                   let isCurrentUser = user.username === currentUser.get('username');
 
@@ -68,7 +69,7 @@ export default class User extends Component {
                       </a>
                       {user.full_name ? <div className="m-ul-i-i-fullname">| {user.full_name}</div> : false}
                       <div className="m-ul-i-i-joined">
-                        <i className="icon-clock"></i>{moment(user.created).format('MMM DD, YYYY')}
+                        <i className="icon-clock"></i>{this.lang.messages.joined} {moment(user.created).format('MMM DD, YYYY')}
                       </div>
                     </div>
                     <div className="m-ul-i-actions">
