@@ -1,6 +1,7 @@
 import React from 'react';
 import Component from '../base/component';
 import Footer from './components/footer';
+import currentUser from '../stores/current_user';
 
 
 export default class Error extends Component {
@@ -10,11 +11,10 @@ export default class Error extends Component {
 
   render () {
     return <div className="l-layout p-error">
-      <div className="p-e-logo m-logo">
+      <a href={`/user/${currentUser.get('username')}`} className="p-e-logo m-logo">
         <h1 className="m-l-title">{this.lang.brand.name}</h1>
-
         <h2 className="m-l-tagline">{this.lang.brand.tagline}</h2>
-      </div>
+      </a>
       <div className="p-e-top"></div>
       <div className="p-e-description">
         <h1>{this.lang.messages.error_title}</h1>

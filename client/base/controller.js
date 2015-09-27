@@ -32,7 +32,6 @@ export default class Controller {
   }
 
   renderErrorView (xhr) {
-    let view = React.render(<ErrorView />, appNode);
-    titleNode.innerText = view.title();
+    this.renderView(ErrorView);
   }
 }

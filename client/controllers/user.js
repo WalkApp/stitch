@@ -76,6 +76,9 @@ export default class UserController extends Controller {
       });
 
       this.renderView(UpcomingView, done);
+    })
+    .fail(() => {
+      this.renderErrorView(dfd);
     });
   }
 }
