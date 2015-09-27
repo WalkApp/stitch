@@ -50,7 +50,7 @@ export default class Profile extends Form {
                 </li>
                 <li>
                   <span className="m-n-line"></span>
-                  <a href="/settings"><i className="icon-pin"></i>{this.lang.captions.settings}</a>
+                  <a href="/settings"><i className="icon-settings"></i>{this.lang.captions.settings}</a>
                 </li>
               </ul>
             </div>

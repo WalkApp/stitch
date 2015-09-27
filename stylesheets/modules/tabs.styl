@@ -11,13 +11,14 @@
       display: inline-block
       padding: 10px 20px
       color: $muted_color
+      border: 1px solid transparent
+      border-bottom: none
 
       &:hover
         text-decoration: none
 
       &.active
         color: #000
-        border: 1px solid $split_border_color
-        border-bottom: none
+        border-color: $split_border_color
         border-radius: top 3px
         background: #fff
