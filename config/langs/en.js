@@ -72,5 +72,6 @@ export default {
     success: 'Your data was tasty',
     joined: 'Joined on',
     signed_in: 'Signed in as',
+    profile_detail: 'Change your public info',
   },
 };

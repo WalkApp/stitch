@@ -59,6 +59,9 @@ export default class Profile extends Form {
                 <div className="m-panel">
                   <div className="m-p-header">
                     {this.lang.messages.profile}
+                    <span className="m-p-h-detail">
+                      {this.lang.messages.profile_detail}
+                    </span>
                   </div>
                   <div className="m-p-body">
                     <form onSubmit={this.handleSubmit}>
