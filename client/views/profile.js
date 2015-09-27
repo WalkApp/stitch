@@ -14,7 +14,7 @@ export default class Profile extends Form {
 
   initState () {
     return {
-      model: profileStore.getState().user
+      model: profileStore.getState().user,
     };
   }
 
@@ -30,7 +30,7 @@ export default class Profile extends Form {
     let user = new UserModel(model);
     let dfd = user.save();
 
-    dfd.fail((xhr) => this.handleAPIError(xhr))
+    dfd.fail((xhr) => this.handleAPIError(xhr));
     dfd.done(() => {
       this.showSuccess();
     });

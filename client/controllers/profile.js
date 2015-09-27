@@ -13,7 +13,7 @@ export default class ProfileController extends Controller {
       this.setInitData({
         ProfileStore: {
           user: user.toJSON(),
-        }
+        },
       });
 
       this.renderView(ProfileView, done);

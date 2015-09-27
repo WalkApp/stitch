@@ -28,7 +28,7 @@ export default class Form extends Component {
   }
 
   showSuccess () {
-    this.showMessage('success', this.lang.messages.success)
+    this.showMessage('success', this.lang.messages.success);
   }
 
   showMessage (type, text) {

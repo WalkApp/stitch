@@ -70,6 +70,6 @@ export default {
     add_event: 'Let\'s walk',
     profile: 'Profile info',
     success: 'Your data was tasty',
-    joined: 'Joined on'
+    joined: 'Joined on',
   },
 };
