@@ -52,8 +52,7 @@ export default class User extends Component {
         </div>
         <div className="l-container">
           {users.items.length
-            ?
-              <ul className="m-user-list">
+            ? <ul className="m-user-list">
                 {users.items.map((user, index) => {
                   let isCurrentUser = user.username === currentUser.get('username');
 
