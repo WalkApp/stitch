@@ -27,6 +27,10 @@ export default class Form extends Component {
     this.showMessage('error', message);
   }
 
+  showSuccess () {
+    this.showMessage('success', this.lang.messages.success);
+  }
+
   showMessage (type, text) {
     this.setState({ message: { type, text } });
     this.forceUpdate();
