@@ -22,9 +22,8 @@ export default class SearchController extends Controller {
           users: users.toJSON(),
         },
       });
-      this.renderErrorView(dfd);
 
-      //this.renderView(SearchView, done);
+      this.renderView(SearchView, done);
     });
 
     dfd.fail(() => {
