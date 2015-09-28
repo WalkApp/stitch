@@ -78,7 +78,7 @@ export default class User extends Component {
               </div>
             </div>
             <div className="pure-u-18-24">
-              <div className="l-right">
+              <div className="l-right-section">
                 <div className="m-nav-tabs">
                   <nav className="m-nt-tabs">
                     <a className="active" href={`/user/${user.username}`}>{this.lang.captions.posts}</a>

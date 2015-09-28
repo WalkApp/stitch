@@ -55,7 +55,7 @@ export default class Profile extends Form {
               </ul>
             </div>
             <div className="pure-u-18-24">
-              <div className="l-right">
+              <div className="l-right-section">
                 <div className="m-panel">
                   <div className="m-p-header">
                     {this.lang.messages.profile}
