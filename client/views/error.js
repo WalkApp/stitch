@@ -11,10 +11,12 @@ export default class Error extends Component {
 
   render () {
     return <div className="l-layout p-error">
-      <a href={`/user/${currentUser.get('username')}`} className="p-e-logo m-logo">
-        <h1 className="m-l-title">{this.lang.brand.name}</h1>
-        <h2 className="m-l-tagline">{this.lang.brand.tagline}</h2>
-      </a>
+      <div className="p-e-logo">
+        <a href={`/user/${currentUser.get('username')}`} className="m-logo">
+          <h1 className="m-l-title">{this.lang.brand.name}</h1>
+          <h2 className="m-l-tagline">{this.lang.brand.tagline}</h2>
+        </a>
+      </div>
       <div className="p-e-top"></div>
       <div className="p-e-description">
         <h1 className="p-e-d-title">{this.lang.messages.error_title}</h1>
