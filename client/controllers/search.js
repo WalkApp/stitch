@@ -26,8 +26,8 @@ export default class SearchController extends Controller {
       this.renderView(SearchView, done);
     });
 
-    dfd.fail(() => {
-      this.renderErrorView(dfd);
+    dfd.fail((xhr) => {
+      this.renderErrorView(xhr);
     });
   }
 }

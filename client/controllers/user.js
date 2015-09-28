@@ -42,8 +42,8 @@ export default class UserController extends Controller {
       this.renderView(UserView, done);
     });
 
-    dfd.fail(() => {
-      this.renderErrorView(dfd);
+    dfd.fail((xhr) => {
+      this.renderErrorView(xhr);
     });
   }
 
@@ -79,8 +79,8 @@ export default class UserController extends Controller {
       this.renderView(UpcomingView, done);
     });
 
-    dfd.fail(() => {
-      this.renderErrorView(dfd);
+    dfd.fail((xhr) => {
+      this.renderErrorView(xhr);
     });
   }
 }
