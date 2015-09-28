@@ -24,10 +24,12 @@ export default class Signin extends Form {
       <div className="p-l-top"></div>
       <div className="p-l-body">
         <div className="p-l-container">
-          <a href="/" className="m-logo centered">
-            <h1 className="m-l-title">{this.lang.brand.name}</h1>
-            <h2 className="m-l-tagline">{this.lang.brand.tagline}</h2>
-          </a>
+          <div className="l-text-center">
+            <a href="/" className="m-logo">
+              <h1 className="m-l-title">{this.lang.brand.name}</h1>
+              <h2 className="m-l-tagline">{this.lang.brand.tagline}</h2>
+            </a>
+          </div>
           <form className="p-l-form" onSubmit={this.handleSubmit}>
             <div className="m-control-list">
               <div className="m-control-group">

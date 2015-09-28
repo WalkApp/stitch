@@ -12,7 +12,7 @@ export default class Signup extends Form {
   }
 
   initState () {
-    return { model: {} };
+    return {model: {}};
   }
 
   save (model) {
@@ -33,27 +33,33 @@ export default class Signup extends Form {
       <div className="p-l-top"></div>
       <div className="p-l-body">
         <div className="p-l-container">
-          <a href="/" className="m-logo centered">
-            <h1 className="m-l-title">{this.lang.brand.name}</h1>
-            <h2 className="m-l-tagline">{this.lang.brand.tagline}</h2>
-          </a>
+          <div className="l-text-center">
+            <a href="/" className="m-logo">
+              <h1 className="m-l-title">{this.lang.brand.name}</h1>
+              <h2 className="m-l-tagline">{this.lang.brand.tagline}</h2>
+            </a>
+          </div>
           <form className="p-l-form" onSubmit={this.handleSubmit}>
             <div className="m-control-group">
               <span className="m-cg-icon icon-user"></span>
-              <input valueLink={this.linkState('model.full_name')} type="text" className="m-control" placeholder={this.lang.fields.full_name} />
+              <input valueLink={this.linkState('model.full_name')} type="text" className="m-control"
+                     placeholder={this.lang.fields.full_name}/>
             </div>
             <div className="m-control-group">
               <span className="m-cg-icon icon-user"></span>
-              <input valueLink={this.linkState('model.username')} type="text" className="m-control" placeholder={this.lang.fields.username} required />
+              <input valueLink={this.linkState('model.username')} type="text" className="m-control"
+                     placeholder={this.lang.fields.username} required/>
             </div>
             <div className="m-control-list">
               <div className="m-control-group">
                 <span className="m-cg-icon icon-lock"></span>
-                <input valueLink={this.linkState('model.password')} type="password" className="m-control" placeholder={this.lang.fields.password} required />
+                <input valueLink={this.linkState('model.password')} type="password" className="m-control"
+                       placeholder={this.lang.fields.password} required/>
               </div>
               <div className="m-control-group">
                 <span className="m-cg-icon icon-lock"></span>
-                <input valueLink={this.linkState('model.confirm_password')} type="password" className="m-control" placeholder={this.lang.fields.confirm_password} required />
+                <input valueLink={this.linkState('model.confirm_password')} type="password" className="m-control"
+                       placeholder={this.lang.fields.confirm_password} required/>
               </div>
             </div>
             <FormStatus {...this.state} />
@@ -68,6 +74,7 @@ export default class Signup extends Form {
       </div>
       <div className="p-l-bottom"></div>
       <Footer />
-    </div>;
+    </div>
+      ;
   }
 }
