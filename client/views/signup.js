@@ -42,24 +42,20 @@ export default class Signup extends Form {
           <form className="p-l-form" onSubmit={this.handleSubmit}>
             <div className="m-control-group">
               <span className="m-cg-icon icon-user"></span>
-              <input valueLink={this.linkState('model.full_name')} type="text" className="m-control"
-                     placeholder={this.lang.fields.full_name}/>
+              <input valueLink={this.linkState('model.full_name')} type="text" className="m-control" placeholder={this.lang.fields.full_name}/>
             </div>
             <div className="m-control-group">
               <span className="m-cg-icon icon-user"></span>
-              <input valueLink={this.linkState('model.username')} type="text" className="m-control"
-                     placeholder={this.lang.fields.username} required/>
+              <input valueLink={this.linkState('model.username')} type="text" className="m-control" placeholder={this.lang.fields.username} required/>
             </div>
             <div className="m-control-list">
               <div className="m-control-group">
                 <span className="m-cg-icon icon-lock"></span>
-                <input valueLink={this.linkState('model.password')} type="password" className="m-control"
-                       placeholder={this.lang.fields.password} required/>
+                <input valueLink={this.linkState('model.password')} type="password" className="m-control" placeholder={this.lang.fields.password} required/>
               </div>
               <div className="m-control-group">
                 <span className="m-cg-icon icon-lock"></span>
-                <input valueLink={this.linkState('model.confirm_password')} type="password" className="m-control"
-                       placeholder={this.lang.fields.confirm_password} required/>
+                <input valueLink={this.linkState('model.confirm_password')} type="password" className="m-control" placeholder={this.lang.fields.confirm_password} required/>
               </div>
             </div>
             <FormStatus {...this.state} />
