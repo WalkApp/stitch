@@ -41,6 +41,10 @@ export default class UserController extends Controller {
 
       this.renderView(UserView, done);
     });
+
+    dfd.fail((xhr) => {
+      this.renderErrorView(xhr);
+    });
   }
 
   upcoming (ctx, done) {
@@ -73,6 +77,10 @@ export default class UserController extends Controller {
       });
 
       this.renderView(UpcomingView, done);
+    });
+
+    dfd.fail((xhr) => {
+      this.renderErrorView(xhr);
     });
   }
 }

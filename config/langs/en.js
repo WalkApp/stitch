@@ -26,6 +26,7 @@ export default {
     sign_in: 'Sign in',
     sign_up: 'Sign up',
     search: 'Search results',
+    error: 'Error',
     profile: 'Your Profile',
   },
 
@@ -68,6 +69,8 @@ export default {
     add_post: 'Tell the world about visited place',
     no_records_found: 'No records found',
     add_event: 'Let\'s walk',
+    error_title: 'Oops...',
+    error_description: 'Something went wrong',
     profile: 'Profile info',
     success: 'Your data was tasty',
     joined: 'Joined on',

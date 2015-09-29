@@ -1,5 +1,6 @@
 import React from 'react';
 import alt from '../alt';
+import ErrorView from '../views/error';
 
 
 export default class Controller {
@@ -28,5 +29,9 @@ export default class Controller {
   renderView (View, callback) {
     let view = React.render(<View />, window.appNode, callback);
     window.titleNode.innerText = view.title();
+  }
+
+  renderErrorView (xhr) {
+    this.renderView(ErrorView);
   }
 }

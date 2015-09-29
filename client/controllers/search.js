@@ -10,7 +10,7 @@ export default class SearchController extends Controller {
 
     if (q) {
       users.filterModel = {
-        username: { contains: q },
+        username: {contains: q},
       };
     }
 
@@ -24,6 +24,10 @@ export default class SearchController extends Controller {
       });
 
       this.renderView(SearchView, done);
+    });
+
+    dfd.fail((xhr) => {
+      this.renderErrorView(xhr);
     });
   }
 }
