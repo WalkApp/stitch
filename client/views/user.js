@@ -51,19 +51,7 @@ export default class User extends Component {
     return <div className="p-user l-layout">
       <Header />
       <div className="l-wrapper">
-        <div className="l-container p-u-top">
-          <div className="pure-g">
-            <div className="pure-u-6-24"></div>
-            <div className="pure-u-18-24">
-              <nav className="p-u-tabs">
-                <a className="active" href={`/user/${user.username}`}>{this.lang.captions.posts}</a>
-                <a href={`/user/${user.username}/upcoming`}>{this.lang.captions.upcoming}</a>
-              </nav>
-            </div>
-          </div>
-        </div>
-        <div className="p-u-line"></div>
-        <div className="l-container p-u-body">
+        <div className="l-content">
           <div className="pure-g">
             <div className="pure-u-6-24">
               <div className="m-profile">
@@ -71,7 +59,7 @@ export default class User extends Component {
                 { user.full_name ? <div className="m-p-fullname">{user.full_name}</div> : false }
                 <div className="m-p-username">{user.username}</div>
                 <ul className="m-p-info">
-                  <li><i className="icon-clock"></i>{moment(user.created).format('MMM DD, YYYY')}</li>
+                  <li><i className="icon-clock"></i>{this.lang.messages.joined} {moment(user.created).format('MMM DD, YYYY')}</li>
                 </ul>
                 {!isOwner
                   ? <div className="m-p-follow">
@@ -90,7 +78,13 @@ export default class User extends Component {
               </div>
             </div>
             <div className="pure-u-18-24">
-              <div className="p-u-content">
+              <div className="l-right-section">
+                <div className="m-nav-tabs">
+                  <nav className="m-nt-tabs">
+                    <a className="active" href={`/user/${user.username}`}>{this.lang.captions.posts}</a>
+                    <a href={`/user/${user.username}/upcoming`}>{this.lang.captions.upcoming}</a>
+                  </nav>
+                </div>
                 {isOwner ? <QuickPost /> : false}
                 <div className="m-wall">
                   {posts.items.map((post, index) => {

@@ -19,7 +19,7 @@
     text-align: left
 
     li
-      a, span
+      > a, > span
         cursor: pointer
         display: block
         padding: 7px 14px
@@ -28,6 +28,20 @@
 
         &:hover
           background: #e2f2f9
+
+      &.c-d-m-static
+        > a, > span
+          padding: 9px 14px
+          cursor: default
+          color: $muted_color
+
+          &:hover
+            background: none
+
+    .c-d-divider
+      padding: 0
+      height: 1px
+      background: $base_border_color
 
     .c-d-footer
       background: #f5fcff

@@ -1,4 +1,3 @@
-import React from 'react';
 import Controller from '../base/controller';
 import WelcomeView from '../views/welcome';
 import SigninView from '../views/signin';

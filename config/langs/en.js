@@ -27,6 +27,7 @@ export default {
     sign_up: 'Sign up',
     search: 'Search results',
     error: 'Error',
+    profile: 'Your Profile',
   },
 
   captions: {
@@ -47,7 +48,9 @@ export default {
     add_post: 'Post',
     add_event: 'Create event',
     error: 'Error',
+    success: 'Success',
     load_more: 'Load more',
+    update: 'Update',
   },
 
   fields: {
@@ -57,6 +60,7 @@ export default {
     full_name: 'Full name',
     address: 'Address',
     image_url: 'Image url',
+    avatar_url: 'Avatar url',
     event_date: 'Date',
   },
 
@@ -67,5 +71,10 @@ export default {
     add_event: 'Let\'s walk',
     error_title: 'Oops...',
     error_description: 'Something went wrong',
+    profile: 'Profile info',
+    success: 'Your data was tasty',
+    joined: 'Joined on',
+    signed_in: 'Signed in as',
+    profile_detail: 'Change your public info',
   },
 };
