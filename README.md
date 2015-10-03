@@ -1,4 +1,5 @@
-# Stitch ![Status](https://magnum.travis-ci.com/walkapp/stitch.svg?token=Z19FeJpZXaFRzpyeLyvy)
+# Stitch [![Circle CI](https://circleci.com/gh/walkapp/stitch.svg?style=shield&circle-token=1fe4e2c41e68c061400fcc5d18e93281e478eb53)](https://circleci.com/gh/walkapp/stitch)
+
 Main website
 
 ![Stitch](http://i.imgur.com/HBlNjlU.jpg)
