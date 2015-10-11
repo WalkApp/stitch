@@ -2,7 +2,28 @@ import React from 'react';
 import Form from '../../base/form';
 import PostModel from '../../models/post';
 import userActions from '../../actions/user';
+import Dropzone from 'file_uploader.js';
 
+let componentConfig = {
+  allowedFiletypes: ['.jpg', '.png', '.gif'],
+  showFiletypeIcon: false,
+  postUrl: '/uploadHandler'
+};
+
+let eventHandlers = {
+  addedfile: simpleCallBack,
+};
+
+
+let djsConfig = {
+  addRemoveLinks: true
+};
+
+
+var simpleCallBack = function (f) {
+  console.log('I\'m a simple callback');
+  console.log(f);
+};
 
 export default class QuickPost extends Form {
   initState () {
@@ -24,6 +45,8 @@ export default class QuickPost extends Form {
     });
   }
 
+
+
   render () {
     var { active } = this.state;
 
@@ -34,6 +57,8 @@ export default class QuickPost extends Form {
               <textarea valueLink={this.linkState('model.description')} placeholder={this.lang.messages.add_post} className="m-control" required />
               <input valueLink={this.linkState('model.address')} placeholder={this.lang.fields.address} type="text" className="m-control" />
               <input valueLink={this.linkState('model.image_url')} placeholder={this.lang.fields.image_url} type="text" className="m-control" />
+              <Dropzone config={componentConfig}  eventHandlers={eventHandlers}
+                        djsConfig={djsConfig}  />
             </div>
             <p className="l-text-right">
               <button className="m-btn" type="submit">{this.lang.captions.add_post}</button>
