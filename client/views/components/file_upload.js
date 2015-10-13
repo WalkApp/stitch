@@ -1,40 +1,46 @@
-'use strict';
+import React from 'react';
+import _ from 'lodash';
+import Component from '../../base/component';
 
-var React = require('react'),
-  _ = require('lodash'),
-  Dropzone, DropzoneComponent;
+let Dropzone;
 
-DropzoneComponent = React.createClass({
+
+export default class FileUpload extends Component {
   /**
    * Configuration of Dropzone.js. Defaults are
-   * overriden overriden by the 'djsConfig' property
+   * overriden by the 'dzConfig' property
    * For a full list of possible configurations,
    * please consult
    * http://www.dropzonejs.com/#configuration
    */
-  getDjsConfig: function () {
-    var options,
-      defaults = {
-        url: this.props.config.postUrl ? this.props.config.postUrl : null
-      };
 
-    if (this.props.djsConfig) {
-      options = _.extend({}, defaults, this.props.djsConfig);
+  getDzConfig () {
+    let options;
+    let defaults = {
+      url: this.props.config.postUrl ? this.props.config.postUrl : null
+    };
+
+    if (this.props.dzConfig) {
+      options = _.extend({}, defaults, this.props.dzConfig);
     } else {
       options = defaults;
     }
+
     return options;
-  },
+  }
 
-  /**
-   * React 'componentDidMount' method
-   * Sets up dropzone.js with the component.
-   */
-  componentDidMount: function () {
-    var self = this,
-      options = this.getDjsConfig();
+  getInitialState () {
+    return {
+      files: []
+    }
+  }
 
-    Dropzone = Dropzone || require('dropzone');
+  componentDidMount () {
+    let self = this;
+    let options = this.getDzConfig();
+
+    if (process.browser) Dropzone = require('dropzone');
+
     Dropzone.autoDiscover = false;
 
     if (!this.props.config.postUrl && !this.props.eventHandlers.drop) {
@@ -43,13 +49,9 @@ DropzoneComponent = React.createClass({
 
     this.dropzone = new Dropzone(React.findDOMNode(self), options);
     this.setupEvents();
-  },
+  }
 
-  /**
-   * React 'componentWillUnmount'
-   * Removes dropzone.js (and all its globals) if the component is being unmounted
-   */
-  componentWillUnmount: function () {
+  componentWillUnmount () {
     if (this.dropzone) {
       var files = this.dropzone.getActiveFiles();
 
@@ -59,92 +61,59 @@ DropzoneComponent = React.createClass({
         // of the dropzone until we're done here.
         this.queueDestroy = true;
 
-        var destroyInterval = window.setInterval(() => {
+        var destroyInterval = setInterval(() => {
           if (this.queueDestroy = false) {
-            return window.clearInterval(destroyInterval);
+            return clearInterval(destroyInterval);
           }
 
           if (this.dropzone.getActiveFiles().length === 0) {
             this.dropzone = this.dropzone.destroy();
-            return window.clearInterval(destroyInterval);
+            return clearInterval(destroyInterval);
           }
         }, 500);
       } else {
         this.dropzone = this.dropzone.destroy();
       }
     }
-  },
+  }
 
-  /**
-   * React 'componentDidUpdate'
-   * If the Dropzone hasn't been created, create it
-   */
-  componentDidUpdate: function () {
-    this.queueDestroy = false;
-
-    if (!this.dropzone) {
-      this.dropzone = new Dropzone(React.findDOMNode(this), this.getDjsConfig());
-    }
-  },
-
-  /**
-   * React 'render'
-   */
-  render: function () {
-    var icons = [],
-      files = this.state.files,
-      config = this.props.config,
-      className = (this.props.className) ? 'filepicker dropzone ' + this.props.className : 'filepicker dropzone';
-
-    //if (config.showFiletypeIcon && config.iconFiletypes && (!files || files.length < 1)) {
-    //  for (var i = 0; i < this.props.config.iconFiletypes.length; i = i + 1) {
-    //    icons.push(<IconComponent filetype={this.props.config.iconFiletypes[i]} key={"icon-component" + i} />);
-    //  }
-    //}
+  render () {
+    let className = (this.props.className)
+      ? 'filepicker dropzone ' + this.props.className
+      : 'filepicker dropzone';
 
     if (!this.props.config.postUrl && this.props.action) {
       return (
         <form action={this.props.action} className={className}>
-          {icons}
           {this.props.children}
         </form>
       );
     } else {
       return (
         <div className={className}>
-          {icons}
           {this.props.children}
         </div>
       );
     }
-  },
-
-  /**
-   * React 'getInitialState' method, setting the initial state
-   * @return {object}
-   */
-  getInitialState: function () {
-    return {
-      files: []
-    }
-  },
+  }
 
   /**
    * Takes event handlers in this.props.eventHandlers
    * and binds them to dropzone.js events
    */
-  setupEvents: function () {
-    var eventHandlers = this.props.eventHandlers;
+  setupEvents () {
+    let eventHandlers = this.props.eventHandlers;
+    debugger;
 
     if (!this.dropzone || !eventHandlers) {
       return;
     }
 
-    for (var eventHandler in eventHandlers) {
+    for (let eventHandler in eventHandlers) {
       if (eventHandlers.hasOwnProperty(eventHandler) && eventHandlers[eventHandler]) {
         // Check if there's an array of event handlers
         if (Object.prototype.toString.call(eventHandlers[eventHandler]) === '[object Array]') {
-          for (var i = 0; i < eventHandlers[eventHandler].length; i = i + 1) {
+          for (let i = 0; i < eventHandlers[eventHandler].length; i = i + 1) {
             // Check if it's an init handler
             if (eventHandler === 'init') {
               eventHandlers[eventHandler][i](this.dropzone);
@@ -164,13 +133,13 @@ DropzoneComponent = React.createClass({
 
     this.dropzone.on('addedfile', (file) => {
       if (file) {
-        var files = this.state.files;
+        let files = this.state.files;
 
         if (!files) {
           files = [];
         }
 
-        files.push(file)
+        files.push(file);
 
         this.setState({files: files});
       }
@@ -178,7 +147,7 @@ DropzoneComponent = React.createClass({
 
     this.dropzone.on('removedfile', (file) => {
       if (file) {
-        var files = this.state.files;
+        let files = this.state.files;
 
         if (files && files.length > 0) {
           for (var i = 0; i < files.length; i++) {
@@ -192,6 +161,5 @@ DropzoneComponent = React.createClass({
       }
     });
   }
-});
 
-module.exports = DropzoneComponent;
+}

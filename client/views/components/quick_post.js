@@ -2,7 +2,7 @@ import React from 'react';
 import Form from '../../base/form';
 import PostModel from '../../models/post';
 import userActions from '../../actions/user';
-import Dropzone from '../components/file_uploader.js';
+import Dropzone from '../components/file_upload.js';
 
 let componentConfig = {
   allowedFiletypes: ['.jpg', '.png', '.gif'],
@@ -10,29 +10,19 @@ let componentConfig = {
   postUrl: 'https://api.cloudinary.com/v1_1/walk/image/upload'
 };
 
-let eventHandlers = {
-  addedfile: simpleCallBack,
-  sending: sendingCallback
-};
-
-
-let djsConfig = {
+let dzConfig = {
   addRemoveLinks: true
 };
 
-var sendingCallback = function (file, xhr, formData) {
-  formData.append('upload_preset', 'nh0kmjdj');
-  debugger;
-  xhr.setRequestHeader('upload_preset', 'nh0kmjdj' );
-
-};
-
-var simpleCallBack = function (f) {
-  console.log('I\'m a simple callback');
-  console.log(f);
-};
-
 export default class QuickPost extends Form {
+  constructor () {
+    super();
+    this.eventHandlers = {
+      addedfile: this.simpleCallBack,
+      sending: this.sendingCallback
+    }
+  }
+
   initState () {
     return {
       active: false,
@@ -52,7 +42,14 @@ export default class QuickPost extends Form {
     });
   }
 
+  sendingCallback (file, xhr, formData) {
+    formData.append('upload_preset', 'nh0kmjdj');
+  };
 
+  simpleCallBack (f) {
+    console.log('I\'m a simple callback');
+    console.log(f);
+  };
 
   render () {
     var { active } = this.state;
@@ -64,8 +61,8 @@ export default class QuickPost extends Form {
               <textarea valueLink={this.linkState('model.description')} placeholder={this.lang.messages.add_post} className="m-control" required />
               <input valueLink={this.linkState('model.address')} placeholder={this.lang.fields.address} type="text" className="m-control" />
               <input valueLink={this.linkState('model.image_url')} placeholder={this.lang.fields.image_url} type="text" className="m-control" />
-              <Dropzone config={componentConfig}  eventHandlers={eventHandlers}
-                        djsConfig={djsConfig}  />
+              <Dropzone config={componentConfig} eventHandlers={this.eventHandlers}
+                        dzConfig={dzConfig} />
             </div>
             <p className="l-text-right">
               <button className="m-btn" type="submit">{this.lang.captions.add_post}</button>
