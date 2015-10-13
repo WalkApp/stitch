@@ -2,16 +2,17 @@ import React from 'react';
 import Form from '../../base/form';
 import PostModel from '../../models/post';
 import userActions from '../../actions/user';
-import Dropzone from 'file_uploader.js';
+import Dropzone from '../components/file_uploader.js';
 
 let componentConfig = {
   allowedFiletypes: ['.jpg', '.png', '.gif'],
   showFiletypeIcon: false,
-  postUrl: '/uploadHandler'
+  postUrl: 'https://api.cloudinary.com/v1_1/walk/image/upload'
 };
 
 let eventHandlers = {
   addedfile: simpleCallBack,
+  sending: sendingCallback
 };
 
 
@@ -19,6 +20,12 @@ let djsConfig = {
   addRemoveLinks: true
 };
 
+var sendingCallback = function (file, xhr, formData) {
+  formData.append('upload_preset', 'nh0kmjdj');
+  debugger;
+  xhr.setRequestHeader('upload_preset', 'nh0kmjdj' );
+
+};
 
 var simpleCallBack = function (f) {
   console.log('I\'m a simple callback');

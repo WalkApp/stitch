@@ -23,7 +23,6 @@ DropzoneComponent = React.createClass({
     } else {
       options = defaults;
     }
-  debugger;
     return options;
   },
 
