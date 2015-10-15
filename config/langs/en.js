@@ -77,7 +77,7 @@ export default {
     joined: 'Joined on',
     signed_in: 'Signed in as',
     profile_detail: 'Change your public info',
-    not_found_title: 'Page not found',
+    not_found_title: 'Not found',
     not_found_description: 'Sorry, but seems we don\'t have a such page',
   },
 };
