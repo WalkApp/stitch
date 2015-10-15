@@ -7,11 +7,6 @@ import Component from '../../client/base/component';
 
 
 export default {
-  setInitData (data) {
-    data.CurrentUserStore = { user: this.req.user };
-    alt.bootstrap(JSON.stringify(data));
-  },
-
   wrapModel (model) {
     // Add token to  model, it's needed to send requests to API
     model.security = {
@@ -23,6 +18,10 @@ export default {
 
   renderView (ViewClass) {
     let { res, req } = this;
+
+    this.setInitData({
+      CurrentUserStore: { user: req.user },
+    });
 
     // Hack to set language to render html
     Component.prototype.lang = langs[res.locals.lang];

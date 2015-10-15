@@ -13,15 +13,18 @@ export default function (req, res, next) {
 
     let dfd = user.fetch();
 
-    dfd.done(() => {
+    dfd.fail(() => {
+      req.session.destroy((err) => {
+        if (err) return next(err);
+        res.redirect('/');
+      });
+    });
+
+    dfd.then(() => {
       req.user = user.toJSON();
       req.user.token = req.session.token;
       req.authorized = true;
       next();
-    });
-
-    dfd.fail(() => {
-      error(res, 'bad_token', 401);
     });
   }
 }

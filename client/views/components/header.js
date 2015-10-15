@@ -31,8 +31,7 @@ export default class Header extends Component {
 
   render () {
     let { currentPath } = this.state;
-    let homeUrl = `/user/${currentUser.get('username')}`;
-    let upcomingUrl = `/user/${currentUser.get('username')}/upcoming`;
+    let homeUrl = `/${currentUser.get('username')}`;
 
     return <div className="c-header">
       <div className="l-container">
@@ -45,12 +44,6 @@ export default class Header extends Component {
           <li className={this.cx({active: currentPath === homeUrl })}>
             <a href={homeUrl}>
               <span className="icon-home"></span>
-            </a>
-            <span className="c-h-n-underline"></span>
-          </li>
-          <li className={this.cx({active: currentPath === upcomingUrl })}>
-            <a href={upcomingUrl}>
-              <span className="icon-upcoming"></span>
             </a>
             <span className="c-h-n-underline"></span>
           </li>

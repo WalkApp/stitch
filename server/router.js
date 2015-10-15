@@ -14,7 +14,6 @@ ClientModel.prototype.$ = ClientCollection.prototype.$ = $;
 
 ClientController.prototype.renderView = renderView;
 ClientController.prototype.wrapModel = wrapModel;
-ClientController.prototype.setInitData = setInitData;
 
 export default class Router extends ClientRouter {
   run (app) {

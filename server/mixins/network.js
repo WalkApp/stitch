@@ -93,9 +93,6 @@ let network = {
           opts.error(xhr, statusText, error);
         }
       } else {
-        this._resource = resource;
-        this._headers = headers;
-
         dfd.resolve(resource);
 
         if (opts.success) {

@@ -55,15 +55,16 @@ export default class User extends Component {
             ? <ul className="m-user-list">
                 {users.items.map((user, index) => {
                   let isCurrentUser = user.username === currentUser.get('username');
+                  let userUrl = `/${user.username}`;
 
                   return <li key={index} className="m-ul-item">
                     <div className="m-ul-i-avatar">
-                      <a href={`/user/${user.username}`}>
+                      <a href={userUrl}>
                         <div style={{ backgroundImage: `url(${user.image_url})` }} className="m-ul-i-a-img"></div>
                       </a>
                     </div>
                     <div className="m-ul-i-info">
-                      <a href={`/user/${user.username}`} className="m-ul-i-i-login">
+                      <a href={userUrl} className="m-ul-i-i-login">
                         {user.username}
                       </a>
                       {user.full_name ? <div className="m-ul-i-i-fullname">| {user.full_name}</div> : false}

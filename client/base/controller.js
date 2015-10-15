@@ -1,6 +1,7 @@
 import React from 'react';
 import alt from '../alt';
 import ErrorView from '../views/error';
+import NotFoundView from '../views/not_found';
 
 
 export default class Controller {
@@ -31,7 +32,11 @@ export default class Controller {
     window.titleNode.innerText = view.title();
   }
 
-  renderErrorView (xhr) {
-    this.renderView(ErrorView);
+  renderErrorView (xhr, done) {
+    if (xhr.status == 404) {
+      this.renderView(NotFoundView, done);
+    } else {
+      this.renderView(ErrorView, done);
+    }
   }
 }

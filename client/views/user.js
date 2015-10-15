@@ -81,8 +81,8 @@ export default class User extends Component {
               <div className="l-right-section">
                 <div className="m-nav-tabs">
                   <nav className="m-nt-tabs">
-                    <a className="active" href={`/user/${user.username}`}>{this.lang.captions.posts}</a>
-                    <a href={`/user/${user.username}/upcoming`}>{this.lang.captions.upcoming}</a>
+                    <a className="active">{this.lang.captions.posts}</a>
+                    <a href={`/${user.username}?section=upcoming`}>{this.lang.captions.upcoming}</a>
                   </nav>
                 </div>
                 {isOwner ? <QuickPost /> : false}
