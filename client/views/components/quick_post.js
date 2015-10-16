@@ -13,7 +13,7 @@ export default class QuickPost extends Form {
       active: false,
       model: {description: ''},
       postImages: [],
-      disabled: false
+      disabled: false,
     };
   }
 

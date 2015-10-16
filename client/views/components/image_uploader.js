@@ -14,28 +14,21 @@ export default class ImageUploader extends Component {
   getDzConfig () {
     return {
       addRemoveLinks: true,
-      acceptedFiles: 'image/jpeg,jpg,png,gif'
+      acceptedFiles: 'image/jpeg,jpg,png,gif',
     };
   }
 
-  getInitialState () {
-    return {
-      filesInQueue: 0
-    }
-  }
-
   componentDidMount () {
-    let self = this;
     let options = this.getDzConfig();
 
     let Dropzone;
     if (process.browser) Dropzone = require('dropzone');
 
-    if(!Dropzone) return;
+    if (!Dropzone) return;
 
     Dropzone.autoDiscover = false;
 
-    this.dropzone = new Dropzone(React.findDOMNode(self), options);
+    this.dropzone = new Dropzone(React.findDOMNode(this), options);
     this.setupEvents();
   }
 
@@ -99,7 +92,7 @@ export default class ImageUploader extends Component {
 
     this.dropzone.on('complete', () => {
       vent.trigger('imageUploader:free');
-    })
+    });
   }
 
 }
