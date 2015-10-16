@@ -12,18 +12,31 @@ export default class QuickPost extends Form {
     return {
       active: false,
       model: {description: ''},
-      postImages: []
+      postImages: [],
+      disabled: false
     };
   }
 
   componentWillMount () {
     vent.on('imageUploader:deleted', this.deleteImage, this);
     vent.on('imageUploader:added', this.addImage, this);
+    vent.on('imageUploader:free', this.enableSaving, this);
+    vent.on('imageUploader:busy', this.disableSaving, this);
   }
 
   componentWillUnmount () {
     vent.off('imageUploader:deleted');
     vent.off('imageUploader:added');
+    vent.off('imageUploader:free');
+    vent.off('imageUploader:busy');
+  }
+
+  disableSaving () {
+    this.setState({disabled: true});
+  }
+
+  enableSaving () {
+    this.setState({disabled: false});
   }
 
   addImage (file) {
@@ -79,7 +92,7 @@ export default class QuickPost extends Form {
           <ImageUploader action='https://api.cloudinary.com/v1_1/walk/image/upload'/>
         </div>
         <p className="l-text-right">
-          <button className="m-btn" type="submit">{this.lang.captions.add_post}</button>
+          <button className="m-btn" type="submit" disabled={this.state.disabled}>{this.lang.captions.add_post}</button>
         </p>
       </div>
         : <div>

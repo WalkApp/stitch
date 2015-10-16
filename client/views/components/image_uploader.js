@@ -90,6 +90,7 @@ export default class ImageUploader extends Component {
 
     this.dropzone.on('sending', (file, xhr, formData) => {
       formData.append('upload_preset', 'nh0kmjdj');
+      vent.trigger('imageUploader:busy');
     });
 
     this.dropzone.on('removedfile', (file) => {
