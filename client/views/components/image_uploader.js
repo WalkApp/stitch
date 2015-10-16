@@ -28,27 +28,7 @@ export default class ImageUploader extends Component {
 
   componentWillUnmount () {
     if (this.dropzone) {
-      let files = this.dropzone.getActiveFiles();
-
-      if (files.length > 0) {
-        // Well, seems like we still have stuff uploading.
-        // This is dirty, but let's keep trying to get rid
-        // of the dropzone until we're done here.
-        this.queueDestroy = true;
-
-        let destroyInterval = setInterval(() => {
-          if (this.queueDestroy = false) {
-            return clearInterval(destroyInterval);
-          }
-
-          if (this.dropzone.getActiveFiles().length === 0) {
-            this.dropzone = this.dropzone.destroy();
-            return clearInterval(destroyInterval);
-          }
-        }, 500);
-      } else {
-        this.dropzone = this.dropzone.destroy();
-      }
+      this.dropzone = this.dropzone.destroy();
     }
   }
 
