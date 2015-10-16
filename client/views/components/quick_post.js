@@ -4,7 +4,6 @@ import Form from '../../base/form';
 import PostModel from '../../models/post';
 import userActions from '../../actions/user';
 import ImageUploader from './image_uploader';
-import vent from '../../modules/vent';
 
 
 export default class QuickPost extends Form {
@@ -15,20 +14,6 @@ export default class QuickPost extends Form {
       postImages: [],
       disabled: false,
     };
-  }
-
-  componentWillMount () {
-    vent.on('imageUploader:deleted', this.deleteImage, this);
-    vent.on('imageUploader:added', this.addImage, this);
-    vent.on('imageUploader:free', this.enableSaving, this);
-    vent.on('imageUploader:busy', this.disableSaving, this);
-  }
-
-  componentWillUnmount () {
-    vent.off('imageUploader:deleted');
-    vent.off('imageUploader:added');
-    vent.off('imageUploader:free');
-    vent.off('imageUploader:busy');
   }
 
   disableSaving () {
@@ -85,11 +70,9 @@ export default class QuickPost extends Form {
       {active
         ? <div>
         <div className="m-control-list">
-          <textarea valueLink={this.linkState('model.description')} placeholder={this.lang.messages.add_post}
-                    className="m-control" required/>
-          <input valueLink={this.linkState('model.address')} placeholder={this.lang.fields.address} type="text"
-                 className="m-control"/>
-          <ImageUploader action='https://api.cloudinary.com/v1_1/walk/image/upload'/>
+          <textarea valueLink={this.linkState('model.description')} placeholder={this.lang.messages.add_post} className="m-control" required/>
+          <input valueLink={this.linkState('model.address')} placeholder={this.lang.fields.address} type="text" className="m-control"/>
+          <ImageUploader onDeleted={this.deleteImage.bind(this)} onAdded={this.addImage.bind(this)} onFree={this.enableSaving.bind(this)} onBusy={this.disableSaving.bind(this)} action='https://api.cloudinary.com/v1_1/walk/image/upload'/>
         </div>
         <p className="l-text-right">
           <button className="m-btn" type="submit" disabled={this.state.disabled}>{this.lang.captions.add_post}</button>
@@ -97,8 +80,7 @@ export default class QuickPost extends Form {
       </div>
         : <div>
         <div className="m-control-list">
-          <textarea valueLink={this.linkState('model.description')} className="m-control-static"
-                    onClick={() => this.setState({ active: true })} placeholder={this.lang.messages.add_post}/>
+          <textarea valueLink={this.linkState('model.description')} className="m-control-static" onClick={() => this.setState({ active: true })} placeholder={this.lang.messages.add_post}/>
         </div>
       </div>
       }
