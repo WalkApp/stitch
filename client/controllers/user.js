@@ -11,6 +11,14 @@ import FollowingsCollection from '../models/followings.js';
 
 export default class UserController extends Controller {
   index (ctx, done) {
+    if (ctx.query.section === 'upcoming') {
+      this.upcoming(ctx, done);
+    } else {
+      this.posts(ctx, done);
+    }
+  }
+
+  posts (ctx, done) {
     let { username } = ctx.params;
     let user = this.wrapModel(new UserModel());
     let posts = this.wrapModel(new PostsCollection());
@@ -29,7 +37,8 @@ export default class UserController extends Controller {
     this.xhrs.followings = followings.fetchCount();
 
     let dfd = Q.all([this.xhrs.user, this.xhrs.posts, this.xhrs.followers, this.xhrs.followings]);
-    dfd.done(() => {
+    dfd.fail(xhr => this.renderErrorView(xhr, done));
+    dfd.then(() => {
       this.setInitData({
         UserStore: {
           user: user.toJSON(),
@@ -40,10 +49,6 @@ export default class UserController extends Controller {
       });
 
       this.renderView(UserView, done);
-    });
-
-    dfd.fail((xhr) => {
-      this.renderErrorView(xhr);
     });
   }
 
@@ -66,7 +71,8 @@ export default class UserController extends Controller {
     this.xhrs.followings = followings.fetchCount();
 
     let dfd = Q.all([this.xhrs.user, this.xhrs.events, this.xhrs.followers, this.xhrs.followings]);
-    dfd.done(() => {
+    dfd.fail(xhr => this.renderErrorView(xhr, done));
+    dfd.then(() => {
       this.setInitData({
         UserStore: {
           user: user.toJSON(),
@@ -77,10 +83,6 @@ export default class UserController extends Controller {
       });
 
       this.renderView(UpcomingView, done);
-    });
-
-    dfd.fail((xhr) => {
-      this.renderErrorView(xhr);
     });
   }
 }

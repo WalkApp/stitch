@@ -9,7 +9,8 @@ export default class ProfileController extends Controller {
     user.username = 'profile';
 
     let dfd = this.xhrs.profile = user.fetch();
-    dfd.done(() => {
+    dfd.fail(xhr => this.renderErrorView(xhr, done));
+    dfd.then(() => {
       this.setInitData({
         ProfileStore: {
           user: user.toJSON(),

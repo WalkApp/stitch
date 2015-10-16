@@ -15,13 +15,13 @@ export default class AuthController extends Controller {
 
     let dfd = user.fetch();
 
-    dfd.done(() => {
-      req.session.token = token;
-      res.json({ sucess: true });
-    });
-
     dfd.fail(() => {
       this.error(res, 'bad_token', 401);
+    });
+
+    dfd.then(() => {
+      req.session.token = token;
+      res.json({ sucess: true });
     });
   }
 

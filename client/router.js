@@ -6,7 +6,7 @@ import currentUser from './stores/current_user';
 export default class Router extends BaseRouter {
   run () {
     super.run();
-    vent.on('user:signin', () => this.routeTo(`/user/${currentUser.get('username')}`));
+    vent.on('user:signin', () => this.routeTo(`/${currentUser.get('username')}`));
     vent.on('user:signout', () => this.routeTo('/'));
   }
 
@@ -16,9 +16,6 @@ export default class Router extends BaseRouter {
     this.use('/signup', this.notAuth);
 
     this.use('/search', this.auth);
-
-    this.use('/user/:username', this.auth);
-    this.use('/user/:username/upcoming', this.auth);
 
     this.use('/profile', this.auth);
   }
@@ -30,10 +27,13 @@ export default class Router extends BaseRouter {
 
     this.route('/search', 'search.index');
 
-    this.route('/user/:username', 'user.index');
-    this.route('/user/:username/upcoming', 'user.upcoming');
-
     this.route('/profile', 'profile.index');
+
+    // Should be after all routes
+    this.use('/:username', this.auth);
+    this.route('/:username', 'user.index');
+
+    this.route('*', 'error.index');
   }
 }
 
@@ -42,6 +42,7 @@ Router.prototype.controllers = {
   user: require('./controllers/user'),
   search: require('./controllers/search'),
   profile: require('./controllers/profile'),
+  error: require('./controllers/error'),
 };
 
 Router.prototype.auth = require('./middlewares/auth');

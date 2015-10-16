@@ -1,5 +1,6 @@
 /public/assets/*
 /public/static/*
 /node_modules
+/sandbox
 /.idea/*
 .DS_Store

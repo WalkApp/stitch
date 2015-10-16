@@ -15,8 +15,8 @@ export default class SearchController extends Controller {
     }
 
     let dfd = this.xhrs.users = users.fetch();
-
-    dfd.done(() => {
+    dfd.fail(xhr => this.renderErrorView(xhr, done));
+    dfd.then(() => {
       this.setInitData({
         SearchStore: {
           users: users.toJSON(),
@@ -24,10 +24,6 @@ export default class SearchController extends Controller {
       });
 
       this.renderView(SearchView, done);
-    });
-
-    dfd.fail((xhr) => {
-      this.renderErrorView(xhr);
     });
   }
 }
