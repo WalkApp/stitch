@@ -32,8 +32,6 @@ export default class Router extends BaseRouter {
     // Should be after all routes
     this.use('/:username', this.auth);
     this.route('/:username', 'user.index');
-
-    this.route('*', 'error.index');
   }
 }
 
@@ -42,7 +40,6 @@ Router.prototype.controllers = {
   user: require('./controllers/user'),
   search: require('./controllers/search'),
   profile: require('./controllers/profile'),
-  error: require('./controllers/error'),
 };
 
 Router.prototype.auth = require('./middlewares/auth');
