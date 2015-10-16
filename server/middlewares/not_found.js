@@ -1,6 +1,17 @@
-import error from './error';
+import Controller from '../../client/base/controller';
 
 
-export default function (res) {
-  error(res, 'not_found', 404);
+class NotFoundController extends Controller {
+  index () {
+    this.renderErrorView({ status: 404 });
+  }
 }
+
+export default function (req, res, next) {
+  let ctor = new NotFoundController();
+
+  ctor.req = req;
+  ctor.res = res;
+
+  ctor.index();
+};

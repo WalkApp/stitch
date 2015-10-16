@@ -76,17 +76,17 @@ class Server {
     } else {
       this.app.use((err, req, res, next) => {
         this.log('error', err.stack || err);
-        middlewares.serverError(res);
+        middlewares.serverError(req, res, next);
       });
     }
 
-    this.app.use((req, res, next) => middlewares.notFound(res));
+    this.app.use(middlewares.notFound);
   }
 
   run () {
     this.preRouteMiddleware();
-    this.router.run(this.app);
     this.initControllers();
+    this.router.run(this.app);
     this.postRouteMiddleware();
 
     this.app.set('port', config.server.port);
