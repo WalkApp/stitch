@@ -7,8 +7,8 @@ export default class Post extends Component {
     let { post } = this.props.data;
 
     return <div className="c-post m-panel">
-      {post.image_url
-        ? <img className="c-p-image" src={post.image_url} />
+      {post.image_urls
+        ? <img className="c-p-image" src={post.image_urls[0]} />
         : false
       }
       <div className="c-p-info m-p-note">
