@@ -18,9 +18,9 @@ export default class ImageUploader extends Component {
   }
 
   componentDidMount () {
-    let options = this.getDzConfig();
-
     if (!Dropzone) return;
+
+    let options = this.getDzConfig();
 
     this.dropzone = new Dropzone(React.findDOMNode(this), options);
     this.setupEvents();
