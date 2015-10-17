@@ -33,15 +33,13 @@ export default class ImageUploader extends Component {
   }
 
   render () {
-    let className = this.cx('dropzone', { [this.props.className]: this.props.className });
+    let className = this.cx('dropzone', {[this.props.className]: this.props.className});
 
     if (!this.props.action) throw new Error('No action property');
 
-    return (
-      <form action={this.props.action} className={className}>
-        {this.props.children}
-      </form>
-    );
+    return <form action={this.props.action} className={className}>
+      {this.props.children}
+    </form>;
   }
 
   setupEvents () {
@@ -50,7 +48,7 @@ export default class ImageUploader extends Component {
     }
 
     this.dropzone.on('success', (file, resp) => {
-      this.trigger('added', resp);
+      this.trigger('added', resp.url);
     });
 
     this.dropzone.on('sending', (file, xhr, formData) => {
@@ -59,7 +57,10 @@ export default class ImageUploader extends Component {
     });
 
     this.dropzone.on('removedfile', (file) => {
-      this.trigger('deleted', file);
+      if (!file.xhr) throw new Error('xhr object cannot be undefined');
+
+      let url = JSON.parse(file.xhr.response).url;
+      this.trigger('deleted', url);
     });
 
     this.dropzone.on('complete', () => {

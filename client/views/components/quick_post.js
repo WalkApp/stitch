@@ -11,7 +11,7 @@ export default class QuickPost extends Form {
     return {
       active: false,
       model: {description: ''},
-      postImages: [],
+      imageUrls: [],
       disabled: false,
     };
   }
@@ -24,36 +24,30 @@ export default class QuickPost extends Form {
     this.setState({disabled: false});
   }
 
-  addImage (file) {
-    if (!file) throw new Error('Argument exception: file');
+  addImage (url) {
+    debugger;
+    if (!url) throw new Error('Argument exception: url');
 
-    let images = this.state.postImages;
-    images.push(file);
+    let urls = this.state.imageUrls;
+    urls.push(url);
 
-    this.setState({postImages: images});
+    this.setState({imageUrls: urls});
   }
 
-  deleteImage (file) {
-    if (!file) throw new Error('Argument exception: file');
+  deleteImage (url) {
+    if (!url) throw new Error('Argument exception: url');
 
-    let images = this.state.postImages;
+    let urls = this.state.imageUrls;
+    urls = _.filter(urls, url);
 
-    if (images && images.length > 0) {
-      _.forEach(images, (image, i) => {
-        if (images[i].name === file.name && images[i].size === file.size) {
-          images.splice(i, 1);
-        }
-      });
-
-      this.setState({postImages: images});
-    }
+    this.setState({imageUrls: urls});
   }
 
   save (model) {
     let post = new PostModel(model);
 
     post.username = 'profile';
-    post.set('image_urls', _.pluck(this.state.postImages, 'url'));
+    post.set('image_urls', this.state.imageUrls);
 
     let dfd = post.save();
     dfd.fail((xhr) => this.handleAPIError(xhr));
