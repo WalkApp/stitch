@@ -5,13 +5,13 @@ import PostModel from '../../models/post';
 import userActions from '../../actions/user';
 import ImageUploader from './image_uploader';
 
+let post = new PostModel();
 
 export default class QuickPost extends Form {
   initState () {
     return {
       active: false,
       model: {description: ''},
-      imageUrls: [],
       disabled: false,
     };
   }
@@ -28,26 +28,24 @@ export default class QuickPost extends Form {
     debugger;
     if (!url) throw new Error('Argument exception: url');
 
-    let urls = this.state.imageUrls;
+    let urls = post.get('image_urls');
     urls.push(url);
 
-    this.setState({imageUrls: urls});
+    post.set('image_urls', urls);
   }
 
   deleteImage (url) {
     if (!url) throw new Error('Argument exception: url');
 
-    let urls = this.state.imageUrls;
-    urls = _.filter(urls, url);
+    let urls = post.get('image_urls');
+    urls.splice(urls.indexOf(url), 1);
 
-    this.setState({imageUrls: urls});
+    post.set('image_urls', urls);
   }
 
   save (model) {
-    let post = new PostModel(model);
-
+    post.set(model);
     post.username = 'profile';
-    post.set('image_urls', this.state.imageUrls);
 
     let dfd = post.save();
     dfd.fail((xhr) => this.handleAPIError(xhr));
