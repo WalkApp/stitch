@@ -42,4 +42,13 @@ export default {
 
     return string;
   },
+
+  removeFromArray (arr, item) {
+    for (let i = arr.length; i--;) {
+      if (arr[i] === item) {
+        arr.splice(i, 1);
+      }
+    }
+  },
+
 };

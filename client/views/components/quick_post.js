@@ -1,17 +1,20 @@
 import React from 'react';
 import _ from 'lodash';
+import { removeFromArray } from 'libs/utils';
 import Form from '../../base/form';
 import PostModel from '../../models/post';
 import userActions from '../../actions/user';
 import ImageUploader from './image_uploader';
 
-let post = new PostModel();
 
 export default class QuickPost extends Form {
   initState () {
     return {
       active: false,
-      model: {description: ''},
+      model: {
+        description: '',
+        image_urls: [],
+      },
       disabled: false,
     };
   }
@@ -25,26 +28,30 @@ export default class QuickPost extends Form {
   }
 
   addImage (url) {
-    debugger;
     if (!url) throw new Error('Argument exception: url');
 
-    let urls = post.get('image_urls');
+    let model = this.state.model;
+    let urls = model.image_urls;
+
     urls.push(url);
 
-    post.set('image_urls', urls);
+    this.setState({model: model});
   }
 
   deleteImage (url) {
     if (!url) throw new Error('Argument exception: url');
 
-    let urls = post.get('image_urls');
-    urls.splice(urls.indexOf(url), 1);
+    let model = this.state.model;
+    let urls = model.image_urls;
 
-    post.set('image_urls', urls);
+    removeFromArray(urls, url);
+
+    this.setState({model: model});
   }
 
   save (model) {
-    post.set(model);
+    let post = new PostModel(model);
+
     post.username = 'profile';
 
     let dfd = post.save();
