@@ -2,10 +2,13 @@ import _ from 'lodash';
 import $ from 'jquery';
 import Backbone from 'backbone';
 import LocalStorage from 'backbone.localstorage';
+import Dropzone from 'dropzone';
 
 
 window.Backbone = Backbone;
 window.Backbone.LocalStorage = LocalStorage;
+window.Dropzone = Dropzone;
+window.Dropzone.autoDiscover = false;
 window.appNode = document.getElementById('app-node');
 window.titleNode =  document.getElementsByTagName('title')[0];
 
