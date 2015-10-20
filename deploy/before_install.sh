@@ -2,4 +2,4 @@
 
 cd /home/ubuntu/walk/stitch
 
-npm install
+sudo npm install
