@@ -16,6 +16,7 @@ export default class Router extends BaseRouter {
     this.use('/signup', this.notAuth);
 
     this.use('/search', this.auth);
+    this.use('/feed', this.auth);
 
     this.use('/profile', this.auth);
   }
@@ -26,6 +27,7 @@ export default class Router extends BaseRouter {
     this.route('/signup', 'welcome.signup');
 
     this.route('/search', 'search.index');
+    this.route('/feed', 'feed.index');
 
     this.route('/profile', 'profile.index');
 
@@ -40,6 +42,7 @@ Router.prototype.controllers = {
   user: require('./controllers/user'),
   search: require('./controllers/search'),
   profile: require('./controllers/profile'),
+  feed: require('./controllers/feed'),
 };
 
 Router.prototype.auth = require('./middlewares/auth');
