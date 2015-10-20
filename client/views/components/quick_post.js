@@ -28,30 +28,17 @@ export default class QuickPost extends Form {
   }
 
   addImage (url) {
-    if (!url) throw new Error('Argument exception: url');
-
-    let model = this.state.model;
-    let urls = model.image_urls;
-
-    urls.push(url);
-
-    this.setState({model: model});
+    this.state.model.image_urls.push(url);
+    this.setState({ model: this.state.model });
   }
 
   deleteImage (url) {
-    if (!url) throw new Error('Argument exception: url');
-
-    let model = this.state.model;
-    let urls = model.image_urls;
-
-    removeFromArray(urls, url);
-
-    this.setState({model: model});
+    removeFromArray(this.state.model.image_urls, url);
+    this.setState({ model: this.state.model });
   }
 
   save (model) {
     let post = new PostModel(model);
-
     post.username = 'profile';
 
     let dfd = post.save();
