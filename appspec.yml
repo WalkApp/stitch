@@ -56,7 +56,8 @@ permissions:
     pattern: "**"
     owner: ubuntu
     group: ubuntu
-    mode: 755
+    type:
+      - directory
 
 
 # If you are not running any commands on the instance, then remove
