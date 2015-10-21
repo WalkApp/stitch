@@ -1,6 +1,10 @@
 var
   SYMLINKS,
   createSymlink,
+  proxy,
+  compileJs,
+  compileCss,
+  _ = require('lodash'),
   pkg = require('./package.json'),
   path = require('path'),
   gulp = require('gulp'),
@@ -12,7 +16,8 @@ var
   source = require('vinyl-source-stream'),
   symlink = require('gulp-symlink'),
   jscs = require('gulp-jscs'),
-  through2 = require('through2');
+  through2 = require('through2'),
+  exec = require('child_process').exec;
 
 
 SYMLINKS = {
@@ -27,32 +32,23 @@ createSymlink = function (key, path) {
     .pipe(symlink(path[1].trim() + '/' + key, { force: true }));
 };
 
-gulp.task('jscs', function () {
-  gulp
-    .src(['./client/**/*.js', './server/**/*.js', './config/**/*.js', './libs/**/*.js'])
-    .pipe(jscs())
-    // hook to check over than 16 files
-    // see https://github.com/jscs-dev/gulp-jscs/issues/22
-    .pipe(through2.obj(function(file, encoding, callback) {
-      callback();
-    }));
-});
-
-gulp.task('symlink', function () {
-  for (var key in SYMLINKS) {
-    createSymlink(key, SYMLINKS[key]);
-  };
-});
-
-gulp.task('server', function () {
-  nodemon({
-    script: 'server/index.js',
-    exec: 'babel-node',
-    ignore: ['client/**/*.*', 'public/**/*.*', 'node_modules/**/*.*']
+proxy = function (runner, callback) {
+  runner.stdout.pipe(process.stdout, { end: false });
+  runner.stderr.pipe(process.stderr, { end: false });
+  runner.on('exit', function (status) {
+    if (status === 0) {
+      if (callback) callback();
+    } else {
+      process.exit(status);
+    }
   });
-});
+}
 
-gulp.task('js', function () {
+compileJs = function (opts) {
+  opts = _.assign({
+
+  }, opts);
+
   var bundle = browserify({
     entries: ['./client/index.js'],
     paths: ['./node_modules']
@@ -67,9 +63,13 @@ gulp.task('js', function () {
     .on('error', function (err) { console.log(err.message) })
     .pipe(source('script.js'))
     .pipe(gulp.dest('./public/assets'));
-});
+};
 
-gulp.task('css', function () {
+compileCss = function (opts) {
+  opts = _.assign({
+
+  }, opts);
+
   gulp.src('./stylesheets/index.styl')
     .pipe(stylus({
       'paths': [path.join(__dirname, '/node_modules')],
@@ -83,6 +83,51 @@ gulp.task('css', function () {
     }))
     .pipe(rename('style.css'))
     .pipe(gulp.dest('./public/assets/'));
+}
+
+gulp.task('symlink', function () {
+  for (var key in SYMLINKS) {
+    createSymlink(key, SYMLINKS[key]);
+  };
+});
+
+
+// ===============================================================
+// TEST
+// ===============================================================
+
+gulp.task('jscs', function () {
+  gulp
+    .src(['./client/**/*.js', './server/**/*.js', './config/**/*.js', './libs/**/*.js'])
+    .pipe(jscs())
+    // hook to check over than 16 files
+    // see https://github.com/jscs-dev/gulp-jscs/issues/22
+    .pipe(through2.obj(function(file, encoding, callback) {
+      callback();
+    }));
+});
+
+gulp.task('test', ['jscs']);
+
+
+// ===============================================================
+// DEVELOPMENT
+// ===============================================================
+
+gulp.task('server:dev', function () {
+  nodemon({
+    script: 'server/index.js',
+    exec: 'babel-node',
+    ignore: ['client/**/*.*', 'public/**/*.*', 'node_modules/**/*.*']
+  });
+});
+
+gulp.task('js', function () {
+  compileJs();
+});
+
+gulp.task('css', function () {
+  compileCss();
 });
 
 gulp.task('watch', function () {
@@ -90,5 +135,16 @@ gulp.task('watch', function () {
   gulp.watch('./client/**/*.js', ['js']);
 });
 
-gulp.task('dev', ['server', 'js', 'css', 'watch']);
-gulp.task('test', ['jscs']);
+gulp.task('dev', ['server:dev', 'js', 'css', 'watch']);
+
+
+// ===============================================================
+// STAGING
+// ===============================================================
+
+gulp.task('server:staging', function () {
+  var runner = exec('env NODE_ENV=staging node index.js');
+  proxy(runner);
+});
+
+gulp.task('staging', ['server:staging', 'js', 'css']);
