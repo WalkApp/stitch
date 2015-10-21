@@ -1,0 +1,23 @@
+{
+  "ignore": [
+    ".git",
+    "node_modules/*",
+
+    "client/*",
+    "public/*",
+    "stylesheets/*"
+  ],
+  "watch": [
+    "server/*",
+
+    "config/*.json",
+    "config/*.js",
+
+    "lib/*",
+
+    "*.js",
+    "*.json"
+  ],
+  "ext": "js json",
+  "verbose": false
+}

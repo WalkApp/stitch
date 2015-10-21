@@ -4,6 +4,7 @@ var
   proxy,
   compileJs,
   compileCss,
+  startServer,
   _ = require('lodash'),
   pkg = require('./package.json'),
   path = require('path'),
@@ -11,7 +12,6 @@ var
   stylus = require('gulp-stylus'),
   nib = require('nib'),
   rename = require('gulp-rename'),
-  nodemon = require('gulp-nodemon'),
   browserify = require('browserify'),
   source = require('vinyl-source-stream'),
   symlink = require('gulp-symlink'),
@@ -83,7 +83,30 @@ compileCss = function (opts) {
     }))
     .pipe(rename('style.css'))
     .pipe(gulp.dest('./public/assets/'));
-}
+};
+
+startServer = function (opts) {
+  opts = _.assign({
+    skipWatch: false,
+    envVaribles: {}
+  }, opts);
+
+  var
+    runner,
+    command = '',
+    variables = [];
+
+  for (key in opts.envVaribles) {
+    variables.push(key + '=' + opts.envVaribles[key]);
+  }
+
+  if (variables.length) command += variables.join(' ');
+  command += opts.skipWatch ? ' node' : ' nodemon';
+  command += ' index.js';
+
+  runner = exec(command);
+  proxy(runner);
+};
 
 gulp.task('symlink', function () {
   for (var key in SYMLINKS) {
@@ -115,11 +138,7 @@ gulp.task('test', ['jscs']);
 // ===============================================================
 
 gulp.task('server:dev', function () {
-  nodemon({
-    script: 'server/index.js',
-    exec: 'babel-node',
-    ignore: ['client/**/*.*', 'public/**/*.*', 'node_modules/**/*.*']
-  });
+  startServer();
 });
 
 gulp.task('js', function () {
@@ -143,8 +162,12 @@ gulp.task('dev', ['server:dev', 'js', 'css', 'watch']);
 // ===============================================================
 
 gulp.task('server:staging', function () {
-  var runner = exec('env NODE_ENV=staging node index.js');
-  proxy(runner);
+  startServer({
+    skipWatch: true,
+    envVaribles: {
+      NODE_ENV: 'staging'
+    }
+  });
 });
 
 gulp.task('staging', ['server:staging', 'js', 'css']);
