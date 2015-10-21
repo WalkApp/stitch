@@ -171,3 +171,4 @@ gulp.task('server:staging', function () {
 });
 
 gulp.task('staging', ['server:staging', 'js', 'css']);
+gulp.task('assets:staging', ['js', 'css']);
