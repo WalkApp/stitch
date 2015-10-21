@@ -1,6 +1,6 @@
 export default {
   server: {
-    ip: '127.0.0.1',
+    ip: '0.0.0.0',
     port: parseInt(process.env.PORT, 10) || 3000,
   },
 
