@@ -16,6 +16,6 @@ export default class Upcoming extends Component {
 
       </div>
       <Footer />
-    </div>
+    </div>;
   }
 }
