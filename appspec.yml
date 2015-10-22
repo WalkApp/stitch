@@ -98,7 +98,7 @@ permissions:
 #   in the script specified in "location".
 hooks:
   ApplicationStop:
-    - location: deploy/application_start.sh
+    - location: deploy/application_stop.sh
       timeout: 300
       runas: ubuntu
 # During the AfterInstall deployment lifecycle event, run the commands
