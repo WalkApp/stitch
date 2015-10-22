@@ -97,8 +97,8 @@ permissions:
 # During the BeforeInstall deployment lifecycle event, run the commands
 #   in the script specified in "location".
 hooks:
-  BeforeInstall:
-    - location: deploy/before_install.sh
+  ApplicationStop:
+    - location: deploy/application_start.sh
       timeout: 300
       runas: ubuntu
 # During the AfterInstall deployment lifecycle event, run the commands
