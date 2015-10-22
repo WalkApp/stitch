@@ -1,2 +1,3 @@
+#!/usr/bin/env bash
 cd /home/ubuntu/walk/stitch
-gulp dev
+forever index.js
