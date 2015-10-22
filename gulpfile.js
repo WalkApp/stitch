@@ -96,7 +96,6 @@ startServer = function (opts) {
     command = '',
     variables = [];
 
-
   for (key in opts.envVariables) {
     variables.push(key + '=' + opts.envVariables[key]);
   }
