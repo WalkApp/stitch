@@ -96,11 +96,12 @@ startServer = function (opts) {
     command = '',
     variables = [];
 
+
   for (key in opts.envVariables) {
     variables.push(key + '=' + opts.envVariables[key]);
   }
 
-  if (variables.length) command += variables.join(' ');
+  if (variables.length) command += 'env ' + variables.join(' ');
   command += opts.skipWatch ? ' node' : ' nodemon';
   command += ' index.js';
 
