@@ -17,6 +17,7 @@ class Server {
     this.logPrefix = 'server';
     this.app = express();
     this.app.set('view engine', 'jade');
+    this.app.set('views', __dirname + '/../views');
     this.router = new Router();
   }
 
