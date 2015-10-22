@@ -1,3 +1,2 @@
 #!/usr/bin/env bash
-cd /home/ubuntu/walk/stitch
-forever index.js
+NODE_ENV=staging forever start /home/ubuntu/walk/stitch/index.js
