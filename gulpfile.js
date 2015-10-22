@@ -94,14 +94,15 @@ startServer = function (opts) {
   var
     runner,
     command = '',
+    isWin = /^win/.test(process.platform),
     variables = [];
 
   for (key in opts.envVariables) {
     variables.push(key + '=' + opts.envVariables[key]);
   }
 
-  if (variables.length) command += 'env ' + variables.join(' ');
-  command += opts.skipWatch ? ' node' : ' nodemon';
+  if (variables.length) command += isWin ? ('set ' + variables.join(' ') + ' && ') : (variables.join(' ') + ' ');
+  command += opts.skipWatch ? 'node' : 'nodemon';
   command += ' index.js';
 
   runner = exec(command);
