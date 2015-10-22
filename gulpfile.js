@@ -88,7 +88,7 @@ compileCss = function (opts) {
 startServer = function (opts) {
   opts = _.assign({
     skipWatch: false,
-    envVaribles: {}
+    envVariables: {}
   }, opts);
 
   var
@@ -96,8 +96,8 @@ startServer = function (opts) {
     command = '',
     variables = [];
 
-  for (key in opts.envVaribles) {
-    variables.push(key + '=' + opts.envVaribles[key]);
+  for (key in opts.envVariables) {
+    variables.push(key + '=' + opts.envVariables[key]);
   }
 
   if (variables.length) command += variables.join(' ');
@@ -164,7 +164,7 @@ gulp.task('dev', ['server:dev', 'js', 'css', 'watch']);
 gulp.task('server:staging', function () {
   startServer({
     skipWatch: true,
-    envVaribles: {
+    envVariables: {
       NODE_ENV: 'staging'
     }
   });
