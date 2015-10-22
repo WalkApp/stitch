@@ -13,7 +13,7 @@ export default class Upcoming extends Component {
     return <div className="p-user l-layout">
       <Header />
       <div className="l-wrapper">
-        Events
+
       </div>
       <Footer />
     </div>

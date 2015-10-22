@@ -19,7 +19,7 @@ export default class BaseCollection extends Collection {
   paginationDefault () {
     return {
       page: 1,
-      perPage: 5,
+      perPage: 20,
     };
   }
 
