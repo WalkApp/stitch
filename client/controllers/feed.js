@@ -5,14 +5,14 @@ import Feed from '../models/feed';
 
 export default class FeedController extends Controller {
   index (ctx, done) {
-    let feed = new Feed();
+    let feed = this.wrapModel(new Feed());
     let dfd = this.xhrs.feed = feed.fetch();
 
     dfd.fail(xhr => this.renderErrorView(xhr));
     dfd.then(() => {
       this.setInitData({
         FeedStore: {
-          news: feed.toJSON(),
+          collection: feed.toJSON(),
         },
       });
 

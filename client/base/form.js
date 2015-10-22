@@ -11,6 +11,8 @@ export default class Form extends Component {
   constructor () {
     super();
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.lockForm = this.lockForm.bind(this);
+    this.unlockForm = this.unlockForm.bind(this);
   }
 
   _linkStateChange (keyPath, value) {
@@ -51,8 +53,19 @@ export default class Form extends Component {
     this.showMessage('error', messages.join('\n'));
   }
 
+  lockForm () {
+    this.setState({ formLocked: true });
+    this.forceUpdate();
+  }
+
+  unlockForm () {
+    this.setState({ formLocked: false });
+    this.forceUpdate();
+  }
+
   handleSubmit (event) {
     event.preventDefault();
+    if (this.state.formLocked) return;
 
     let model = _.clone(this.state.model);
     this.save(model);

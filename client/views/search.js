@@ -5,42 +5,32 @@ import Component from '../base/component';
 import Header from './components/header';
 import Footer from './components/footer';
 import SearchBox from './components/search_box';
-import FollowToggle from './components/follow_toggle.js';
+import FollowToggle from './components/follow_toggle';
+import LoadMore from './components/load_more';
 import currentUser from '../stores/current_user';
-import searchStore from '../stores/search';
-import searchActions from '../actions/search';
+import searchUsersStore from '../stores/search/users';
+import searchUsersActions from '../actions/search/users';
 
 
-export default class User extends Component {
+export default class Search extends Component {
   title () {
     return `${this.lang.titles.search}`;
   }
 
   initState () {
-    return searchStore.getState();
+    return searchUsersStore.getState();
   }
 
   componentDidMount () {
-    searchStore.listen(this.refreshState);
+    searchUsersStore.listen(this.refreshState);
   }
 
   componentWillUnmount () {
-    searchStore.unlisten(this.refreshState);
-  }
-
-  loadMore () {
-    let { filter, pagination } = this.state.users;
-    let users = new UsersCollection(null, { filter, pagination });
-    users.pagination.page += 1;
-
-    let dfd = users.fetch();
-    dfd.done(() => {
-      searchActions.pushUsers(users.toJSON());
-    });
+    searchUsersStore.unlisten(this.refreshState);
   }
 
   render () {
-    let { users } = this.state;
+    let { collection } = this.state;
 
     return <div className="p-search l-layout">
       <Header />
@@ -51,9 +41,9 @@ export default class User extends Component {
           </div>
         </div>
         <div className="l-container">
-          {users.items.length
+          {collection.items.length
             ? <ul className="m-user-list">
-                {users.items.map((user, index) => {
+                {collection.items.map((user, index) => {
                   let isCurrentUser = user.username === currentUser.get('username');
                   let userUrl = `/${user.username}`;
 
@@ -77,12 +67,7 @@ export default class User extends Component {
                     </div>
                   </li>;
                 })}
-                {users.canLoadMore
-                  ? <button className="m-btn m-btn-load-more" onClick={this.loadMore.bind(this)}>
-                      {this.lang.captions.load_more}
-                    </button>
-                  : false
-                }
+                <LoadMore Collection={UsersCollection} data={collection} onLoad={data => searchUsersActions.loadMore(data)} />
               </ul>
             : <h4>{this.lang.messages.no_records_found}</h4>
           }

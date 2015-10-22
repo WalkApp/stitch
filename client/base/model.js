@@ -5,6 +5,12 @@ import $ from 'jquery';
 
 
 export default class Model extends Backbone.Model {
+  constructor (models, opts, data = {}) {
+    super(models, opts);
+
+    if (data.params) this.params = data.params;
+  }
+
   baseUrl () {
     return `${this.apiRoot}${_.result(this, 'urlPath')}`;
   }

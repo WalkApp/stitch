@@ -1,14 +1,15 @@
 import React from 'react';
-import Feed from '../models/feed';
+import FeedCollection from '../models/feed';
 import Component from '../base/component';
 import Header from './components/header';
 import Footer from './components/footer';
 import Post from './components/post';
+import LoadMore from './components/load_more';
 import feedActions from '../actions/feed';
 import feedStore from '../stores/feed';
 
 
-export default class User extends Component {
+export default class Feed extends Component {
   title () {
     return `${this.lang.brand.name}`;
   }
@@ -25,19 +26,8 @@ export default class User extends Component {
     feedStore.unlisten(this.refreshState);
   }
 
-  loadMore () {
-    let { filter, pagination } = this.state.news;
-    let feed = new Feed(null, { filter, pagination });
-    feed.pagination.page += 1;
-
-    let dfd = feed.fetch();
-    dfd.done(() => {
-      feedActions.pushNews(feed.toJSON());
-    });
-  }
-
   render () {
-    let { news } = this.state;
+    let { collection } = this.state;
 
     return <div className="p-feed l-layout">
       <Header />
@@ -48,17 +38,12 @@ export default class User extends Component {
             <div className="pure-u-18-24">
               <h2 className="p-f-title">Recent News</h2>
               <div className="m-wall">
-                {news.items.map((post, index) => {
+                {collection.items.map((post, index) => {
                   return <div key={index} className="m-w-row">
                     <Post data={{ post }}/>
                   </div>;
                 })}
-                {news.canLoadMore
-                  ? <button className="m-btn m-btn-load-more" onClick={this.loadMore.bind(this)}>
-                      {this.lang.captions.load_more}
-                    </button>
-                  : false
-                }
+                <LoadMore Collection={FeedCollection} data={collection} onLoad={data => feedActions.loadMore(data)} />
               </div>
             </div>
           </div>

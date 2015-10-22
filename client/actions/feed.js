@@ -3,7 +3,7 @@ import alt from '../alt';
 
 class FeedActions {
   constructor () {
-    this.generateActions('pushNews');
+    this.generateActions('loadMore');
   }
 }
 

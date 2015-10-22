@@ -20,31 +20,18 @@ export default class UserController extends Controller {
 
   posts (ctx, done) {
     let { username } = ctx.params;
-    let user = this.wrapModel(new UserModel());
-    let posts = this.wrapModel(new PostsCollection());
-    let followers = this.wrapModel(new FollowersCollection());
-    let followings = this.wrapModel(new FollowingsCollection());
+    let data = { params: { username }, order: '-created' };
+    let posts = this.wrapModel(new PostsCollection(null, null, data));
 
-    user.username = username;
-    posts.username = username;
-    posts.order = '-created';
-    followers.username = username;
-    followings.username = username;
-
-    this.xhrs.user = user.fetch();
     this.xhrs.posts = posts.fetch();
-    this.xhrs.followers = followers.fetchCount();
-    this.xhrs.followings = followings.fetchCount();
 
-    let dfd = Q.all([this.xhrs.user, this.xhrs.posts, this.xhrs.followers, this.xhrs.followings]);
+    let dfd = Q.all([this.fetchUser(username), this.xhrs.posts]);
     dfd.fail(xhr => this.renderErrorView(xhr, done));
     dfd.then(() => {
       this.setInitData({
-        UserStore: {
-          user: user.toJSON(),
-          posts: posts.toJSON(),
-          followerCount: followers.count,
-          followingCount: followings.count,
+        UserStore: this.getUserStoreData(),
+        UserPostsStore: {
+          collection: posts.toJSON(),
         },
       });
 
@@ -54,35 +41,46 @@ export default class UserController extends Controller {
 
   upcoming (ctx, done) {
     let { username } = ctx.params;
-    let user = this.wrapModel(new UserModel());
-    let events = this.wrapModel(new EventsCollection());
-    let followers = this.wrapModel(new FollowersCollection());
-    let followings = this.wrapModel(new FollowingsCollection());
+    let data = { params: { username }, order: '-created' };
+    let events = this.wrapModel(new EventsCollection(null, null, data));
 
-    user.username = username;
-    events.username = username;
-    events.order = '-created';
-    followers.username = username;
-    followings.username = username;
-
-    this.xhrs.user = user.fetch();
     this.xhrs.events = events.fetch();
-    this.xhrs.followers = followers.fetchCount();
-    this.xhrs.followings = followings.fetchCount();
 
-    let dfd = Q.all([this.xhrs.user, this.xhrs.events, this.xhrs.followers, this.xhrs.followings]);
+    let dfd = Q.all([this.fetchUser(username), this.xhrs.events]);
     dfd.fail(xhr => this.renderErrorView(xhr, done));
     dfd.then(() => {
       this.setInitData({
-        UserStore: {
-          user: user.toJSON(),
-          events: events.toJSON(),
-          followerCount: followers.count,
-          followingCount: followings.count,
+        UserStore: this.getUserStoreData(),
+        UserEventsStore: {
+          collection: events.toJSON(),
         },
       });
 
       this.renderView(UpcomingView, done);
     });
+  }
+
+  fetchUser (username) {
+    let data = { params: { username } };
+
+    this.user = this.wrapModel(new UserModel());
+    this.user.username = username;
+
+    this.followers = this.wrapModel(new FollowersCollection(null, null, data));
+    this.followings = this.wrapModel(new FollowingsCollection(null, null, data));
+
+    this.xhrs.user = this.user.fetch();
+    this.xhrs.followers = this.followers.fetchCount();
+    this.xhrs.followings = this.followings.fetchCount();
+
+    return Q.all([this.xhrs.user, this.xhrs.followers, this.xhrs.followings]);
+  }
+
+  getUserStoreData () {
+    return {
+      user: this.user.toJSON(),
+      followerCount: this.followers.count,
+      followingCount: this.followings.count,
+    };
   }
 }

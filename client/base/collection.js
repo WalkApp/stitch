@@ -6,18 +6,20 @@ import urlQuery from 'libs/url_query';
 
 
 export default class BaseCollection extends Collection {
-  constructor (models, opts = {}) {
+  constructor (models, opts, data = {}) {
     super(models, opts);
     this.pagination = this.paginationDefault();
 
-    if (opts.filter) this.filter = opts.filter;
-    if (opts.pagination) _.assign(this.pagination, opts.pagination);
+    if (data.filterModel) this.filterModel = data.filterModel;
+    if (data.params) this.params = data.params;
+    if (data.order) this.order = data.order;
+    if (data.pagination) _.assign(this.pagination, data.pagination);
   }
 
   paginationDefault () {
     return {
       page: 1,
-      perPage: 20,
+      perPage: 5,
     };
   }
 
@@ -56,11 +58,13 @@ export default class BaseCollection extends Collection {
 
   toJSON () {
     let pagination = this.pagination;
-    let filter = this.filter;
+    let filterModel = this.filterModel;
+    let params = this.params;
+    let order = this.order;
     let canLoadMore = this.canLoadMore();
     let items = super.toJSON();
 
-    return { items, canLoadMore, pagination, filter };
+    return { items, canLoadMore, pagination, filterModel, params, order };
   }
 
   fetchCount () {
