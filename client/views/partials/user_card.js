@@ -32,6 +32,6 @@ export default class UserCard extends Component {
           <small>{this.lang.captions.following}</small>
         </li>
       </ul>
-    </div>
+    </div>;
   }
 }
