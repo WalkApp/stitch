@@ -58,6 +58,7 @@ permissions:
     group: ubuntu
     type:
       - directory
+      - file
 
 
 # If you are not running any commands on the instance, then remove
