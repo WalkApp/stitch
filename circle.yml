@@ -8,7 +8,7 @@ test:
 
 deployment:
   staging:
-    branch: ConfDeploy
+    branch: master
     codedeploy:
       stitch:
         application_root: /
