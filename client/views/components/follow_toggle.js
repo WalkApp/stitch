@@ -32,7 +32,7 @@ export default class FollowToggle extends Component {
       });
     }
 
-    dfd.done(() => {
+    dfd.then(() => {
       let isFollowed = !this.state.isFollowed;
       this.setState({isFollowed});
 
