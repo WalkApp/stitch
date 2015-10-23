@@ -2,7 +2,7 @@ import React from 'react';
 import Form from '../base/form';
 import Header from './components/header';
 import Footer from './components/footer';
-import FormStatus from './components/form_status';
+import FormStatus from './partials/form_status';
 import UserModel from '../models/user';
 import profileStore from '../stores/profile';
 

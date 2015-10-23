@@ -1,7 +1,7 @@
 import React from 'react';
 import Form from '../base/form';
 import Footer from './components/footer';
-import FormStatus from './components/form_status';
+import FormStatus from './partials/form_status';
 import auth from '../modules/auth';
 
 
