@@ -1,15 +1,11 @@
-import alt from '../alt';
+import alt from '../../alt';
 
 
 class UserActions {
   constructor () {
     this.generateActions(
-      'addPost',
-      'addEvent',
       'follow',
-      'unfollow',
-      'pushPosts',
-      'pushEvents'
+      'unfollow'
     );
   }
 }

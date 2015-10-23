@@ -1,16 +1,13 @@
 import alt from '../alt';
+import CollectionStore from '../base/collection_store';
 import feedActions from '../actions/feed';
 
 
-export default alt.createStore(class FeedStore {
+class FeedStore extends CollectionStore {
   constructor () {
+    super();
     this.bindActions(feedActions);
-    this.news = [];
   }
+}
 
-  onPushNews (news) {
-    let items = this.news.items.concat(news.items);
-    this.news = news;
-    this.news.items = items;
-  }
-});
+export default alt.createStore(FeedStore);

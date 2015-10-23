@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React from 'react';
 import moment from 'moment';
 import PostsCollection from '../models/posts';
@@ -7,10 +8,11 @@ import Footer from './components/footer';
 import Post from './components/post';
 import QuickPost from './components/quick_post';
 import FollowToggle from './components/follow_toggle';
+import LoadMore from './components/load_more';
 import userStore from '../stores/user';
+import userPostsStore from '../stores/user/posts';
 import currentUser from '../stores/current_user';
-import userActions from '../actions/user';
-import _ from 'lodash';
+import userPostsActions from '../actions/user/posts';
 
 
 export default class User extends Component {
@@ -19,30 +21,26 @@ export default class User extends Component {
   }
 
   initState () {
-    let state = userStore.getState();
-    state.isOwner = state.user.username === currentUser.get('username');
+    let { user, followerCount, followingCount } = userStore.getState();
+    let { collection } = userPostsStore.getState();
 
-    return state;
+    return {
+      user,
+      followerCount,
+      followingCount,
+      isOwner: user.username === currentUser.get('username'),
+      posts: collection,
+    };
   }
 
   componentDidMount () {
     userStore.listen(this.refreshState);
+    userPostsStore.listen(this.refreshState);
   }
 
   componentWillUnmount () {
     userStore.unlisten(this.refreshState);
-  }
-
-  loadMore () {
-    let { filter, pagination } = this.state.posts;
-    let posts = new PostsCollection(null, { filter, pagination });
-    posts.pagination.page += 1;
-    posts.username = this.state.user.username;
-
-    let dfd = posts.fetch();
-    dfd.done(() => {
-      userActions.pushPosts(posts.toJSON());
-    });
+    userPostsStore.unlisten(this.refreshState);
   }
 
   render () {
@@ -68,10 +66,12 @@ export default class User extends Component {
                   : false
                 }
                 <ul className="m-p-statistics">
-                  <li><strong>{_.padLeft(followerCount, '2', '0')}</strong>
+                  <li>
+                    <strong>{_.padLeft(followerCount, '2', '0')}</strong>
                     <small>{this.lang.captions.followers}</small>
                   </li>
-                  <li><strong>{_.padLeft(followingCount, '2', '0')}</strong>
+                  <li>
+                    <strong>{_.padLeft(followingCount, '2', '0')}</strong>
                     <small>{this.lang.captions.following}</small>
                   </li>
                 </ul>
@@ -89,15 +89,10 @@ export default class User extends Component {
                 <div className="m-wall">
                   {posts.items.map((post, index) => {
                     return <div key={index} className="m-w-row">
-                      <Post data={{ post }}/>
+                      <Post data={{ post }} />
                     </div>;
                   })}
-                  {posts.canLoadMore
-                    ? <button className="m-btn m-btn-load-more" onClick={this.loadMore.bind(this)}>
-                        {this.lang.captions.load_more}
-                      </button>
-                    : false
-                  }
+                  <LoadMore Collection={PostsCollection} data={posts} onLoad={data => userPostsActions.loadMore(data)} />
                 </div>
               </div>
             </div>

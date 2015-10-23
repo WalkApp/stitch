@@ -1,8 +1,12 @@
 import alt from '../alt';
+import Store from '../base/store';
 
 
-export default alt.createStore(class ProfileStore {
+class ProfileStore extends Store {
   constructor () {
-    this.user = {};
+    super();
+    this.user = null;
   }
-});
+}
+
+export default alt.createStore(ProfileStore);

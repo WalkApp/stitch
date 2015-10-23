@@ -5,7 +5,7 @@ import Component from '../../base/component';
 export default class Post extends Component {
   render () {
     let { post } = this.props.data;
-    let hasImage = post.image_url && post.image_urls.length > 0;
+    let hasImage = post.image_urls && post.image_urls.length > 0;
 
     return <div className="c-post m-panel">
       {hasImage
