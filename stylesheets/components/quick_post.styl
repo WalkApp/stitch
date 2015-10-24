@@ -68,8 +68,6 @@
     display: table
     box-sizing: border-box
 
-    padding: 10px 12px
-
     width: 100%
 
     border-top: 1px solid #f2f2f2
@@ -79,6 +77,17 @@
       vertical-align: top
 
       .m-btn
+        height: 49px
+
+        color: $muted_color
+        background: none
+        border-radius: 0
+
+        &:hover
+          background: #f5fcff
+
+        &:active
+          background: #ebf6fa
 
         i
           margin-right: .4em
@@ -87,6 +96,7 @@
 
     .c-qp-f-submit
       display: table-cell
+      padding: 10px 12px
       width: 80px
 
   .c-image_uploader
