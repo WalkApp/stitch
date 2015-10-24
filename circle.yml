@@ -16,6 +16,6 @@ deployment:
         revision_location:
           revision_type: S3
           s3_location:
-            bucket: stitch-bucket
+            bucket: walk-bucket
             key_pattern: stitch-{BRANCH}-{SHORT_COMMIT}
         deployment_group: walk
