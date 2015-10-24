@@ -7,10 +7,11 @@ import Dropzone from 'dropzone';
 
 window.Backbone = Backbone;
 window.Backbone.LocalStorage = LocalStorage;
-window.Dropzone = Dropzone;
-window.Dropzone.autoDiscover = false;
+
 window.appNode = document.getElementById('app-node');
 window.titleNode =  document.getElementsByTagName('title')[0];
+
+Dropzone.autoDiscover = false;
 
 $.ajaxSetup({
   crossDomain: true,

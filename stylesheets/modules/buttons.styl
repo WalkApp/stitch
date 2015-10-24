@@ -1,4 +1,5 @@
 .m-btn
+  cursor: pointer
   display: inline-block
   padding: 8px 15px
   box-sizing: border-box
@@ -36,10 +37,20 @@
     color: #26cd49
     border: 1px solid
 
-    &.m-btn-active
+    &.active
       background:#26cd49
       color: #fefefe
       border-color:#26cd49
+
+  &.m-btn-light
+    color: $muted_color
+    background: none
+
+    &:hover
+      background: #f5fcff
+
+    &:active
+      background: #ebf6fa
 
   &.m-btn-load-more
     display: block

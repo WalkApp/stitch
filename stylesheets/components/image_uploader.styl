@@ -1,0 +1,27 @@
+.c-image_uploader
+  cursor: pointer
+
+  position: relative
+
+  text-align: center
+  color: $secondary_color
+
+  border: 1px dashed $base_border_color
+  border-radius: 3px
+  background: rgba(255, 255, 255, .9)
+
+  transition: border-color 150ms ease, background 150ms ease
+
+  &.dz-drag-hover
+    border-color: #4bb6e7
+    background: rgba(245, 252, 255, .9)
+
+  .dz-message
+    display: table
+
+    width: 100%
+    height: 100%
+
+    span
+      display: table-cell
+      vertical-align: middle
