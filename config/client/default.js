@@ -1,3 +1,3 @@
 export default {
-  api_root: 'http://thewalk.me:8080/api',
+  api_root: 'http://127.0.0.1:8080/api',
 };
