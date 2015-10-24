@@ -36,9 +36,10 @@ export default class QuickPost extends Form {
 
     let dfd = post.save();
     dfd.fail(xhr => this.handleAPIError(xhr));
+    dfd.always(this.unlockForm);
     dfd.then(() => {
       userPostsActions.unshiftItem(post.toJSON());
-      this.unlockForm();
+      this.refs.imgUploader.reset();
       this.refreshState();
     });
   }
@@ -47,7 +48,7 @@ export default class QuickPost extends Form {
     var { active } = this.state;
 
     return <form className="m-panel c-quick_post" onSubmit={this.handleSubmit}>
-      <ImageUploader id="post-images" />
+      <ImageUploader ref="imgUploader" id="post-images" onDeleted={this.deleteImage.bind(this)} onAdded={this.addImage.bind(this)} onFree={this.unlockForm} onBusy={this.lockForm} />
       <div className="m-p-body c-qp-body">
         <div className="c-qp-left">
           <div className="c-qp-avatar" style={{ backgroundImage: `url(${currentUser.get('image_url')})` }}></div>
@@ -64,6 +65,9 @@ export default class QuickPost extends Form {
           </div>
         </div>
       </div>
+      <div className="c-qp-images">
+        <div data-uploader-preview="post-images"></div>
+      </div>
       <div className="c-qp-footer">
         <div className="c-qp-f-actions">
           <button type="button" className="m-btn m-btn-sm m-btn-light" data-uploader="post-images">
@@ -71,7 +75,7 @@ export default class QuickPost extends Form {
           </button>
         </div>
         <div className="c-qp-f-submit">
-          <button className="m-btn m-btn-sm m-btn-block" type="submit">{this.lang.captions.add_post}</button>
+          <button className="m-btn m-btn-sm m-btn-block" disaled={this.formLocked} type="submit">{this.lang.captions.add_post}</button>
         </div>
       </div>
     </form>;
