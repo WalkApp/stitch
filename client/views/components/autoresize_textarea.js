@@ -28,6 +28,6 @@ export default class AutoresizeTextarea extends Component {
   }
 
   render () {
-    return <textarea {...this.props} ref="textarea"></textarea>
+    return <textarea {...this.props} ref="textarea"></textarea>;
   }
 }
