@@ -9,7 +9,7 @@ export default class SearchController extends Controller {
     let data = {};
 
     if (searchText) {
-      data.filterModel = { contains: searchText };
+      data.filterModel = { username: { contains: searchText } };
     }
 
     let users = this.wrapModel(new UsersCollection(null, null, data));
