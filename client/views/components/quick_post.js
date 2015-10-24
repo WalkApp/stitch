@@ -75,7 +75,7 @@ export default class QuickPost extends Form {
           </button>
         </div>
         <div className="c-qp-f-submit">
-          <button className="m-btn m-btn-sm m-btn-block" disaled={this.formLocked} type="submit">{this.lang.captions.add_post}</button>
+          <button type="submit" className="m-btn m-btn-sm m-btn-block" disaled={this.formLocked} type="submit">{this.lang.captions.add_post}</button>
         </div>
       </div>
     </form>;
