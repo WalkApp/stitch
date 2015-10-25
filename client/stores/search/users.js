@@ -10,4 +10,4 @@ class SearchUsersStore extends CollectionStore {
   }
 }
 
-export default alt.createStore(SearchUsersStore);
+export default alt.createStore(SearchUsersStore, 'SearchUsersStore');

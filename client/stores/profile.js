@@ -9,4 +9,4 @@ class ProfileStore extends Store {
   }
 }
 
-export default alt.createStore(ProfileStore);
+export default alt.createStore(ProfileStore, 'ProfileStore');

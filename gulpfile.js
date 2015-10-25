@@ -1,15 +1,20 @@
 var
   SYMLINKS,
+  VENDOR,
   createSymlink,
   proxy,
-  compileJs,
   compileCss,
   startServer,
+  compileAppJs,
+  compileVendorJs,
   _ = require('lodash'),
   pkg = require('./package.json'),
   path = require('path'),
   gulp = require('gulp'),
   stylus = require('gulp-stylus'),
+  minifyCSS = require('gulp-minify-css'),
+  uglify = require('gulp-uglify'),
+  streamify = require('gulp-streamify'),
   nib = require('nib'),
   rename = require('gulp-rename'),
   browserify = require('browserify'),
@@ -19,6 +24,23 @@ var
   through2 = require('through2'),
   exec = require('child_process').exec;
 
+
+VENDOR = [
+  '!underscore',
+  'lodash',
+  'react',
+  'react/lib/ReactLink',
+  'alt',
+  'backbone',
+  'backbone.localstorage',
+  'classnames',
+  'dropzone',
+  'jquery',
+  'moment',
+  'page',
+  'q',
+  'querystring'
+];
 
 SYMLINKS = {
   'config': './config > node_modules',
@@ -44,9 +66,29 @@ proxy = function (runner, callback) {
   });
 }
 
-compileJs = function (opts) {
+compileVendorJs = function (opts) {
   opts = _.assign({
 
+  }, opts);
+
+  var bundle = browserify();
+
+  _.forEach(VENDOR, function (vendor) {
+    if (!_.startsWith(vendor, '!')) {
+      bundle.require(vendor, { expose: vendor });
+    }
+  });
+
+  bundle.bundle()
+    .on('error', function (err) { console.log(err.message) })
+    .pipe(source('vendor.js'))
+    .pipe(streamify(uglify()))
+    .pipe(gulp.dest('./public/assets'));
+};
+
+compileAppJs = function (opts) {
+  opts = _.assign({
+    minify: false
   }, opts);
 
   var bundle = browserify({
@@ -54,35 +96,39 @@ compileJs = function (opts) {
     paths: ['./node_modules']
   });
 
-  bundle.exclude('underscore');
-  bundle.require('lodash', { expose: 'underscore' });
-  bundle.require('./config/client', { expose: 'config' });
-  bundle.require('./config/langs/client', { expose: 'config/langs' });
+  _.forEach(VENDOR, function (lib) {
+    bundle.exclude(_.startsWith(lib, '!') ? lib.substr(1) : lib);
+  });
 
-  bundle.bundle()
+  bundle = bundle
+    .bundle()
     .on('error', function (err) { console.log(err.message) })
-    .pipe(source('script.js'))
-    .pipe(gulp.dest('./public/assets'));
+    .pipe(source('script.js'));
+
+  if (opts.minify) bundle = bundle.pipe(streamify(uglify()));
+
+  bundle.pipe(gulp.dest('./public/assets'));
 };
 
 compileCss = function (opts) {
   opts = _.assign({
-
+    minify: false
   }, opts);
 
-  gulp.src('./stylesheets/index.styl')
-    .pipe(stylus({
-      'paths': [path.join(__dirname, '/node_modules')],
-      'include css': true,
-      'use': [nib()],
-      'urlfunc': 'embedurl',
-      'linenos': true,
-      'define': {
-        '$version': pkg.version
-      }
-    }))
-    .pipe(rename('style.css'))
-    .pipe(gulp.dest('./public/assets/'));
+  var task = gulp.src('./stylesheets/index.styl')
+  .pipe(stylus({
+    'paths': [path.join(__dirname, '/node_modules')],
+    'include css': true,
+    'use': [nib()],
+    'urlfunc': 'embedurl',
+    'linenos': true,
+    'define': {
+      '$version': pkg.version
+    }
+  }));
+  task = task.pipe(rename('style.css'));
+  if (opts.minify) task = task.pipe(minifyCSS());
+  task = task.pipe(gulp.dest('./public/assets/'));
 };
 
 startServer = function (opts) {
@@ -142,9 +188,15 @@ gulp.task('server:dev', function () {
   startServer();
 });
 
-gulp.task('js', function () {
-  compileJs();
+gulp.task('js:app', function () {
+  compileAppJs();
 });
+
+gulp.task('js:vendor', function () {
+  compileVendorJs();
+});
+
+gulp.task('js', ['js:app', 'js:vendor']);
 
 gulp.task('css', function () {
   compileCss();
@@ -152,15 +204,26 @@ gulp.task('css', function () {
 
 gulp.task('watch', function () {
   gulp.watch('./stylesheets/**/*.styl', ['css']);
-  gulp.watch('./client/**/*.js', ['js']);
+  gulp.watch('./client/**/*.js', ['js:app']);
 });
 
+gulp.task('assets', ['js', 'css']);
 gulp.task('dev', ['server:dev', 'js', 'css', 'watch']);
 
 
 // ===============================================================
 // STAGING
 // ===============================================================
+
+gulp.task('js:app:min', function () {
+  compileAppJs({ minify: true });
+});
+
+gulp.task('js:min', ['js:vendor', 'js:app:min']);
+
+gulp.task('css:min', function () {
+  compileCss({ minify: true });
+});
 
 gulp.task('server:staging', function () {
   startServer({
@@ -171,5 +234,5 @@ gulp.task('server:staging', function () {
   });
 });
 
-gulp.task('staging', ['server:staging', 'js', 'css']);
-gulp.task('assets:staging', ['js', 'css']);
+gulp.task('assets:min', ['js:min', 'css:min']);
+gulp.task('staging', ['server:staging', 'assets:min']);

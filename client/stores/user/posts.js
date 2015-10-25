@@ -10,4 +10,4 @@ class UserPostsStore extends CollectionStore {
   }
 }
 
-export default alt.createStore(UserPostsStore);
+export default alt.createStore(UserPostsStore, 'UserPostsStore');

@@ -3,7 +3,7 @@ import { getValue } from 'libs/utils';
 import currentUserActions from '../actions/current_user';
 
 
-export default alt.createStore(class CurrentUserStore {
+class CurrentUserStore {
   constructor () {
     this.bindActions(currentUserActions);
     this.user = null;
@@ -30,4 +30,6 @@ export default alt.createStore(class CurrentUserStore {
   static authorized () {
     return !!this.get();
   }
-});
+};
+
+export default alt.createStore(CurrentUserStore, 'CurrentUserStore');

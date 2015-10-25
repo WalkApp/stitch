@@ -10,4 +10,4 @@ class UserEventsStore extends CollectionStore {
   }
 }
 
-export default alt.createStore(UserEventsStore);
+export default alt.createStore(UserEventsStore, 'UserEventsStore');

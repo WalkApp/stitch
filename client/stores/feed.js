@@ -10,4 +10,4 @@ class FeedStore extends CollectionStore {
   }
 }
 
-export default alt.createStore(FeedStore);
+export default alt.createStore(FeedStore, 'FeedStore');
