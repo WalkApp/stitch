@@ -1,4 +1,4 @@
-import UserModel from '../../client/models/user';
+import UserModel from 'client/models/user';
 import { wrapModel } from '../mixins/isomorphic_controller';
 import error from './error';
 
