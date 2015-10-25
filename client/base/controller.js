@@ -33,6 +33,8 @@ export default class Controller {
   }
 
   renderErrorView (xhr, done) {
+    if (xhr.readyState == 0) return;
+
     if (xhr.status == 404) {
       this.renderView(NotFoundView, done);
     } else {
