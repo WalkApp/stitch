@@ -8,6 +8,14 @@ export default class Post extends Component {
     let hasImage = post.image_urls && post.image_urls.length > 0;
 
     return <div className="c-post m-panel">
+      <div className="c-p-header">
+        <div className="c-p-h-left">
+          <div className="c-p-h-l-avatar"></div>
+          <div className="c-p-h-l-author"></div>
+          <div className="c-p-h-l-time"></div>
+        </div>
+        <div className="c-p-h-right"></div>
+      </div>
       {hasImage
         ? <img className="c-p-image" src={post.image_urls[0]} />
         : false
