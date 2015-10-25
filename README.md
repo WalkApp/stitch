@@ -13,8 +13,6 @@ Main website
 
 ## Setup
 
-0. Now our API sucks and isn't deployed in production so first you need to clone and run it before you start the Web site. Here is [Readme](https://github.com/walkapp/batman#setup)
-
 1. Install nodejs:
 
   It is recommended to install Node.js with OS native installer via [Nodejs.org website](http://nodejs.org/download/).
