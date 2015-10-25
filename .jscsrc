@@ -73,7 +73,6 @@
   },
   "requirePaddingNewLinesAfterBlocks": true,
   "requireSemicolons": true,
-  "safeContextKeyword": "_this",
   "validateIndentation": 2,
   "requireSpaceAfterLineComment": true
 }

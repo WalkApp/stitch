@@ -1,0 +1,111 @@
+.c-quick_post
+  position: relative
+  overflow: visible
+
+  .c-qp-body
+    display: table
+    box-sizing: border-box
+
+    width: 100%
+
+    .c-qp-left
+      display: table-cell
+      vertical-align: top
+
+      padding-right: 15px
+
+      width: 45px
+
+    .c-qp-main
+      display: table-cell
+      vertical-align: top
+
+  .c-qp-avatar
+    width: 45px
+    height: 45px
+
+    border-radius: 3px
+
+    background: no-repeat center center
+    background-size: cover
+
+  .c-qp-location_box
+    display: table
+    box-sizing: border-box
+
+    width: 100%
+
+    border-bottom: 1px solid #f2f2f2
+
+    .m-control
+      display: table-cell
+
+      padding: 10px 8px
+
+      border: none
+
+    .c-qp-lb-pin
+      cursor: pointer
+
+      display: table-cell
+      width: 25px
+
+      font-size: 15px
+      color: $base_icon_color
+      text-align: center
+
+  .c-qp-description
+
+    .m-control
+      padding: 10px 8px
+      border: none
+      resize: none
+
+  .c-qp-images
+    padding: 0 12px
+
+  .c-qp-footer
+    display: table
+    box-sizing: border-box
+
+    width: 100%
+
+    border-top: 1px solid #f2f2f2
+
+    .c-qp-f-actions
+      display: table-cell
+      vertical-align: top
+
+      .m-btn
+        height: 49px
+
+        color: $muted_color
+        background: none
+        border-radius: 0
+
+        &:hover
+          background: #f5fcff
+
+        &:active
+          background: #ebf6fa
+
+        i
+          margin-right: .4em
+          font-size: 14px
+          color: $base_icon_color
+
+    .c-qp-f-submit
+      display: table-cell
+      padding: 10px 12px
+      width: 80px
+
+  .c-image_uploader
+    display: none
+
+    absolute: top -1px left -1px
+    right: -1px
+    bottom: -1px
+    box-sizing: border-box
+
+    &.dragging
+      display: block

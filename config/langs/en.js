@@ -52,6 +52,7 @@ export default {
     success: 'Success',
     load_more: 'Load more',
     update: 'Update',
+    attach_photo: 'Attach photo',
   },
 
   fields: {
@@ -63,6 +64,7 @@ export default {
     image_url: 'Image url',
     avatar_url: 'Avatar url',
     event_date: 'Date',
+    location: 'Location',
   },
 
   messages: {
@@ -79,5 +81,6 @@ export default {
     profile_detail: 'Change your public info',
     not_found_title: 'Not found',
     not_found_description: 'Sorry, but seems we don\'t have a such page',
+    drop_images: 'Drop images here to upload',
   },
 };

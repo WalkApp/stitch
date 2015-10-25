@@ -46,7 +46,7 @@ export default class FollowToggle extends Component {
 
   render () {
     return <button
-      className={this.cx('m-btn m-btn-block m-btn-sm m-btn-success', {'m-btn-active': this.state.isFollowed})}
+      className={this.cx('m-btn m-btn-block m-btn-sm m-btn-success', { active: this.state.isFollowed })}
       onClick={this.handleToggle}>
       {this.state.isFollowed ? this.lang.captions.unfollow : this.lang.captions.follow}
     </button>;
