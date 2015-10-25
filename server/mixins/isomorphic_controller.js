@@ -2,8 +2,8 @@ import _ from 'lodash';
 import React from 'react';
 import config from 'config';
 import langs from 'config/langs';
-import alt from '../../client/alt';
-import Component from '../../client/base/component';
+import alt from 'client/alt';
+import Component from 'client/base/component';
 
 
 export default {

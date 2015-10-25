@@ -1,5 +1,5 @@
 import Controller from '../base/controller';
-import UserModel from '../../client/models/user';
+import UserModel from 'client/models/user';
 
 
 export default class AuthController extends Controller {

@@ -44,7 +44,9 @@ VENDOR = [
 
 SYMLINKS = {
   'config': './config > node_modules',
-  'libs': './libs > node_modules'
+  'libs': './libs > node_modules',
+  'client': './client > node_modules',
+  'server': './server > node_modules'
 };
 
 createSymlink = function (key, path) {

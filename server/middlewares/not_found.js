@@ -1,4 +1,4 @@
-import Controller from '../../client/base/controller';
+import Controller from 'client/base/controller';
 
 
 class NotFoundController extends Controller {

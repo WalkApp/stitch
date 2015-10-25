@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import Backbone from 'backbone';
-import ClientModel from '../client/base/model';
-import ClientCollection from '../client/base/collection';
-import ClientRouter from '../client/router';
-import ClientController from '../client/base/controller';
+import ClientModel from 'client/base/model';
+import ClientCollection from 'client/base/collection';
+import ClientRouter from 'client/router';
+import ClientController from 'client/base/controller';
 import { sync, $ } from './mixins/network';
 import { renderView, wrapModel, setInitData } from './mixins/isomorphic_controller';
 
