@@ -1,8 +1,46 @@
 .c-post
+
   .c-p-image
     width: 100%
     display: block
+    border: 2px solid rgba(0, 0, 0, .17);
+
 
   .c-p-info
     color: $base_icon_color
     font-size: 12px
+
+  .c-p-header
+    display: table
+    width: 100%
+    border: 1px solid #f2f2f2
+
+    .c-p-h-right
+      display: table-cell
+      width: 9%
+      vertical-align: middle
+
+      i[class^="icon-"]
+        color: #c5d9e1
+
+    .c-p-h-left
+      display: table-cell
+
+      .c-p-h-l-avatar
+        display: table-cell
+        width: 45px
+        height: 45px
+        background: no-repeat center center
+        background-size: cover
+        border-radius: 3px
+
+      .c-p-h-l-info
+        display: table-cell
+        padding-left: 20px
+
+        .c-p-h-l-i-author
+          font-size: 15px
+
+        .c-p-h-l-i-time
+          color: #82aabd
+          font-size: 13px
