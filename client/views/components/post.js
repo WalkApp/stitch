@@ -1,5 +1,5 @@
 import React from 'react';
-import moment from 'moment'
+import moment from 'moment';
 import Component from '../../base/component';
 import currentUser from '../../stores/current_user';
 
