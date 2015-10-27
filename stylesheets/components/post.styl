@@ -1,23 +1,14 @@
 .c-post
 
-  .c-p-image
-    width: 100%
-    display: block
-    border: 2px solid rgba(0, 0, 0, .17);
-
-
-  .c-p-info
-    color: $base_icon_color
-    font-size: 12px
-
   .c-p-header
     display: table
     width: 100%
-    border: 1px solid #f2f2f2
+    border-bottom: 1px solid #f2f2f2
+    box-sizing: border-box
 
     .c-p-h-right
       display: table-cell
-      width: 9%
+      width: 4%
       vertical-align: middle
 
       i[class^="icon-"]
@@ -36,7 +27,7 @@
 
       .c-p-h-l-info
         display: table-cell
-        padding-left: 20px
+        padding-left: 12px
 
         .c-p-h-l-i-author
           font-size: 15px
@@ -44,3 +35,70 @@
         .c-p-h-l-i-time
           color: #82aabd
           font-size: 13px
+
+  .c-p-image
+    width: 100%
+    display: block
+
+  .c-p-info
+    display: table
+    width: 100%
+    height: 52px
+    color: $base_icon_color
+    font-size: 12px
+    padding-top: 0
+    box-sizing: border-box
+
+    .c-p-i-icon
+      display: table-cell
+      width: 7%;
+      background-color: #e5f3f9
+      font-size: 15px
+      vertical-align: middle
+      text-align: center
+
+    .c-p-i-address
+      display: table-cell
+      background-color: #f0f8fb
+      vertical-align: middle
+      padding-left: 12px
+
+  .c-p-description
+    padding: 0 24px 12px 24px
+
+  .c-p-footer
+    display: table
+    box-sizing: border-box;
+    width: 100%
+    border-top: 1px solid #f2f2f2
+    padding-left: 24px
+
+    .c-p-f-likes
+      display: table-cell
+      width: 12%
+
+      i[class^="icon-"]
+        color: #ff448a
+
+      .c-p-f-l-count
+        color: #5f95ae
+        font-size: 12px
+        padding-left: 5px
+
+    .c-p-f-actions
+      display: table-cell
+
+      i[class^="icon-"]
+        margin-right: 0.4em;
+        font-size: 14px;
+        color: #5f95ae;
+
+      .m-btn
+        height: 49px;
+        color: #82aabd;
+        font-weight: 600
+        background: none;
+        border-radius: 0;
+
+        &:hover
+          background: #f5fcff
