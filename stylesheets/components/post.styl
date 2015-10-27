@@ -36,9 +36,22 @@
           color: #82aabd
           font-size: 13px
 
-  .c-p-image
-    width: 100%
-    display: block
+  .c-p-shadow
+    position: relative
+    display: inline-block
+
+    &::after
+      position: absolute
+      top: 0
+      right: 0
+      bottom: 0
+      left: 0
+      box-shadow: 0 0 0 2px rgba(0,0,0,.17) inset
+      content: ""
+
+    .c-p-s-image
+      width: 100%
+      vertical-align: top;
 
   .c-p-info
     display: table

@@ -22,7 +22,12 @@ export default class Post extends Component {
         <div className="c-p-h-right"><i className="icon-clock"></i></div>
       </div>
       {hasImage
-        ? <div className="m-p-body"><img className="c-p-image" src={post.image_urls[0]} /></div>
+        ?
+          <div className="m-p-body">
+            <div className="c-p-shadow">
+              <img className="c-p-s-image" src={post.image_urls[0]} />
+            </div>
+          </div>
         : false
       }
       <div className="c-p-info m-p-body">
