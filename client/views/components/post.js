@@ -44,8 +44,7 @@ export default class Post extends Component {
       <div className="c-p-footer">
         <div className="c-p-f-actions">
           <button type="button" className="m-btn m-btn-sm c-p-f-a-like">
-            <i className="icon-pin"></i>
-            <strong>12</strong>
+            <i className="icon-pin"></i>12
           </button>
 
           <button type="button" className="m-btn m-btn-sm">
