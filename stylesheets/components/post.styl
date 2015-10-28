@@ -8,7 +8,7 @@
 
     .c-p-h-right
       display: table-cell
-      width: 4%
+      width: 25px
       vertical-align: middle
 
       i
@@ -38,14 +38,10 @@
 
   .c-p-shadow
     position: relative
-    display: inline-block
+    display: block
 
     &::after
-      position: absolute
-      top: 0
-      right: 0
-      bottom: 0
-      left: 0
+      absolute: top bottom left right
       box-shadow: 0 0 0 2px rgba(0,0,0,.17) inset
       content: ""
 
@@ -64,7 +60,7 @@
 
     .c-p-i-icon
       display: table-cell
-      width: 7%
+      width: 36px
       background-color: #e5f3f9
       font-size: 15px
       vertical-align: middle
@@ -84,19 +80,6 @@
     box-sizing: border-box
     width: 100%
     border-top: 1px solid #f2f2f2
-    padding-left: 24px
-
-    .c-p-f-likes
-      display: table-cell
-      width: 12%
-
-      i
-        color: #ff448a
-
-      .c-p-f-l-count
-        color: #5f95ae
-        font-size: 12px
-        padding-left: 5px
 
     .c-p-f-actions
       display: table-cell
@@ -115,3 +98,8 @@
 
         &:hover
           background: #f5fcff
+
+      .c-p-f-a-like
+
+        i
+          color: #ff448a

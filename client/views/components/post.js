@@ -42,16 +42,16 @@ export default class Post extends Component {
         </p>
       </div>
       <div className="c-p-footer">
-        <div className="c-p-f-likes">
-          <i className="icon-pin"></i>
-          <strong className="c-p-f-l-count">12</strong>
-        </div>
         <div className="c-p-f-actions">
-          <button type="button" className="m-btn m-btn-sm" data-uploader="post-images">
+          <button type="button" className="m-btn m-btn-sm c-p-f-a-like">
+            <i className="icon-pin"></i>
+            <strong>12</strong>
+          </button>
+
+          <button type="button" className="m-btn m-btn-sm">
             <i className="icon-upcoming"></i>{this.lang.captions.add_event}
           </button>
         </div>
-
       </div>
     </div>;
   }
