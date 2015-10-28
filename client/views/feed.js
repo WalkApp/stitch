@@ -36,7 +36,7 @@ export default class Feed extends Component {
           <div className="pure-g">
             <div className="pure-u-3-24"></div>
             <div className="pure-u-18-24">
-              <h2 className="p-f-title">Recent News</h2>
+              <h2 className="p-f-title">{this.lang.captions.feed}</h2>
               <div className="m-wall">
                 {collection.items.map((post, index) => {
                   return <div key={index} className="m-w-row">

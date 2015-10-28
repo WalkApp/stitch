@@ -53,6 +53,7 @@ export default {
     load_more: 'Load more',
     update: 'Update',
     attach_photo: 'Attach photo',
+    feed: 'Recent News',
   },
 
   fields: {

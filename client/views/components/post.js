@@ -47,7 +47,7 @@ export default class Post extends Component {
           <strong className="c-p-f-l-count">12</strong>
         </div>
         <div className="c-p-f-actions">
-          <button type="button" className="m-btn m-btn-sm m-btn-light" data-uploader="post-images">
+          <button type="button" className="m-btn m-btn-sm" data-uploader="post-images">
             <i className="icon-upcoming"></i>{this.lang.captions.add_event}
           </button>
         </div>
