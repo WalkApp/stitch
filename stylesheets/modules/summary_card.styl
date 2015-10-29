@@ -1,0 +1,56 @@
+.m-summary_card
+  border: 1px solid #4cb2e2
+  border-radius: 3px
+
+  .m-sc-banner
+    position: relative
+    padding: 20px 0
+    background: #4cb2e2
+
+    text-align: center
+
+    figure
+      display: table
+      margin: 0
+
+      width: 100%
+      height: 180px
+
+      text-align: center
+
+      .m-sc-b-wrapper
+        display: table-cell
+        vertical-align: middle
+
+      .m-sc-b-icon
+        margin: 0 auto
+
+        width: 140px
+        height: @width
+
+        background: rgba(255, 255, 255, .11)
+        border-radius: 50%
+
+        color: #fff
+        font-size: 60px
+        line-height: @height
+        text-align: center
+
+    figcaption
+      font-size: 18px
+      font-family: $project_font_family
+      color: #fff
+
+  .m-sc-text
+    padding: 12px 24px
+    min-height: 90px
+
+    color: #000
+    font-size: 14px
+    text-align: center
+
+  &.m-summary_card-green
+    border-color: #38cd5f
+
+    .m-sc-banner
+      background: #38cd5f
