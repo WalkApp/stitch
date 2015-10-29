@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import Component from '../../base/component';
 import Dropdown from './dropdown';
+import currentUser from '../../stores/current_user';
 
 
 export default class Post extends Component {
@@ -9,6 +10,7 @@ export default class Post extends Component {
     let { post } = this.props.data;
     let hasImage = post.image_urls && post.image_urls.length > 0;
     let postDropdownId = `post-${post._id}-dropdown`;
+    let isOwner = post.user._id === currentUser.get('_id')
 
     return <div className="c-post m-panel">
       <div className="c-p-header m-p-body">
@@ -23,9 +25,14 @@ export default class Post extends Component {
           <i className="icon-more" data-dropdown-toggle={postDropdownId}></i>
           <Dropdown id={postDropdownId}>
             <ul className="c-d-menu">
-              <li>
-                <span>{this.lang.captions.delete}</span>
-              </li>
+              {isOwner
+                ? <li>
+                    <span>{this.lang.captions.delete}</span>
+                  </li>
+                : <li className="c-d-m-static">
+                    <span>No available actions</span>
+                  </li>
+              }
             </ul>
           </Dropdown>
         </div>
