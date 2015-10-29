@@ -56,6 +56,7 @@ export default {
     update: 'Update',
     attach_photo: 'Attach photo',
     all_news: 'All News',
+    delete: 'Delete',
   },
 
   fields: {

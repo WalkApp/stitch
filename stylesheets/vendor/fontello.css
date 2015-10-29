@@ -51,3 +51,5 @@
 .icon-play:before { content: '\e80f'; } /* '' */
 .icon-tell:before { content: '\e810'; } /* '' */
 .icon-invite:before { content: '\e811'; } /* '' */
+.icon-like:before { content: '\e812'; } /* '' */
+.icon-more:before { content: '\e813'; } /* '' */
