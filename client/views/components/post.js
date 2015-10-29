@@ -39,7 +39,7 @@ export default class Post extends Component {
       </div>
       {hasImage
         ?
-          <div className="m-p-body">
+          <div className="m-p-body c-p-slider">
             <div className="c-p-shadow">
               <img className="c-p-s-image" src={post.image_urls[0]} />
             </div>

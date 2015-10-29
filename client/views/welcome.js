@@ -24,15 +24,18 @@ export default class Welcome extends Component {
             </p>
           </section>
           <section>
-            <h4>Get know what happen in your city!</h4>
+            <h4>Share news and feedback about public places and events in your city!</h4>
             <p>
-              Tell people who follow you about places and events that you have visited. Be stay in all friends news and join them.
+              Share your experience on visited places and events with the community.
             </p>
             <p>
-              Find place by type, addres or type. Read your friends feedback about it.
+              Find out which events and places your friends attended and obtain their feedback.
             </p>
             <p>
-              Create events and send invitations to people who even aren't registered in Walk by sms or email. <a href="/about">Read More</a>
+              Create your own event and invite friends while keepin in touch with an upcoming events.
+            </p>
+            <p>
+              Discover and explore new places through community members’ feedback. <a href="/about">Learn More</a>
             </p>
           </section>
         </div>
