@@ -22,11 +22,10 @@ export default class About extends Component {
         <div className="l-container">
           <div className="p-a-description">
             <h2 className="p-a-d-title">
-              Social network to share visited places and events with friends
+              Social Network for Sharing News and Feedback About <br /> Public Places and Events in Your City
             </h2>
             <p className="p-a-d-detail">
-              Get know what happen in your city <br />
-              with Walk you will be always stay in friends news and where they go
+              Find suitable place, invite guests, and obtain feedback through photos and comments
             </p>
           </div>
           <div className="p-a-divider"><span className="p-a-d-circle"></span></div>
@@ -50,7 +49,8 @@ export default class About extends Component {
                   </figcaption>
                 </div>
                 <div className="m-sc-text">
-                  Tell friends about places and events that you have visited
+                  <p>Share your experience on visited places and events with the community</p>
+                  <p>Find out which events and places your friends attended and obtain their feedback</p>
                 </div>
               </div>
             </section>
@@ -67,7 +67,7 @@ export default class About extends Component {
                   </figcaption>
                 </div>
                 <div className="m-sc-text">
-                  Tell friends about places and events that you have visited
+                  <p>Create your own event attach photos, description and get know who will come</p>
                 </div>
               </div>
             </section>
@@ -84,13 +84,15 @@ export default class About extends Component {
                   </figcaption>
                 </div>
                 <div className="m-sc-text">
-                  Tell friends about places and events that you have visited
+                  <p>
+                    Send invitations through Walk accounts, e-mails, or even phone messages which can be used for guests not registered on the Walk
+                  </p>
                 </div>
               </div>
             </section>
           </div>
           <div className="p-a-detail_info">
-            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using r-less normal distribution of letters, as opposed to using
+            Walk will become a storage and provider of an up-to-date, reliable, and unbiased information about public places and events. As a future work based on collected data we will develop layout and intelligent features including recommender based on preferences, history, user location and price to make search of the place more effective.
           </div>
           <div className="p-a-join">
             <a className="m-btn" href="/signup">Try Now</a>
