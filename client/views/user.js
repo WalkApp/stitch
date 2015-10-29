@@ -16,7 +16,7 @@ import userPostsActions from '../actions/user/posts';
 export default class User extends Component {
   title () {
     let user = userStore.getState().user;
-    return `${user.full_name || user.username} | ${this.lang.brand.name}`
+    return `${user.full_name || user.username} | ${this.lang.brand.name}`;
   }
 
   initState () {

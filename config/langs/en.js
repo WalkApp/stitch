@@ -85,6 +85,6 @@ export default {
     not_found_title: 'Not found',
     not_found_description: 'Sorry, but seems we don\'t have a such page',
     drop_images: 'Drop images here to upload',
-    try_walk: 'Try it already today'
+    try_walk: 'Try it already today',
   },
 };

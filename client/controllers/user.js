@@ -57,7 +57,7 @@ export default class UserController extends Controller {
       });
 
       this.renderView(UpcomingView, done);
-    }).fail(err => console.log(err));
+    });
   }
 
   fetchUser (username) {
