@@ -50,14 +50,24 @@ export default class Feed extends Component {
           <div className="pure-g">
             <div className="pure-u-3-24"></div>
             <div className="pure-u-18-24">
-              <div className="m-wall">
-                {collection.items.map((post, index) => {
-                  return <div key={index} className="m-w-row">
-                    <Post data={{ post }}/>
-                  </div>;
-                })}
-                <LoadMore Collection={FeedCollection} data={collection} onLoad={data => feedActions.loadMore(data)} />
-              </div>
+              {collection.items.length
+                ? <div className="m-wall">
+                    {collection.items.map((post, index) => {
+                      return <div key={index} className="m-w-row">
+                        <Post data={{ post }}/>
+                      </div>;
+                    })}
+                    <LoadMore Collection={FeedCollection} data={collection} onLoad={data => feedActions.loadMore(data)} />
+                  </div>
+                : <div className="m-empty_message">
+                    <div className="m-em-icon">
+                      <i className="icon-empty_wall"></i>
+                    </div>
+                    <p className="m-em-message">
+                      There is no any news
+                    </p>
+                  </div>
+              }
             </div>
           </div>
         </div>

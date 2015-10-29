@@ -53,7 +53,7 @@ export default class Post extends Component {
       <div className="c-p-footer">
         <div className="c-p-f-actions">
           <button type="button" className="m-btn m-btn-sm c-p-f-a-like">
-            <i className="icon-like"></i>12
+            <i className="icon-like"></i>0
           </button>
           <button type="button" className="m-btn m-btn-sm">
             <i className="icon-upcoming"></i>{this.lang.captions.add_event}

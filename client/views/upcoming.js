@@ -33,7 +33,7 @@ export default class Upcoming extends Component {
   }
 
   render () {
-    let { user } = this.state;
+    let { user, isOwner } = this.state;
 
     return <div className="p-user l-layout">
       <Header />
@@ -62,6 +62,14 @@ export default class Upcoming extends Component {
             </div>
             <div className="pure-u-18-24">
               <div className="l-right-section">
+                <div className="m-empty_message">
+                  <div className="m-em-icon">
+                    <i className="icon-empty_events"></i>
+                  </div>
+                  <p className="m-em-message">
+                    { isOwner ? 'You haven\'t any events yet.' : `${user.full_name || user.username} hasn't any events yet` }
+                  </p>
+                </div>
               </div>
             </div>
           </div>
