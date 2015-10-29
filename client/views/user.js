@@ -73,14 +73,24 @@ export default class User extends Component {
             <div className="pure-u-18-24">
               <div className="l-right-section">
                 {isOwner ? <QuickPost /> : false}
-                <div className="m-wall">
-                  {posts.items.map((post, index) => {
-                    return <div key={index} className="m-w-row">
-                      <Post data={{ post }} />
-                    </div>;
-                  })}
-                  <LoadMore Collection={PostsCollection} data={posts} onLoad={data => userPostsActions.loadMore(data)} />
-                </div>
+                {posts.items.length
+                  ? <div className="m-wall">
+                      {posts.items.map((post, index) => {
+                        return <div key={index} className="m-w-row">
+                          <Post data={{ post }} />
+                        </div>;
+                      })}
+                      <LoadMore Collection={PostsCollection} data={posts} onLoad={data => userPostsActions.loadMore(data)} />
+                    </div>
+                  : <div className="m-empty_message">
+                      <div className="m-em-icon">
+                        <i className="icon-empty_wall"></i>
+                      </div>
+                      <p className="m-em-message">
+                        { isOwner ? 'You haven\'t any posts yet.' : `${user.full_name || user.username} hasn't any posts yet` }
+                      </p>
+                    </div>
+                }
               </div>
             </div>
           </div>

@@ -40,7 +40,7 @@
 .icon-edit:before { content: '\e804'; } /* '' */
 .icon-place:before { content: '\e805'; } /* '' */
 .icon-home:before { content: '\e806'; } /* '' */
-.icon-like:before { content: '\e807'; } /* '' */
+.icon-like-1:before { content: '\e807'; } /* '' */
 .icon-pin:before { content: '\e808'; } /* '' */
 .icon-photo:before { content: '\e809'; } /* '' */
 .icon-search:before { content: '\e80a'; } /* '' */
@@ -53,3 +53,5 @@
 .icon-invite:before { content: '\e811'; } /* '' */
 .icon-like:before { content: '\e812'; } /* '' */
 .icon-more:before { content: '\e813'; } /* '' */
+.icon-empty_events:before { content: '\e814'; } /* '' */
+.icon-empty_wall:before { content: '\e815'; } /* '' */

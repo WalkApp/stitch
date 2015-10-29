@@ -40,7 +40,7 @@ export default class Search extends Component {
             <SearchBox />
           </div>
         </div>
-        <div className="l-container">
+        <div className="l-content">
           {collection.items.length
             ? <ul className="m-user-list">
                 {collection.items.map((user, index) => {
@@ -69,7 +69,14 @@ export default class Search extends Component {
                 })}
                 <LoadMore Collection={UsersCollection} data={collection} onLoad={data => searchUsersActions.loadMore(data)} />
               </ul>
-            : <h4>{this.lang.messages.no_records_found}</h4>
+            : <div className="m-empty_message">
+                <div className="m-em-icon">
+                  <i className="icon-search"></i>
+                </div>
+                <p className="m-em-message">
+                  {this.lang.messages.no_records_found}
+                </p>
+              </div>
           }
         </div>
       </div>
