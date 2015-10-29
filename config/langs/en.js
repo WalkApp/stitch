@@ -55,7 +55,7 @@ export default {
     load_more: 'Load more',
     update: 'Update',
     attach_photo: 'Attach photo',
-    all_news: 'All News',    
+    all_news: 'All News',
   },
 
   fields: {
