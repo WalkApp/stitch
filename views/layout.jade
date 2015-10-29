@@ -3,6 +3,23 @@ html
   head
     title!= title
 
+    meta(name='title' content='Walk')
+    meta(name='description' content='Social Network for Sharing News and Feedback About Public Places and Events in Your City')
+    meta(name='keywords' content='walk, city life, events, social')
+
+    meta(property='og:title' content='Walk')
+    meta(property='og:description' content='Social Network for Sharing News and Feedback About Public Places and Events in Your City')
+
+    meta(property='og:image' content='#{config.base_url}/images/walk_og_830x830.jpg')
+    meta(property='og:image:type' content='image/jpeg')
+    meta(property='og:image:width' content='830')
+    meta(property='og:image:height' content='830')
+
+    meta(property='og:image' content='#{config.base_url}/images/walk_og_1200x630.jpg')
+    meta(property='og:image:type' content='image/jpeg')
+    meta(property='og:image:width' content='1200')
+    meta(property='og:image:height' content='630')
+
     link(rel='icon' type='image/png' href='/favicon-32x32.png' sizes='32x32')
     link(rel='icon' type='image/png' href='/favicon-194x194.png' sizes='194x194')
     link(rel='icon' type='image/png' href='/favicon-96x96.png' sizes='96x96')
@@ -15,7 +32,7 @@ html
 
     script.
       window.app = {
-        config: !{JSON.stringify(config)},
+        config: !{JSON.stringify(config._client)},
         env: !{JSON.stringify(env)},
         langs: !{JSON.stringify(langs)},
         stores: !{stores}

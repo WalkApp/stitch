@@ -13,7 +13,7 @@ export default class VideoPlayer extends Component {
     return <div className={this.cx('c-video-player', { show })}>
       {show
         ? <div className="c-vp-wrapper">
-            <iframe scrolling="no" src="https://www.youtube.com/embed/9bWJAYMa7sk" frameborder="0" allowFullScreen></iframe>
+            <iframe scrolling="no" src="https://www.youtube.com/embed/W6I3P-VRTrE" allowFullScreen></iframe>
           </div>
         : <div className="c-vp-preview" onClick={() => this.setState({ show: true })}>
             <p><i className="icon-play"></i></p>

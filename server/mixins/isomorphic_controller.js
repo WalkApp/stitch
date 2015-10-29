@@ -38,7 +38,7 @@ export default {
       html,
       env: res.locals.env,
       langs: _.pick(langs, [res.locals.lang]),
-      config: config._client,
+      config: config,
       stores: alt.flush(),
     });
   },
