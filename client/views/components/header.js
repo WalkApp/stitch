@@ -17,7 +17,6 @@ export default class Header extends Component {
   }
 
   componentDidMount () {
-    window.currentUser = currentUser;
     currentUser.listen(this.refreshState);
     vent.on('route:after', this.setActivePath, this);
   }
