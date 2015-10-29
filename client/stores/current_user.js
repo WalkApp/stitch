@@ -17,6 +17,11 @@ class CurrentUserStore {
     this.user = null;
   }
 
+  onUpdate (user) {
+    this.user.full_name = user.full_name;
+    this.user.image_url = user.image_url;
+  }
+
   static get (keyPath) {
     let user = this.getState().user;
 

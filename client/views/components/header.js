@@ -10,14 +10,20 @@ import { format } from 'libs/utils';
 
 export default class Header extends Component {
   initState () {
-    return {currentPath: ''};
+    return {
+      currentPath: '',
+      user: currentUser.get(),
+    };
   }
 
-  componentWillMount () {
+  componentDidMount () {
+    window.currentUser = currentUser;
+    currentUser.listen(this.refreshState);
     vent.on('route:after', this.setActivePath, this);
   }
 
   componentWillUnmount () {
+    currentUser.unlisten(this.refreshState);
     vent.off('route:after', this.setActivePath, this);
   }
 
@@ -30,8 +36,8 @@ export default class Header extends Component {
   }
 
   render () {
-    let { currentPath } = this.state;
-    let homeUrl = `/${currentUser.get('username')}`;
+    let { currentPath, user } = this.state;
+    let homeUrl = `/${user.username}`;
 
     return <div className="c-header">
       <div className="l-container">
@@ -57,11 +63,11 @@ export default class Header extends Component {
         <HeaderSearchBox />
         <div className="c-h-nav-right">
           <div className="c-h-nr-avatar">
-            <span className="c-h-nr-a-img" data-dropdown-toggle="account-dropdown" style={{ backgroundImage: `url(${currentUser.get('image_url')})` }}></span>
+            <span className="c-h-nr-a-img" data-dropdown-toggle="account-dropdown" style={{ backgroundImage: `url(${user.image_url})` }}></span>
             <Dropdown id="account-dropdown">
               <ul className="c-d-menu">
                 <li className="c-d-m-static">
-                  <span>{this.lang.messages.signed_in} <strong>{currentUser.get('username')}</strong></span>
+                  <span>{this.lang.messages.signed_in} <strong>{user.username}</strong></span>
                 </li>
                 <li className="c-d-divider"></li>
                 <li><a href="/profile">{this.lang.captions.profile}</a></li>

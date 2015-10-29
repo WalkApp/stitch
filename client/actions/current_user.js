@@ -3,7 +3,11 @@ import alt from '../alt';
 
 class CurrentUserActions {
   constructor () {
-    this.generateActions('signin', 'signout');
+    this.generateActions(
+      'signin',
+      'signout',
+      'update'
+    );
   }
 }
 
