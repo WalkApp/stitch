@@ -36,6 +36,7 @@ export default class Header extends Component {
 
   render () {
     let { currentPath, user } = this.state;
+    user = user || {};
     let homeUrl = `/${user.username}`;
 
     return <div className="c-header">
