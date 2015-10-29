@@ -3,11 +3,16 @@ import Model from '../base/model';
 
 export default class UserModel extends Model {
   urlPath () {
-    let urlPath = '/users';
-    let username = this.username;
+    return '/users';
+  }
 
-    if (username) urlPath += `/${username}`;
+  url () {
+    let url = this.baseUrl();
 
-    return urlPath;
+    if (this.username) {
+      url += `/${this.username}`;
+    }
+
+    return url;
   }
 }

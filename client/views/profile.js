@@ -5,6 +5,7 @@ import Footer from './components/footer';
 import FormStatus from './partials/form_status';
 import UserModel from '../models/user';
 import profileStore from '../stores/profile';
+import currentUserActions from '../actions/current_user';
 
 
 export default class Profile extends Form {
@@ -28,11 +29,13 @@ export default class Profile extends Form {
 
   save (model) {
     let user = new UserModel(model);
-    let dfd = user.save();
+    user.username = 'profile';
 
+    let dfd = user.save();
     dfd.fail((xhr) => this.handleAPIError(xhr));
     dfd.done(() => {
       this.showSuccess();
+      currentUserActions.update(user.toJSON());
     });
   }
 
