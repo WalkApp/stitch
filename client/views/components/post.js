@@ -1,7 +1,6 @@
 import React from 'react';
 import moment from 'moment';
 import Component from '../../base/component';
-import currentUser from '../../stores/current_user';
 
 
 export default class Post extends Component {
@@ -12,12 +11,11 @@ export default class Post extends Component {
     return <div className="c-post m-panel">
       <div className="c-p-header m-p-body">
         <div className="c-p-h-left">
-          <div className="c-p-h-l-avatar" style={{ backgroundImage: `url(${currentUser.get('image_url')})` }}></div>
+          <div className="c-p-h-l-avatar" style={{ backgroundImage: `url(${post.user.image_url})` }}></div>
           <div className="c-p-h-l-info">
-            <div className="c-p-h-l-i-author">{currentUser.get('username')}</div>
+            <div className="c-p-h-l-i-author">{post.user.full_name}</div>
             <div className="c-p-h-l-i-time">{moment(post.created).fromNow()}</div>
           </div>
-
         </div>
         <div className="c-p-h-right"><i className="icon-clock"></i></div>
       </div>
@@ -46,7 +44,6 @@ export default class Post extends Component {
           <button type="button" className="m-btn m-btn-sm c-p-f-a-like">
             <i className="icon-pin"></i>12
           </button>
-
           <button type="button" className="m-btn m-btn-sm">
             <i className="icon-upcoming"></i>{this.lang.captions.add_event}
           </button>
