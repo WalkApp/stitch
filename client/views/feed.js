@@ -11,7 +11,7 @@ import feedStore from '../stores/feed';
 
 export default class Feed extends Component {
   title () {
-    return `${this.lang.brand.name}`;
+    return this.lang.titles.feed;
   }
 
   initState () {
@@ -32,11 +32,24 @@ export default class Feed extends Component {
     return <div className="p-feed l-layout">
       <Header />
       <div className="l-wrapper">
+        <div className="p-f-top">
+          <div className="l-content">
+            <div className="pure-g">
+              <div className="pure-u-3-24"></div>
+              <div className="pure-u-18-24">
+                <div className="m-nav-tabs">
+                  <nav className="m-nt-tabs">
+                    <a className="active">{this.lang.captions.all_news}</a>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div className="l-content">
           <div className="pure-g">
             <div className="pure-u-3-24"></div>
             <div className="pure-u-18-24">
-              <h2 className="p-f-title">{this.lang.captions.feed}</h2>
               <div className="m-wall">
                 {collection.items.map((post, index) => {
                   return <div key={index} className="m-w-row">

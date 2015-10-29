@@ -48,3 +48,6 @@
 .icon-upcoming:before { content: '\e80c'; } /* '' */
 .icon-settings:before { content: '\e80d'; } /* '' */
 .icon-cross:before { content: '\e80e'; } /* '' */
+.icon-play:before { content: '\e80f'; } /* '' */
+.icon-tell:before { content: '\e810'; } /* '' */
+.icon-invite:before { content: '\e811'; } /* '' */

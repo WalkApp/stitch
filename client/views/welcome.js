@@ -1,11 +1,12 @@
 import React from 'react';
 import Component from '../base/component';
 import Footer from './components/footer';
+import currentUser from '../stores/current_user';
 
 
 export default class Welcome extends Component {
   title () {
-    return `${this.lang.brand.name} | ${this.lang.titles.welcome}`;
+    return `${this.lang.titles.welcome} | ${this.lang.brand.name}`;
   }
 
   render () {
@@ -25,10 +26,13 @@ export default class Welcome extends Component {
           <section>
             <h4>Get know what happen in your city!</h4>
             <p>
-              It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+              Tell people who follow you about places and events that you have visited. Be stay in all friends news and join them.
             </p>
             <p>
-              There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything
+              Find place by type, addres or type. Read your friends feedback about it.
+            </p>
+            <p>
+              Create events and send invitations to people who even aren't registered in Walk by sms or email. <a href="/about">Read More</a>
             </p>
           </section>
         </div>

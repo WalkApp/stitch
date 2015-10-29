@@ -18,7 +18,7 @@ export default {
 
   brand: {
     name: 'Walk',
-    tagline: 'Where do you go today',
+    tagline: 'Find and share places and events',
   },
 
   titles: {
@@ -29,6 +29,8 @@ export default {
     error: 'Error',
     not_found: 'Not found',
     profile: 'Your Profile',
+    feed: 'News Feed',
+    about: 'About',
   },
 
   captions: {
@@ -53,7 +55,7 @@ export default {
     load_more: 'Load more',
     update: 'Update',
     attach_photo: 'Attach photo',
-    feed: 'Recent News',
+    all_news: 'All News',    
   },
 
   fields: {

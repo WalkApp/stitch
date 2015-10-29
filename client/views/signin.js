@@ -7,7 +7,7 @@ import auth from '../modules/auth';
 
 export default class Signin extends Form {
   title () {
-    return `${this.lang.brand.name} | ${this.lang.titles.sign_in}`;
+    return `${this.lang.titles.sign_in} | ${this.lang.brand.name}`;
   }
 
   initState () {
@@ -27,7 +27,7 @@ export default class Signin extends Form {
           <div className="l-text-center">
             <a href="/" className="m-logo">
               <h1 className="m-l-title">{this.lang.brand.name}</h1>
-              <h2 className="m-l-tagline">{this.lang.brand.tagline}</h2>
+              <h2 className="m-l-tagline">{this.lang.messages.try_walk}</h2>
             </a>
           </div>
           <form className="p-l-form" onSubmit={this.handleSubmit}>
