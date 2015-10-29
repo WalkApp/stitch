@@ -8,10 +8,15 @@ class WindowEvents {
     this.$win = $(window);
 
     this.$doc.on('click', this.handleClick);
+    vent.on('route:after', this.handlePageChanged, this);
   }
 
   handleClick (event) {
     vent.trigger('document:click', event);
+  }
+
+  handlePageChanged () {
+    this.$win.scrollTop(0);
   }
 }
 
