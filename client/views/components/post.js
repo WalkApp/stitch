@@ -10,7 +10,7 @@ export default class Post extends Component {
     let { post } = this.props.data;
     let hasImage = post.image_urls && post.image_urls.length > 0;
     let postDropdownId = `post-${post._id}-dropdown`;
-    let isOwner = post.user._id === currentUser.get('_id')
+    let isOwner = post.user._id === currentUser.get('_id');
 
     return <div className="c-post m-panel">
       <div className="c-p-header m-p-body">
