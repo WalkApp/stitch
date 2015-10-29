@@ -34,7 +34,7 @@ export default {
   },
 
   captions: {
-    start: 'Start',
+    start: 'Start Now',
     about: 'About',
     sign_in: 'Sign in',
     sign_up: 'Sign up',
