@@ -18,7 +18,7 @@ export default {
 
   brand: {
     name: 'Walk',
-    tagline: 'Where do you go today',
+    tagline: 'Find and share places and events',
   },
 
   titles: {
@@ -29,6 +29,8 @@ export default {
     error: 'Error',
     not_found: 'Not found',
     profile: 'Your Profile',
+    feed: 'News Feed',
+    about: 'About',
   },
 
   captions: {
@@ -53,6 +55,7 @@ export default {
     load_more: 'Load more',
     update: 'Update',
     attach_photo: 'Attach photo',
+    all_news: 'All News',
   },
 
   fields: {
@@ -82,5 +85,6 @@ export default {
     not_found_title: 'Not found',
     not_found_description: 'Sorry, but seems we don\'t have a such page',
     drop_images: 'Drop images here to upload',
+    try_walk: 'Try it already today',
   },
 };

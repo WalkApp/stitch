@@ -14,6 +14,8 @@ export default class QuickPost extends Form {
     return {
       active: false,
       model: {
+        // FIXME: Remove this hardcode
+        address: 'Astana, Kazakhstan',
         description: '',
         image_urls: [],
       },
@@ -55,7 +57,7 @@ export default class QuickPost extends Form {
         </div>
         <div className="c-qp-main">
           <div className="c-qp-location_box">
-            <input valueLink={this.linkState('model.address')} placeholder={this.lang.fields.location} className="m-control" type="text" required />
+            <input valueLink={this.linkState('model.location_name')} placeholder={this.lang.fields.location} className="m-control" type="text" required />
             <div className="c-qp-lb-pin">
               <i className="icon-pin"></i>
             </div>

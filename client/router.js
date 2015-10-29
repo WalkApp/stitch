@@ -26,6 +26,8 @@ export default class Router extends BaseRouter {
     this.route('/signin', 'welcome.signin');
     this.route('/signup', 'welcome.signup');
 
+    this.route('/about', 'welcome.about');
+
     this.route('/search', 'search.index');
     this.route('/feed', 'feed.index');
 
