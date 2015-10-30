@@ -1,4 +1,5 @@
 import config from 'config';
+import hbs from 'express-handlebars';
 import domain from 'domain';
 import express from 'express';
 import session from 'express-session';
@@ -16,7 +17,8 @@ class Server {
     this.log = log;
     this.logPrefix = 'server';
     this.app = express();
-    this.app.set('view engine', 'jade');
+    this.app.engine('.hbs', hbs({extname: '.hbs'}));
+    this.app.set('view engine', '.hbs');
     this.app.set('views', __dirname + '/../views');
     this.router = new Router();
   }
