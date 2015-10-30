@@ -12,6 +12,6 @@ export default {
     db: {
       host: 'localhost',
       database: 'session_walkapp',
-    }
+    },
   },
 };

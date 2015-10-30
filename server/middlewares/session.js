@@ -10,6 +10,6 @@ export default session({
   secret: config.session.secret,
   cookie: {maxAge: config.session.maxAge},
   store: new MongoStore({
-    url: `mongodb://${config.session.db.host}/${config.session.db.database}`
-  })
+    url: `mongodb://${config.session.db.host}/${config.session.db.database}`,
+  }),
 });
