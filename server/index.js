@@ -37,12 +37,7 @@ class Server {
       _domain.on('error', next);
     });
 
-    this.app.use(session({
-      secret: config.session.secret,
-      cookie: { maxAge: config.session.maxAge },
-      resave: false,
-      saveUninitialized: false,
-    }));
+    this.app.use(middlewares.session);
 
     this.app.use(morgan(config.debug ? 'dev' : 'combined'));
 

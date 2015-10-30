@@ -10,4 +10,9 @@ export default {
     secret: 'sheistouchingme',
     maxAge: 86400000,
   },
+
+  mongodb: {
+    host: 'localhost',
+    database: 'walkapp',
+  },
 };
