@@ -37,13 +37,6 @@ class Server {
       _domain.on('error', next);
     });
 
-    this.app.use(session({
-      secret: config.session.secret,
-      cookie: { maxAge: config.session.maxAge },
-      resave: false,
-      saveUninitialized: false,
-    }));
-
     this.app.use(morgan(config.debug ? 'dev' : 'combined'));
 
     // Set publis assets.
@@ -54,6 +47,8 @@ class Server {
 
     // Parse application/json.
     this.app.use(bodyParser.json({ limit: 1024 * 1024 }));
+
+    this.app.use(middlewares.session);
 
     // Get Access token from API.
     this.app.use(middlewares.accessToken);

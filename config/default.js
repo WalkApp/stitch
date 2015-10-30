@@ -9,5 +9,9 @@ export default {
   session: {
     secret: 'sheistouchingme',
     maxAge: 86400000,
+    db: {
+      host: 'localhost',
+      database: 'session_walkapp',
+    },
   },
 };
