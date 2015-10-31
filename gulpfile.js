@@ -1,6 +1,7 @@
 var
   SYMLINKS,
   VENDOR,
+  ALISASES,
   createSymlink,
   proxy,
   compileCss,
@@ -14,6 +15,7 @@ var
   stylus = require('gulp-stylus'),
   minifyCSS = require('gulp-minify-css'),
   uglify = require('gulp-uglify'),
+  aliasify = require('aliasify'),
   streamify = require('gulp-streamify'),
   nib = require('nib'),
   rename = require('gulp-rename'),
@@ -26,16 +28,13 @@ var
 
 
 VENDOR = [
-  '!underscore',
-  'lodash',
-  'react',
-  'react/lib/ReactLink',
   'alt',
   'backbone',
   'backbone.localstorage',
   'classnames',
   'dropzone',
   'jquery',
+  'lodash',
   'moment',
   'page',
   'q',
@@ -48,6 +47,8 @@ SYMLINKS = {
   'client': './client > node_modules',
   'server': './server > node_modules'
 };
+
+ALISASES = _.keys(pkg.aliasify.aliases);
 
 createSymlink = function (key, path) {
   path = path.split('>');
@@ -76,10 +77,14 @@ compileVendorJs = function (opts) {
   var bundle = browserify();
 
   _.forEach(VENDOR, function (vendor) {
-    if (!_.startsWith(vendor, '!')) {
-      bundle.require(vendor, { expose: vendor });
-    }
+    bundle.require(vendor, { expose: vendor });
   });
+
+  _.forEach(ALISASES, function (aliase) {
+    bundle.exclude(aliase);
+  });
+
+  bundle.transform({ global: true }, aliasify);
 
   bundle.bundle()
     .on('error', function (err) { console.log(err.message) })
@@ -98,9 +103,11 @@ compileAppJs = function (opts) {
     paths: ['./node_modules']
   });
 
-  _.forEach(VENDOR, function (lib) {
-    bundle.exclude(_.startsWith(lib, '!') ? lib.substr(1) : lib);
+  _.forEach(VENDOR.concat(ALISASES), function (lib) {
+    bundle.exclude(lib);
   });
+
+  bundle.transform({ global: true }, aliasify);
 
   bundle = bundle
     .bundle()
