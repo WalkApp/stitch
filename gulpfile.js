@@ -22,14 +22,13 @@ var
   symlink = require('gulp-symlink'),
   jscs = require('gulp-jscs'),
   through2 = require('through2'),
-  exec = require('child_process').exec;
+  exec = require('child_process').exec,
+  aliasify = require('aliasify');
 
 
 VENDOR = [
   '!underscore',
   'lodash',
-  'react',
-  'react/lib/ReactLink',
   'alt',
   'backbone',
   'backbone.localstorage',
@@ -78,8 +77,12 @@ compileVendorJs = function (opts) {
   _.forEach(VENDOR, function (vendor) {
     if (!_.startsWith(vendor, '!')) {
       bundle.require(vendor, { expose: vendor });
+    } else {
+      bundle.exclude(vendor.substr(1));
     }
   });
+
+  bundle.transform({ global: true }, aliasify);
 
   bundle.bundle()
     .on('error', function (err) { console.log(err.message) })
@@ -101,6 +104,8 @@ compileAppJs = function (opts) {
   _.forEach(VENDOR, function (lib) {
     bundle.exclude(_.startsWith(lib, '!') ? lib.substr(1) : lib);
   });
+
+  bundle.transform({ global: true }, aliasify);
 
   bundle = bundle
     .bundle()
