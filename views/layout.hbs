@@ -29,13 +29,12 @@
 <div id="app-node"></div>
 <script>
   window.app = {
-    config: JSON.stringify(config._client),
-    env: JSON.stringify(env),
-    langs: JSON.stringify(langs),
-    stores: stores,
-  };
-
-<script>
+    config: {{{JSON.stringify config._client}}},
+    env: {{{JSON.stringify env}}},
+    langs: {{{JSON.stringify langs}}},
+    stores: {{{stores}}},
+  }
+</script>
 <script type="text/javascript" src="/assets/vendor.js"></script>
 <script type="text/javascript" src="/assets/script.js"></script>
 </body>
