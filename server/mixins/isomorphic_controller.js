@@ -34,6 +34,7 @@ export default {
     Component.prototype.lang = null;
 
     res.render('layout', {
+      JSON,
       title,
       html,
       env: res.locals.env,
